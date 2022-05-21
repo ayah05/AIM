@@ -1,5 +1,7 @@
 # Default ignored files
 /shelf/
 /workspace.xml
-/.idea/misc.xml
+misc.xml
 /inspectionProfiles
+dataSources.local.xml
+/dataSources/
