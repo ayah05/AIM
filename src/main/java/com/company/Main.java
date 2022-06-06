@@ -6,6 +6,8 @@ public class Main {
 	// write your code here
       new Interface();
       // i wrote this shit here hgjihgj
+        System.out.println("gggg");
     }
     //// Test und so
+
 }
