@@ -67,8 +67,8 @@ INSERT INTO "Condition" VALUES ('J95','Intraoperative and postprocedural complic
 INSERT INTO "Condition" VALUES ('I95','Hypotension'); -- contraindication to propofol
 INSERT INTO "Condition" VALUES('Z91.012','Allergy to eggs');-- contraindication to propofol
 INSERT INTO "Condition" VALUES('Z91.2','Personal history of poor personal hygiene');--contraindication to performing any kind of medical procedure on that person.
-INSERT INTO "Condition" VALUES ('T20','Burn and Corrosion of Head, Face, and Neck');--contraindication to suxamethonium (=succinylcholine)
-INSERT INTO "Condition" VALUES ('Z33','Pregnant');--idk if z33 is the right code / yess- it is just a status (z) not a condition.. kinda like allergies..dunno of we should use ICD10 codes for allergies as well but probably...
+INSERT INTO "Condition" VALUES ('T20','Burn and Corrosion of Head, Face, and Neck');--contraindication to suxamethonium (=succinylcholine) (M03AB01)
+INSERT INTO "Condition" VALUES ('Z33','Pregnant state');--idk if z33 is the right code / offictial wording sounds just a little better than improvised :p but yess pregnant just a status (z) not a condition.. kinda like allergies..dunno of we should use ICD10 codes for allergies as well but probably...
 INSERT INTO "Condition" VALUES ('N17','Acute renal failure');
 INSERT INTO "Condition" VALUES ('N18','Chronic renal disease');
 INSERT INTO "Condition" VALUES ('N19','Unspecified kidney failure');
