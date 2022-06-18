@@ -59,16 +59,22 @@ INSERT INTO "Drug" VALUES ('B01AA03','Warfarin')ON CONFLICT DO NOTHING; --the an
 INSERT INTO "Drug" VALUES ('B01AA04','Phenprocoumon')ON CONFLICT DO NOTHING;--the anticoagulant used most in austria: "marcoumar"
 INSERT INTO "Drug" VALUES ('B01AC06','Acetylsalicylic acid')ON CONFLICT DO NOTHING;--aspirin. used as anticoagulant (mostly <= 100 mg)
 INSERT INTO "Drug" VALUES ('N02BA01','Acetylsalicylic acid')ON CONFLICT DO NOTHING;--aspirin. used as analgesic (mostly >= 500 mg)
-
+INSERT INTO "Drug" VALUES ('J01FA','Macrolides')ON CONFLICT DO NOTHING; --contraindicated to fentanyl
+INSERT INTO "Drug" VALUES ('J05AE',' Protease inhibitors')ON CONFLICT DO NOTHING; --contraindicated to fentanyl
+INSERT INTO "Drug" VALUES ('C05AE03','Diltiazem')ON CONFLICT DO NOTHING;--contraindicated to fentanyl (Diltiazem is a Muscle relaxant)
+INSERT INTO "Drug" VALUES ('C08DB01','Diltiazem')ON CONFLICT DO NOTHING;--contraindicated to fentanyl (Diltiazem is a Benzothiazepine derivative)
+INSERT INTO "Drug" VALUES ('J02AC02','Itraconazole')ON CONFLICT DO NOTHING;--contraindicated to fentanyl (Itraconazole is an antimycotics for systemic use)
+INSERT INTO "Drug" VALUES ('N06AF01','Isocarboxazid')ON CONFLICT DO NOTHING;--contraindicated to fentanyl (is a Monoamine oxidase inhibitors (MAOIs))
 --filling in several conditions
-INSERT INTO "Condition" VALUES ('J46','Status asthmaticus') ON CONFLICT DO NOTHING;
+INSERT INTO "Condition" VALUES ('J46','Status asthmaticus') ON CONFLICT DO NOTHING;--contraindicated to fentanyl
 INSERT INTO "Condition" VALUES ('G71','Primary Myopathies')ON CONFLICT DO NOTHING;
-INSERT INTO "Condition" VALUES ('J95','Intraoperative and postprocedural complications and disorders of respiratory system, not elsewhere classified.')ON CONFLICT DO NOTHING;
+INSERT INTO "Condition" VALUES ('J44.1','Chronic obstructive pulmonary disease with (acute) exacerbation')ON CONFLICT DO NOTHING;--contraindicated to fentanyl
+INSERT INTO "Condition" VALUES ('E66.2','Morbid (severe) obesity with alveolar hypoventilation')ON CONFLICT DO NOTHING;--contraindicated to fentanyl
 INSERT INTO "Condition" VALUES ('I95','Hypotension')ON CONFLICT DO NOTHING; -- contraindication to propofol
 INSERT INTO "Condition" VALUES('Z91.012','Allergy to eggs')ON CONFLICT DO NOTHING;-- contraindication to propofol
 INSERT INTO "Condition" VALUES('Z91.2','Personal history of poor personal hygiene')ON CONFLICT DO NOTHING;--contraindication to performing any kind of medical procedure on that person.
 INSERT INTO "Condition" VALUES ('T20','Burn and Corrosion of Head, Face, and Neck')ON CONFLICT DO NOTHING;--contraindication to suxamethonium (=succinylcholine) (M03AB01)
-INSERT INTO "Condition" VALUES ('Z33','Pregnant state')ON CONFLICT DO NOTHING;--idk if z33 is the right code / offictial wording sounds just a little better than improvised :p but yess pregnant just a status (z) not a condition.. kinda like allergies..dunno of we should use ICD10 codes for allergies as well but probably...
+INSERT INTO "Condition" VALUES ('Z33.3','Pregnant state')ON CONFLICT DO NOTHING;
 INSERT INTO "Condition" VALUES ('N17','Acute renal failure')ON CONFLICT DO NOTHING;
 INSERT INTO "Condition" VALUES ('N18','Chronic renal disease')ON CONFLICT DO NOTHING;
 INSERT INTO "Condition" VALUES ('N19','Unspecified kidney failure')ON CONFLICT DO NOTHING;
@@ -86,7 +92,36 @@ INSERT INTO "Condition" VALUES ('Z88.4','Personal history of allergy to anaesthe
 INSERT INTO "Condition" VALUES ('Z88.5','Personal history of allergy to narcotic agent')ON CONFLICT DO NOTHING;--opioids?
 INSERT INTO "Condition" VALUES ('Z88.6','Personal history of allergy to analgesic agent')ON CONFLICT DO NOTHING;--NSAIDs? also opioiods mayyyybe?
 INSERT INTO "Condition" VALUES ('Z88.9','Personal history of allergy to unspecified drugs, medicaments and biological substances')ON CONFLICT DO NOTHING;--everything else
+INSERT INTO "Condition" VALUES ('O90','Complications of the puerperium, not elsewhere classified')ON CONFLICT DO NOTHING;--everything else
+INSERT INTO "Condition" VALUES ('O94','Sequelae of complication of pregnancy, childbirth, and the puerperium')ON CONFLICT DO NOTHING;--everything else
+INSERT INTO "Condition" VALUES ('Z39.1','Encounter for care and examination of lactating mother')ON CONFLICT DO NOTHING;--everything else
+INSERT INTO "Condition" VALUES ('F20.9','Schizophrenia, unspecified') ON CONFLICT DO NOTHING;
+INSERT INTO "Condition" VALUES ('H40.21','Acute angle-closure glaucoma') ON CONFLICT DO NOTHING;
 
 
-INSERT INTO "Interaction" VALUES (DEFAULT,'N01AX10','','Z91.012','Propofol might cause an allergic reaction to patients allergic to eggs, egg products, soy, or soy products {information available on DOI: 10.1016/j.jpainsymman.2010.07.001}.');
-INSERT INTO "Interaction" VALUES (DEFAULT,'N01AX10','','I95','Caution is necessry for patients with abnormally low blood pressure {information available on PMID:28613634}.')
+--filling in several interactions
+INSERT INTO "Interaction" VALUES (DEFAULT,'N01AX10','Z91.012','Propofol might cause an allergic reaction to patients allergic to eggs, egg products, soy, or soy products {information available on DOI: 10.1016/j.jpainsymman.2010.07.001}.');
+INSERT INTO "Interaction" VALUES (DEFAULT,'N01AX10','I95','Caution is necessry for patients with abnormally low blood pressure {information available on PMID:28613634}.');
+INSERT INTO "Interaction" VALUES (DEFAULT,'N01AH01','J46','The use of fentanyl is contraindicated in patients with respiratory depression or obstructive airway diseases (i.e., asthma, COPD, obstructive sleep apnea, obesity hyperventilation, also know as, Pickwickian syndrome) {information available on PMID: 29083586}');
+INSERT INTO "Interaction" VALUES (DEFAULT,'N01AH01','J44.1','The use of fentanyl is contraindicated in patients with respiratory depression or obstructive airway diseases (i.e., asthma, COPD, obstructive sleep apnea, obesity hyperventilation, also know as, Pickwickian syndrome) {information available on PMID: 29083586}');
+INSERT INTO "Interaction" VALUES (DEFAULT,'N01AH01','E66.2','The use of fentanyl is contraindicated in patients with respiratory depression or obstructive airway diseases (i.e., asthma, COPD, obstructive sleep apnea, obesity hyperventilation, also know as, Pickwickian syndrome) {information available on PMID: 29083586}');
+INSERT INTO "Interaction" VALUES (DEFAULT,'N01AH01','K70','The use of fentanyl is contraindicated in patients with liver failure {information available on PMID: 29083586}');
+INSERT INTO "Interaction" VALUES (DEFAULT,'N01AH01','K71','The use of fentanyl is contraindicated in patients with liver failure {information available on PMID: 29083586}');
+INSERT INTO "Interaction" VALUES (DEFAULT,'N01AH01','K72','The use of fentanyl is contraindicated in patients with liver failure {information available on PMID: 29083586}');
+INSERT INTO "Interaction" VALUES (DEFAULT,'N01AH01','J01FA','Fentanyl should not be used with certain medications such as CYP3A4 inhibitors like macrolide antibiotics or azole-antifungal agents, and protease inhibitors because they may increase plasma concentrations of fentanyl, extending the opioid drug action and exacerbating the opioid-induced respiratory depression (OIRD) {information available on PMID: 29083586}');
+INSERT INTO "Interaction" VALUES (DEFAULT,'N01AH01','J05AE','Fentanyl should not be used with certain medications such as CYP3A4 inhibitors like macrolide antibiotics or azole-antifungal agents, and protease inhibitors because they may increase plasma concentrations of fentanyl, extending the opioid drug action and exacerbating the opioid-induced respiratory depression (OIRD) {information available on PMID: 29083586}');
+INSERT INTO "Interaction" VALUES (DEFAULT,'N01AH01','C05AE03','Fentanyl should not be used with certain medications such as CYP3A4 inhibitors like macrolide antibiotics or azole-antifungal agents, and protease inhibitors because they may increase plasma concentrations of fentanyl, extending the opioid drug action and exacerbating the opioid-induced respiratory depression (OIRD) {information available on PMID: 29083586}');
+INSERT INTO "Interaction" VALUES (DEFAULT,'N01AH01','C08DB01','Fentanyl should not be used with certain medications such as CYP3A4 inhibitors like macrolide antibiotics or azole-antifungal agents, and protease inhibitors because they may increase plasma concentrations of fentanyl, extending the opioid drug action and exacerbating the opioid-induced respiratory depression (OIRD) {information available on PMID: 29083586}');
+INSERT INTO "Interaction" VALUES (DEFAULT,'N01AH01','J02AC02','Fentanyl should not be used with certain medications such as CYP3A4 inhibitors like macrolide antibiotics or azole-antifungal agents, and protease inhibitors because they may increase plasma concentrations of fentanyl, extending the opioid drug action and exacerbating the opioid-induced respiratory depression (OIRD) {information available on PMID: 29083586}');
+INSERT INTO "Interaction" VALUES (DEFAULT,'N01AH01','N06AF01','Fentanyl is contraindicated if a patient has used a monoamine oxidase inhibitor in the previous 14 days {information available on PMID: 29083586}.');
+INSERT INTO "Interaction" VALUES (DEFAULT,'N01AH03','B01AC06','The risk or severity of hypertension can be increased when Sufentanil is combined with Acetylsalicylic acid {information available on DrugBank}.');
+INSERT INTO "Interaction" VALUES (DEFAULT,'N01AH03','N05BA01','The risk or severity of adverse effects can be increased when Sufentanil is combined with 1,2-Benzodiazepine {information available on DrugBank}.');
+INSERT INTO "Interaction" VALUES (DEFAULT,'N01AX03','N05BA01','The risk or severity of adverse effects can be increased when Ketamine is combined with 1,2-Benzodiazepine {information available on DrugBank}.');
+INSERT INTO "Interaction" VALUES (Default,'N01AX03','Z33.3','It is not recommended to use Ketamine during obstetrics, pregnancy, or breastfeeding as it is unknown if this medication passes into breast milk {information available on PMID: 29262083}.');
+INSERT INTO "Interaction" VALUES (Default,'N01AX03','O90','It is not recommended to use Ketamine during obstetrics, pregnancy, or breastfeeding as it is unknown if this medication passes into breast milk {information available on PMID: 29262083}.');
+INSERT INTO "Interaction" VALUES (Default,'N01AX03','O94','It is not recommended to use Ketamine during obstetrics, pregnancy, or breastfeeding as it is unknown if this medication passes into breast milk {information available on PMID: 29262083}.');
+INSERT INTO "Interaction" VALUES (Default,'N01AX03','Z39.1','It is not recommended to use Ketamine during obstetrics, pregnancy, or breastfeeding as it is unknown if this medication passes into breast milk {information available on PMID: 29262083}.');
+INSERT INTO "Interaction" VALUES (Default,'N01AX03','F20.9','Ketamine is contraindicated in patients with schizophrenia due to the potential for exacerbating the underlying condition {information available on PMID: 29262083}.');
+INSERT INTO "Interaction" VALUES (Default,'N05CD08','H40.21','Benzodiazepines are contraindicated in patients with acute narrow-angle glaucoma {information available on Accessdata.fda.gov.');--Midazolam is a Benzodiazepine
+--(current state: researching about Midazolam)
+
