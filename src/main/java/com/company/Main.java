@@ -4,11 +4,14 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+
 public class Main extends Application {
 
     public static void main(String[] args) {
-        launch();
+       launch();
+        // FHIR_IPS_parser parse = new FHIR_IPS_parser();
+        // System.out.println(parse.readIPS("./src/main/IPS-example-Bundle-with-renal-disease-et-al.json"));
+
     }
 
     @Override

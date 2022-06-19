@@ -3,6 +3,7 @@ module com.company {
     requires javafx.fxml;
     requires hapi.fhir.base;
     requires hapi.fhir.structures.r4;
+    requires org.hl7.fhir.r4;
 
 
     opens com.company to javafx.fxml;
