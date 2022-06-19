@@ -2,7 +2,9 @@ DROP TABLE IF EXISTS Patient;
 DROP TABLE IF EXISTS Drug;
 DROP TABLE IF EXISTS Condition;
 DROP TABLE IF EXISTS Interaction;
+
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO ayah05;
+
 CREATE TABLE "Patient" (
                            "PatientID" serial PRIMARY KEY,
                            "Drug" varchar(7) REFERENCES "Drug",
