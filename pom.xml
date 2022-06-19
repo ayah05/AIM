@@ -91,6 +91,11 @@
             <artifactId>logback-classic</artifactId>
             <version>1.2.11</version>
         </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-archetype-fxml</artifactId>
+            <version>0.0.6</version>
+        </dependency>
         <!-- only necessary for validation
         <dependency>
             <groupId>ca.uhn.hapi.fhir</groupId>
