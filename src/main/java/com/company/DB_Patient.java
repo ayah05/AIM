@@ -16,9 +16,11 @@ public class DB_Patient {
         this.name = name; this.conditions = conditions; this.drugs = drugs; this.age = age;
         this.weight = weight;
     }
+    // overloaded constructor with less arguments #1
     public DB_Patient(String name, String[] conditions, String[] drugs, int age){
         this.name = name; this.conditions = conditions; this.drugs = drugs; this.age = age;
     }
+    // overloaded constructor with less arguments #2
     public DB_Patient(String name, String[] conditions, String[] drugs){
         this.name = name; this.conditions = conditions; this.drugs = drugs;
     }
