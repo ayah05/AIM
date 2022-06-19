@@ -38,7 +38,8 @@ buildNumber.properties
 ##############################
 ## IntelliJ
 ##############################
-out/
+out/*
+/out/
 .idea/
 .idea_modules/
 *.iml
