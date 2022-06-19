@@ -4,6 +4,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 public class Interface {
     private JFrame frame;
@@ -32,6 +36,7 @@ public class Interface {
     private JLabel jBackgroundS;
 
     Interface(){
+
         int delay = 1200; //milliseconds
         frame = new JFrame("AIM");
         frame.add(mainPanel);
@@ -42,8 +47,9 @@ public class Interface {
         backgroundS = new ImageIcon("./images/StartBild.PNG");
         jBackgroundS=new JLabel(backgroundS);
         mainPanel.add(jBackgroundS);
-        jBackgroundS.setVisible(true);
 
+        jBackgroundS.setVisible(true);
+        frame.pack();
         ActionListener taskPerformer = new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jBackgroundS.setVisible(false);
@@ -52,7 +58,7 @@ public class Interface {
         new javax.swing.Timer(delay, taskPerformer).start();
 
         //normal background image
-        background = new ImageIcon("./images/Background.PNG");
+        background = new ImageIcon("./images/StartBild.PNG");
         jBackground= new JLabel(background);
         mainPanel.add(jBackground);
         jBackground.add(anamneseButton);
@@ -64,7 +70,9 @@ public class Interface {
 
 
         jBackground.setSize(1823,1013);
-        mainPanel.setSize(1823,1013);
+        mainPanel.setSize(jBackground.getSize());
+
+
         frame.pack();
         //Change Buttons to transparent
         anamneseButton.setBorder(null);
@@ -86,6 +94,9 @@ public class Interface {
         display_Anamnese.setVisible(false);
         display_Interaction.setVisible(false);
         display_Medication.setVisible(false);
+
+
+
 
 
         anamneseButton.addActionListener(new ActionListener() {
