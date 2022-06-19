@@ -74,7 +74,7 @@ INSERT INTO "Drug" VALUES ('D11AH08','Abrocitinib') ON CONFLICT DO NOTHING;--D11
 INSERT INTO "Condition" VALUES ('J46','Status asthmaticus') ON CONFLICT DO NOTHING;--contraindicated to fentanyl
 INSERT INTO "Condition" VALUES ('G71','Primary Myopathies')ON CONFLICT DO NOTHING;
 INSERT INTO "Condition" VALUES ('J96','Acute respiratory failure, unspecified whether with hypoxia or hypercapnia')ON CONFLICT DO NOTHING;
-INSERT INTO "Condition" VALUES ('G72.9','Myopathy, unspecified')ON CONFLICT DO NOTHING;
+INSERT INTO "Condition" VALUES ('G72','Other myopathies')ON CONFLICT DO NOTHING;
 INSERT INTO "Condition" VALUES ('J44.1','Chronic obstructive pulmonary disease with (acute) exacerbation')ON CONFLICT DO NOTHING;--contraindicated to fentanyl
 INSERT INTO "Condition" VALUES ('E66.2','Morbid (severe) obesity with alveolar hypoventilation')ON CONFLICT DO NOTHING;--contraindicated to fentanyl
 INSERT INTO "Condition" VALUES ('I95','Hypotension')ON CONFLICT DO NOTHING; -- contraindication to propofol
@@ -156,7 +156,7 @@ INSERT INTO "Interaction" VALUES (Default,'M03AB01','T20','Succinylcholine is co
 INSERT INTO "Interaction" VALUES (Default,'M03AB01','E88.09','Succinylcholine is contraindicated in patients with known decreased plasma cholinesterase activity, recent burns or trauma within 24 to 72 hours, and muscle myopathies. {information available on PMID:29763160}.');
 INSERT INTO "Interaction" VALUES (Default,'M03AB01','T07','Succinylcholine is contraindicated in patients with known decreased plasma cholinesterase activity, recent burns or trauma within 24 to 72 hours, and muscle myopathies. {information available on PMID:29763160}.');
 INSERT INTO "Interaction" VALUES (Default,'M03AB01','G71','Succinylcholine is contraindicated in patients with known decreased plasma cholinesterase activity, recent burns or trauma within 24 to 72 hours, and muscle myopathies. {information available on PMID:29763160}.');
-INSERT INTO "Interaction" VALUES (Default,'M03AB01','G72.9','Succinylcholine is contraindicated in patients with known decreased plasma cholinesterase activity, recent burns or trauma within 24 to 72 hours, and muscle myopathies. {information available on PMID:29763160}.');
+INSERT INTO "Interaction" VALUES (Default,'M03AB01','G72','Succinylcholine is contraindicated in patients with known decreased plasma cholinesterase activity, recent burns or trauma within 24 to 72 hours, and muscle myopathies. {information available on PMID:29763160}.');
 INSERT INTO "Interaction" VALUES (Default,'M03AC09','Z88.4','The absolute contraindication to using Rocuronium would be a documented allergic reaction to the drug. {information available on PMID:30969710}.');
 INSERT INTO "Interaction" VALUES (Default,'M03AC09','N05CD08','Midazolam may increase the central nervous system depressant (CNS depressant) activities of Rocuronium - severity:moderate. {information available on DrugBank}.');
 INSERT INTO "Interaction" VALUES (Default,'N01BB02','Z88.4','Lidocaine is contraindicated in patients with a known severe adverse reaction.  {information available on PMID:30969703}.');--is it possible to call 'known severe adverse reactions' 'an allergy against the drug'??
