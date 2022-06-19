@@ -42,11 +42,13 @@
     </build>
 
     <dependencies>
+        <!-- for REST API calls
         <dependency>
             <groupId>org.jboss.resteasy</groupId>
             <artifactId>resteasy-client-20</artifactId>
             <version>3.5.1.Final</version>
         </dependency>
+        -->
 
         <dependency>
             <groupId>org.openjfx</groupId>
@@ -62,6 +64,11 @@
             <groupId>org.openjfx</groupId>
             <artifactId>javafx-base</artifactId>
             <version>18-ea+6</version>
+        </dependency>
+        <dependency>
+            <groupId>org.openjfx</groupId>
+            <artifactId>javafx-archetype-fxml</artifactId>
+            <version>0.0.6</version>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -92,10 +99,11 @@
             <version>1.2.11</version>
         </dependency>
         <dependency>
-            <groupId>org.openjfx</groupId>
-            <artifactId>javafx-archetype-fxml</artifactId>
-            <version>0.0.6</version>
+            <groupId>com.fasterxml.woodstox</groupId>
+            <artifactId>woodstox-core</artifactId>
+            <version>6.2.8</version>
         </dependency>
+
         <!-- only necessary for validation
         <dependency>
             <groupId>ca.uhn.hapi.fhir</groupId>
