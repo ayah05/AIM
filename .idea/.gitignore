@@ -1,10 +1,11 @@
 /shelf/
 /workspace.xml
-.idea/misc.xml
-.idea/inspectionProfiles
+/misc.xml
+.idea/inspectionProfiles/*
 .idea/dataSources.local.xml
+/dataSources.local.xml
 /dataSources/*
 .idea/dataSources/
-.idea/dataSources/e9c5f270-6c05-4420-bb0d-d8067208649a.xml
-.idea/dataSources/e9c5f270-6c05-4420-bb0d-d8067208649a/
+/dataSources/e9c5f270-6c05-4420-bb0d-d8067208649a.xml
+/dataSources/e9c5f270-6c05-4420-bb0d-d8067208649a/
 .idea/shelf
