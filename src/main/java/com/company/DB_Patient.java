@@ -10,17 +10,25 @@ public class DB_Patient {
     private String name;
     private int age;
     private double weight;
+    private int patID_DB_PK;
 
     public DB_Patient(){}
     public DB_Patient(String name, String[] conditions, String[] drugs, int age, double weight){
         this.name = name; this.conditions = conditions; this.drugs = drugs; this.age = age;
         this.weight = weight;
     }
+    // overloaded constructor with less arguments #1
     public DB_Patient(String name, String[] conditions, String[] drugs, int age){
         this.name = name; this.conditions = conditions; this.drugs = drugs; this.age = age;
     }
+    // overloaded constructor with less arguments #2
     public DB_Patient(String name, String[] conditions, String[] drugs){
         this.name = name; this.conditions = conditions; this.drugs = drugs;
+    }
+    // overloaded constructor with more arguments (database primary key)
+    public DB_Patient(String name, String[] conditions, String[] drugs,int age, double weight, int key){
+        this.name = name; this.conditions = conditions; this.drugs = drugs; this.age = age;
+        this.weight = weight; this.patID_DB_PK = key;
     }
     public String[] getConditions(){
         return this.conditions;
@@ -68,4 +76,10 @@ public class DB_Patient {
     public void setWeight(double weight){
         this.weight = weight;
     }
+    public void setPatID(int key){ // only if there is not alredy a key present:
+        if(this.patID_DB_PK < 1 ){
+            this.patID_DB_PK = key;
+        }
+    }
+    public int getPatID(){ return this.patID_DB_PK;}
 }
