@@ -9,7 +9,7 @@ import java.util.List;
  * This class provides a Patient object according to the data-model of our postgreSQL-DB <p>
  *     Weight is in kilograms!
  */
-public class DB_Patient extends SQLException {
+public class DB_Patient {
     private List <String> conditions = new ArrayList<>();
     private List <String> drugs = new ArrayList<>();
     private String name;
