@@ -88,8 +88,8 @@
                               <Label alignment="CENTER" contentDisplay="CENTER" prefHeight="34.0" prefWidth="432.0" text="Vorerkrankungen" />
                               <HBox prefHeight="41.0" prefWidth="434.0">
                                  <children>
-                                    <TextField prefHeight="26.0" prefWidth="269.0" />
-                                    <ChoiceBox prefWidth="150.0" />
+                                    <TextField fx:id="TFCondition" prefHeight="26.0" prefWidth="265.0" />
+                                    <ChoiceBox fx:id="checkBCondition" prefHeight="26.0" prefWidth="168.0" />
                                  </children></HBox>
                               <ListView prefHeight="200.0" prefWidth="200.0" />
                            </children>
@@ -113,7 +113,7 @@
       </HBox>
       <VBox prefHeight="64.0" prefWidth="699.0">
          <children>
-            <Button fx:id="importJason" mnemonicParsing="false" onAction="#fileJason" prefHeight="26.0" prefWidth="869.0" text="Jason importieren" />
+            <Button fx:id="importJason" mnemonicParsing="false" onAction="#fileJason" prefHeight="26.0" prefWidth="869.0" text="Json importieren" />
             <Button fx:id="b_ECard" mnemonicParsing="false" onAction="#readEcard" prefHeight="26.0" prefWidth="888.0" text="E-Card import" />
          </children>
       </VBox>
