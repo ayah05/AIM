@@ -1,14 +1,68 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="com.company.InterfaceController"
-            prefHeight="400.0" prefWidth="600.0">
-
-</AnchorPane>
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="673.0" prefWidth="866.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.company.InterfaceController">
+    <children>
+        <HBox prefHeight="29.0" prefWidth="866.0">
+            <children>
+                <Button fx:id="B_Anamnese" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#switchToInterface1" prefHeight="26.0" prefWidth="430.0" text="Anamnese" HBox.hgrow="ALWAYS">
+                    <font>
+                        <Font size="15.0" />
+                    </font></Button>
+                <Pane prefHeight="31.0" prefWidth="59.0" style="-fx-background-color: #d3eff5;" />
+                <Button fx:id="B_medication" alignment="CENTER" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#switchToInterface2" prefHeight="26.0" prefWidth="430.0" text="Medication" HBox.hgrow="ALWAYS">
+                    <font>
+                        <Font size="15.0" />
+                    </font></Button>
+            </children>
+        </HBox>
+        <VBox prefHeight="148.0" prefWidth="866.0" />
+        <VBox prefHeight="118.0" prefWidth="866.0">
+            <children>
+                <HBox prefHeight="31.0" prefWidth="866.0">
+                    <children>
+                        <Label alignment="CENTER" prefHeight="18.0" prefWidth="433.0" text="Wähle die gewünschte Medikatio" />
+                        <HBox prefHeight="18.0" prefWidth="228.0" />
+                        <Label alignment="CENTER" prefHeight="56.0" prefWidth="437.0" text="Kontrolle auf Interoperabilität" />
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+        <HBox prefHeight="640.0" prefWidth="866.0">
+            <children>
+                <VBox prefHeight="640.0" prefWidth="444.0">
+                    <children>
+                        <HBox prefHeight="46.0" prefWidth="434.0" VBox.vgrow="ALWAYS" />
+                        <HBox prefHeight="53.0" prefWidth="434.0" />
+                        <HBox prefHeight="293.0" prefWidth="434.0" />
+                        <HBox prefHeight="273.0" prefWidth="434.0" />
+                        <HBox prefHeight="245.0" prefWidth="434.0" />
+                    </children>
+                </VBox>
+                <VBox prefHeight="640.0" prefWidth="442.0">
+                    <children>
+                        <HBox prefHeight="40.0" prefWidth="433.0" />
+                        <HBox prefHeight="49.0" prefWidth="433.0">
+                            <children>
+                                <VBox prefHeight="200.0" prefWidth="100.0" />
+                            </children></HBox>
+                        <VBox prefHeight="378.0" prefWidth="433.0">
+                     <children>
+                        <TextFlow prefHeight="279.0" prefWidth="433.0" style="-fx-background-color: ALICEBLUE; -fx-border-color: Black;" />
+                     </children></VBox>
+                        <VBox prefHeight="77.0" prefWidth="433.0" />
+                    </children>
+                </VBox>
+            </children>
+        </HBox>
+        <VBox prefHeight="64.0" prefWidth="699.0">
+            <children>
+                <Button fx:id="importJason" mnemonicParsing="false" onAction="#fileJason" prefHeight="26.0" prefWidth="869.0" text="Jason importieren" />
+                <Button fx:id="b_ECard" mnemonicParsing="false" onAction="#readEcard" prefHeight="26.0" prefWidth="888.0" text="E-Card import" />
+            </children>
+        </VBox>
+    </children>
+</VBox>
