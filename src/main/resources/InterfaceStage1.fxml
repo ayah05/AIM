@@ -113,7 +113,7 @@
       </HBox>
       <VBox prefHeight="64.0" prefWidth="699.0">
          <children>
-            <Button fx:id="importJason" mnemonicParsing="false" onAction="#fileJason" prefHeight="26.0" prefWidth="869.0" text="Jason importieren" />
+            <Button fx:id="importJason" mnemonicParsing="false" onAction="#fileJason" prefHeight="26.0" prefWidth="869.0" text="Json importieren" />
             <Button fx:id="b_ECard" mnemonicParsing="false" onAction="#readEcard" prefHeight="26.0" prefWidth="888.0" text="E-Card import" />
          </children>
       </VBox>
