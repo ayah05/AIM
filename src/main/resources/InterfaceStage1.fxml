@@ -24,41 +24,50 @@
          <children>
             <HBox prefHeight="31.0" prefWidth="866.0">
                <children>
-                  <Label alignment="CENTER" prefHeight="18.0" prefWidth="433.0" text="Persönliche Daten" />
-                  <HBox prefHeight="18.0" prefWidth="228.0" />
-                  <Label alignment="CENTER" prefHeight="56.0" prefWidth="437.0" text="Aktuelle Medication" />
+                  <Label alignment="CENTER" prefHeight="18.0" prefWidth="439.0" text="Persönliche Daten" />
+                  <HBox prefHeight="18.0" prefWidth="70.0" />
+                  <Label alignment="CENTER" prefHeight="18.0" prefWidth="435.0" text="Aktuelle Medication" />
                </children>
             </HBox>
          </children>
       </VBox>
+      <VBox prefHeight="132.0" prefWidth="866.0" VBox.vgrow="ALWAYS" />
       <HBox prefHeight="640.0" prefWidth="866.0">
          <children>
             <VBox prefHeight="640.0" prefWidth="444.0">
                <children>
                   <HBox prefHeight="46.0" prefWidth="434.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <Label contentDisplay="CENTER" prefHeight="18.0" prefWidth="512.0" text="Vorname">
+                        <HBox prefHeight="26.0" prefWidth="70.0" HBox.hgrow="ALWAYS" />
+                        <Label contentDisplay="CENTER" prefHeight="19.0" prefWidth="268.0" text="Vorname">
                            <font>
                               <Font size="13.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="t_fname" prefHeight="32.0" prefWidth="532.0" />
+                        <TextField fx:id="t_fname" prefHeight="26.0" prefWidth="220.0" />
+                        <HBox prefHeight="26.0" prefWidth="64.0" HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>
                   <HBox prefHeight="53.0" prefWidth="434.0">
                      <children>
-                        <Label prefHeight="31.0" prefWidth="214.0" text="Nachname" />
-                        <TextField fx:id="t_lname" prefHeight="31.0" prefWidth="234.0" />
+                        <Label prefHeight="28.0" prefWidth="291.0" text="Nachname">
+                           <graphic>
+                              <HBox prefHeight="26.0" prefWidth="20.0" />
+                           </graphic></Label>
+                        <TextField fx:id="t_lname" prefHeight="26.0" prefWidth="220.0" />
+                        <HBox prefHeight="26.0" prefWidth="64.0" HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>
                   <HBox prefHeight="38.0" prefWidth="434.0">
                      <children>
-                        <Label prefHeight="26.0" prefWidth="434.0" text="Gewicht">
+                        <HBox prefHeight="26.0" prefWidth="70.0" HBox.hgrow="ALWAYS" />
+                        <Label prefHeight="26.0" prefWidth="268.0" text="Gewicht">
                            <font>
                               <Font size="13.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="t_wight" prefHeight="30.0" prefWidth="455.0" />
+                        <TextField fx:id="t_wight" prefHeight="26.0" prefWidth="220.0" />
+                        <HBox prefHeight="33.0" prefWidth="64.0" HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>
                   <HBox prefHeight="41.0" prefWidth="434.0" />
