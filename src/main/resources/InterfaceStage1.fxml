@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="673.0" prefWidth="866.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.company.InterfaceController">
+   <children>
+      <HBox prefHeight="29.0" prefWidth="866.0">
+         <children>
+            <Button fx:id="B_Anamnese" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="26.0" prefWidth="430.0" text="Anamnese" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font size="15.0" />
+               </font></Button>
+            <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#d3eff5" height="31.0" stroke="#9e9e9e" strokeType="INSIDE" width="26.0" />
+            <Button fx:id="B_medication" alignment="CENTER" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="26.0" prefWidth="430.0" text="Medication" HBox.hgrow="ALWAYS">
+               <font>
+                  <Font size="15.0" />
+               </font></Button>
+         </children>
+      </HBox>
+      <HBox prefHeight="640.0" prefWidth="866.0">
+         <children>
+            <VBox prefHeight="640.0" prefWidth="444.0">
+               <children>
+                  <HBox prefHeight="46.0" prefWidth="434.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <Label contentDisplay="CENTER" prefHeight="18.0" prefWidth="512.0" text="Vorname">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="t_fname" prefHeight="32.0" prefWidth="530.0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="53.0" prefWidth="434.0">
+                     <children>
+                        <Label prefHeight="31.0" prefWidth="214.0" text="Nachname" />
+                        <TextField fx:id="t_lname" prefHeight="31.0" prefWidth="234.0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="38.0" prefWidth="434.0">
+                     <children>
+                        <Label prefHeight="26.0" prefWidth="434.0" text="Gewicht">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="t_wight" prefHeight="30.0" prefWidth="455.0" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="41.0" prefWidth="434.0" />
+                  <HBox prefHeight="456.0" prefWidth="434.0" />
+               </children>
+            </VBox>
+            <VBox prefHeight="640.0" prefWidth="442.0">
+               <children>
+                  <HBox prefHeight="30.0" prefWidth="433.0" />
+                  <HBox prefHeight="40.0" prefWidth="433.0" />
+                  <HBox prefHeight="100.0" prefWidth="200.0" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <VBox prefHeight="64.0" prefWidth="699.0">
+         <children>
+            <Button fx:id="importJason" mnemonicParsing="false" onAction="#fileJason" prefHeight="26.0" prefWidth="869.0" text="Jason importieren" />
+            <Button fx:id="b_ECard" mnemonicParsing="false" onAction="#readEcard" prefHeight="26.0" prefWidth="888.0" text="E-Card import" />
+         </children>
+      </VBox>
+   </children>
+</VBox>

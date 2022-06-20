@@ -2,7 +2,10 @@ package com.company;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
+
+import java.io.File;
 
 
 public class Main extends Application {
@@ -16,9 +19,12 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws Exception {
-        FXMLLoader fxmlLoader = new FXMLLoader(TestController.class.getResource("/hello-view.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-        stage.setTitle("Hello!");
+        FXMLLoader fxmlLoader = new FXMLLoader(InterfaceController.class.getResource("/InterfaceStage1.fxml"));
+        Scene scene = new Scene(fxmlLoader.load());
+        stage.setTitle("AIM");
+        File fileIcon = new File("src/main/resources/Images/ICON.png");
+        Image applicationIcon = new Image(fileIcon.toURI().toString());
+        stage.getIcons().add(applicationIcon);
         stage.setScene(scene);
         stage.show();
     }
