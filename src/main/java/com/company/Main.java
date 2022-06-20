@@ -5,9 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
 import java.io.File;
-
 
 public class Main extends Application {
 
@@ -20,6 +18,9 @@ public class Main extends Application {
         // System.out.println(parse.readIPS("./src/main/IPS-example-Bundle-with-renal-disease-et-al.json"));
 
     }
+
+
+
 
     @Override
     public void start(Stage stage) throws Exception {
