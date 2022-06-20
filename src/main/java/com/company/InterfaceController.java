@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
@@ -14,6 +15,7 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class InterfaceController {
 
@@ -22,8 +24,13 @@ public class InterfaceController {
     @FXML
     private TextField t_fname,t_lname,t_wight;
 
+    @FXML
+    private DatePicker DP;
+
+
     private Stage stage;
     private Scene scene;
+    private String birthdate;
 
 
 
@@ -56,5 +63,11 @@ public class InterfaceController {
         stage.setScene(scene);
         stage.show();
     }
+    public void getDate(ActionEvent event){
+        LocalDate myDate =  DP.getValue();
+       birthdate = String.valueOf(myDate);
+        System.out.println(birthdate);
+    }
+
 
 }

@@ -12,6 +12,9 @@ import java.io.File;
 public class Main extends Application {
 
     public static void main(String[] args) {
+      ////////////
+      //  Wenn die GUI nervt einfach mit // launch(); auskommentieren :D
+      ///////////
          launch();
         // FHIR_IPS_parser parse = new FHIR_IPS_parser();
         // System.out.println(parse.readIPS("./src/main/IPS-example-Bundle-with-renal-disease-et-al.json"));
