@@ -1,5 +1,7 @@
 package com.company;
 
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -7,30 +9,38 @@ import java.util.List;
  *     Weight is in kilograms!
  */
 public class DB_Patient {
-    private List <String> conditions;
-    private List <String> drugs;
+    private List <String> conditions = new ArrayList<>();
+    private List <String> drugs = new ArrayList<>();
     private String name;
+    private Date dob;
     private int age = -1;
-    private double weight = Double.NaN ;
+    private double weight = Double.NaN;
     private int patID_DB_PK= -1;
 
     public DB_Patient(){}
-    public DB_Patient(String name, List<String> conditions, List<String> drugs, int age, double weight){
-        this.name = name; this.conditions = conditions; this.drugs = drugs; this.age = age;
-        this.weight = weight;
+    public DB_Patient(String name, List<String> conditions, List<String> drugs, Date dob, double weight, int age){
+        this.name = name; this.conditions = conditions; this.drugs = drugs; this.dob = dob;
+        this.weight = weight; this.age = age;
     }
     // overloaded constructor with less arguments #1
-    public DB_Patient(String name, List<String> conditions, List<String> drugs, int age){
-        this.name = name; this.conditions = conditions; this.drugs = drugs; this.age = age;
+    public DB_Patient(String name, List<String> conditions, List<String> drugs, Date dob){
+        this.name = name; this.conditions = conditions; this.drugs = drugs; this.dob = dob;
+        this.age = (int)((System.currentTimeMillis() - dob.getTime()) / 3.154e+10);
     }
     // overloaded constructor with less arguments #2
     public DB_Patient(String name, List<String> conditions, List<String> drugs){
         this.name = name; this.conditions = conditions; this.drugs = drugs;
     }
-    // overloaded constructor with more arguments (database primary key)
-    public DB_Patient(String name, List<String> conditions, List<String> drugs,int age, double weight, int key){
+    // overloaded constructor with all arguments (database primary key + age)
+    public DB_Patient(String name, List<String> conditions, List<String> drugs,int age, double weight, int key, Date dob){
         this.name = name; this.conditions = conditions; this.drugs = drugs; this.age = age;
-        this.weight = weight; this.patID_DB_PK = key;
+        this.weight = weight; this.patID_DB_PK = key; this.dob = dob;
+    }
+    // overloaded constructor with more arguments (database primary key)
+    public DB_Patient(String name, List<String> conditions, List<String> drugs, double weight, int key, Date dob){
+        this.name = name; this.conditions = conditions; this.drugs = drugs;
+        this.weight = weight; this.patID_DB_PK = key; this.dob = dob;
+        this.age = (int)((System.currentTimeMillis() - dob.getTime()) / 3.154e+10);
     }
 
     // getters and setters:
@@ -70,7 +80,15 @@ public class DB_Patient {
         }
     }
     public int getPatID(){ return this.patID_DB_PK;}
+    public Date getDOB(){
+        return this.dob;
+    }
+    public void setDob(Date dob){
+        if(this.dob == null){
+            this.dob = dob;
+        }
+    }
 
     @Override
-    public String toString(){ return String.format("\t%s\n\tAge: %d, Weight: %f\n\t%s\n\t%s",name,age,weight,conditions,drugs); }
+    public String toString(){ return String.format("\t%s, ID: %d\n\tAge: %d, Weight: %f\n\tDOB: %s\n\t%s\n\t%s",name,patID_DB_PK,age,weight,dob,conditions,drugs); }
 }
