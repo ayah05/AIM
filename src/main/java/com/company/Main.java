@@ -5,21 +5,32 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-
 import java.io.File;
-
 
 public class Main extends Application {
 
     public static void main(String[] args) {
       ////////////
-      //  Wenn die GUI nervt einfach mit // launch(); auskommentieren :D
+      //  Wenn die GUI nervt einfach mit // (oder /* */ xd) launch(); auskommentieren :D
+        // glaub am besten, wenn jeder seinen bereich hat dann müsste git vlt funktionieren ^^
       ///////////
-         launch();
-        // FHIR_IPS_parser parse = new FHIR_IPS_parser();
-        // System.out.println(parse.readIPS("./src/main/IPS-example-Bundle-with-renal-disease-et-al.json"));
 
+        /* flo test */
+        launch();
+
+        /* mo test
+        FHIR_IPS_parser parse = new FHIR_IPS_parser();
+        System.out.println(parse.readIPS("./src/main/IPS-example-Bundle-with-renal-disease-et-al.json"));
+         */
+        //
+
+        /* ayah test
+
+         */
     }
+
+
+
 
     @Override
     public void start(Stage stage) throws Exception {

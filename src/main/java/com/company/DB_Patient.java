@@ -1,5 +1,6 @@
 package com.company;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,7 +18,8 @@ public class DB_Patient {
     private double weight = Double.NaN;
     private int patID_DB_PK= -1;
 
-    public DB_Patient(){}
+    public DB_Patient(){
+    }
     public DB_Patient(String name, List<String> conditions, List<String> drugs, Date dob, double weight, int age){
         this.name = name; this.conditions = conditions; this.drugs = drugs; this.dob = dob;
         this.weight = weight; this.age = age;
