@@ -3,6 +3,7 @@ package com.company;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -15,9 +16,11 @@ import javafx.stage.Stage;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.time.LocalDate;
+import java.util.ResourceBundle;
 
-public class InterfaceController {
+public class InterfaceController implements Initializable {
 
     @FXML
     private Button B_Anamnese;
@@ -46,6 +49,7 @@ public class InterfaceController {
 
        t_fname.setText(ECard[1]);
        t_lname.setText(ECard[2]);
+       //t_wight.setText(ECard[]); // Falls das gewicht im der ECard hinterlegt ist?
 
     }
     public void switchToInterface2 (ActionEvent event) throws IOException {
@@ -70,4 +74,12 @@ public class InterfaceController {
     }
 
 
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+       // cb_food.getItems().addAll(food);
+     //   cb_food.setOnAction(this::getFood);
+    }
+    private  void setCondition (ActionEvent event){
+
+    }
 }
