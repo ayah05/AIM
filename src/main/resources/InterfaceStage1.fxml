@@ -123,8 +123,14 @@
       <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="150.0" prefWidth="400.0" VBox.vgrow="ALWAYS" />
       <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="64.0" prefWidth="699.0">
          <children>
-            <Button fx:id="importJason" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#fileJason" prefHeight="26.0" prefWidth="869.0" text="Json importieren" />
-            <Button fx:id="b_ECard" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#readEcard" prefHeight="26.0" prefWidth="888.0" text="E-Card import" />
+            <ButtonBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+              <buttons>
+                  <Button fx:id="importJason" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#fileJason" prefHeight="26.0" prefWidth="869.0" text="Json importieren" />
+                  <Button fx:id="b_ECard" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#readEcard" prefHeight="26.0" prefWidth="888.0" text="E-Card import" />
+                <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="200.0" text="Save Patient" />
+                  <Button mnemonicParsing="false" text="load Patient" />
+              </buttons>
+            </ButtonBar>
          </children>
       </VBox>
    </children>
