@@ -1,11 +1,13 @@
 package com.company;
 
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Month;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 /**
  * This class provides a Patient object according to the data-model of our postgreSQL-DB <p>
@@ -97,5 +99,7 @@ public class DB_Patient {
     }
 
     @Override
-    public String toString(){ return String.format("\t%s, ID: %d\n\tAge: %d, Weight: %f\n\tDOB: %s\n\t%s\n\t%s",name,patID_DB_PK,age,weight,dob,conditions,drugs); }
+    public String toString(){
+        SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
+        return String.format(Locale.ROOT,"\t%s, ID: %d\n\tAge: %d yrs, Weight: %.2f kg\n\tDOB: %s\n\tRist factors: %s\n\tSubstances: %s",name,patID_DB_PK,age,weight,fmt.format(dob),conditions,drugs); }
 }
