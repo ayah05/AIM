@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -18,6 +19,9 @@ public class DB_Patient {
     private int patID_DB_PK= -1;
 
     public DB_Patient(){
+    }
+    public DB_Patient(boolean test){
+       this.name = "Martha DeLarosa"; this.age = 50; this.dob = new Date(1972, Calendar.MAY, 1); this.conditions.addAll(List.of("N18.9","N95.1","Z88.0")); this.drugs.addAll(List.of("L02BG03","G02CX04","J01FA09", "B01AA03")); this.weight=63;
     }
     public DB_Patient(String name, List<String> conditions, List<String> drugs, Date dob, double weight, int age){
         this.name = name; this.conditions = conditions; this.drugs = drugs; this.dob = dob;
