@@ -3,8 +3,8 @@ DROP TABLE IF EXISTS Drug;
 DROP TABLE IF EXISTS Condition;
 DROP TABLE IF EXISTS Interaction;
 
-GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO ayah05, kulturaffe;
-
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO ayah05;
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO kulturaffe;
 CREATE TABLE "Patient" (
                            "PatientID" serial PRIMARY KEY,
                            "Drug" varchar(7) REFERENCES "Drug",
@@ -21,7 +21,7 @@ CREATE TABLE "Condition" (
 
 CREATE TABLE "Drug" (
                         "Code (ATC)" varchar(7) PRIMARY KEY ,
-                        "Name" varchar(50) NOT NULL
+                        "Name" varchar(60) NOT NULL
 );
 
 
@@ -30,22 +30,23 @@ CREATE TABLE "Interaction" (
                                "Drug" varchar(7) NOT NULL REFERENCES "Drug",
                                "Drug2" varchar(7) REFERENCES "Drug",
                                "Condition" varchar(5) REFERENCES "Condition",
-                               "Hint" varchar(50)
+                               "Hint" varchar(300)
 );
---filling in patient names
-INSERT INTO "Patient" VALUES (Default,'','','Brigitta Haggis',34,65);
-INSERT INTO "Patient" VALUES (Default,'','','Giulietta Cirlos',23,55);
-INSERT INTO "Patient" VALUES (Default,'','','Alexio Jarlmann',50,88);
-INSERT INTO "Patient" VALUES (Default,'','','Georgiana Labdon',39,70);
-INSERT INTO "Patient" VALUES (Default,'','','York Kingscott',27,76);
-INSERT INTO "Patient" VALUES (Default,'','','Tim Bettenson',20,65);
-INSERT INTO "Patient" VALUES (Default,'','','Mahmud Witling',65,82);
-INSERT INTO "Patient" VALUES (Default,'','','Rosana Jantet',45,68);
-INSERT INTO "Patient" VALUES (Default,'','','Kathe Camm',70,57);
-INSERT INTO "Patient" VALUES (Default,'','','Janett Harris',30,60);
-INSERT INTO "Patient" VALUES (Default,'','','Brigitta Haggis',34,65);
-INSERT INTO "Patient" VALUES (Default,'','','Alexander Helks',44,90);
-INSERT INTO "Patient" VALUES (Default,'','','Martha DeLarosa',50,63);
+
+
+INSERT INTO "Patient" VALUES (1,'','','Brigitta Haggis',34,65.6) ON CONFLICT DO NOTHING;
+INSERT INTO "Patient" VALUES (2,'','','Giulietta Cirlos',23,55.7)ON CONFLICT DO NOTHING;
+INSERT INTO "Patient" VALUES (3,'','','Alexio Jarlmann',50,88.3)ON CONFLICT DO NOTHING;
+INSERT INTO "Patient" VALUES (4,'','','Georgiana Labdon',39,70.4)ON CONFLICT DO NOTHING;
+INSERT INTO "Patient" VALUES (5,'','','York Kingscott',27,76.2)ON CONFLICT DO NOTHING;
+INSERT INTO "Patient" VALUES (6,'','','Tim Bettenson',20,65.1)ON CONFLICT DO NOTHING;
+INSERT INTO "Patient" VALUES (7,'','','Mahmud Witling',65,82.4)ON CONFLICT DO NOTHING;
+INSERT INTO "Patient" VALUES (8,'','','Rosana Jantet',45,68.8)ON CONFLICT DO NOTHING;
+INSERT INTO "Patient" VALUES (9,'','','Kathe Camm',70,57.9)ON CONFLICT DO NOTHING;
+INSERT INTO "Patient" VALUES (10,'','','Janett Harris',30,60.1)ON CONFLICT DO NOTHING;
+INSERT INTO "Patient" VALUES (11,'','','Brigitta Haggis',34,65.2)ON CONFLICT DO NOTHING;
+INSERT INTO "Patient" VALUES (12,'','','Alexander Helks',44,90.3)ON CONFLICT DO NOTHING;
+INSERT INTO "Patient" VALUES (13,'','','Martha DeLarosa',50,63.4)ON CONFLICT DO NOTHING;
 --filling in drugs and atc codes
 INSERT INTO "Drug" VALUES ('N01AX10','Propofol')ON CONFLICT DO NOTHING;
 INSERT INTO "Drug" VALUES ('N01AH01','Fentanyl')ON CONFLICT DO NOTHING;--N01AH - opioid anesthetics
@@ -115,74 +116,75 @@ INSERT INTO "Condition" VALUES ('K29','Gastritis und Duodenitis') ON CONFLICT DO
 
 
 --filling in several interactions
-INSERT INTO "Interaction" VALUES (DEFAULT,'N01AX10','Z91.012','Propofol might cause an allergic reaction to patients allergic to eggs, egg products, soy, or soy products. {information available on DOI:10.1016/j.jpainsymman.2010.07.001}.');
-INSERT INTO "Interaction" VALUES (DEFAULT,'N01AX10','I95','Caution is necessry for patients with abnormally low blood pressure. {information available on PMID:28613634}.');
-INSERT INTO "Interaction" VALUES (DEFAULT,'N01AH01','J46','The use of fentanyl is contraindicated in patients with respiratory depression or obstructive airway diseases (i.e., asthma, COPD, obstructive sleep apnea, obesity hyperventilation, also know as, Pickwickian syndrome). {information available on PMID:29083586}.');
-INSERT INTO "Interaction" VALUES (DEFAULT,'N01AH01','J44.1','The use of fentanyl is contraindicated in patients with respiratory depression or obstructive airway diseases (i.e., asthma, COPD, obstructive sleep apnea, obesity hyperventilation, also know as, Pickwickian syndrome). {information available on PMID:29083586}.');
-INSERT INTO "Interaction" VALUES (DEFAULT,'N01AH01','E66.2','The use of fentanyl is contraindicated in patients with respiratory depression or obstructive airway diseases (i.e., asthma, COPD, obstructive sleep apnea, obesity hyperventilation, also know as, Pickwickian syndrome). {information available on PMID:29083586}.');
-INSERT INTO "Interaction" VALUES (DEFAULT,'N01AH01','K70','The use of fentanyl is contraindicated in patients with liver failure. {information available on PMID:29083586}.');
-INSERT INTO "Interaction" VALUES (DEFAULT,'N01AH01','K71','The use of fentanyl is contraindicated in patients with liver failure. {information available on PMID:29083586}.');
-INSERT INTO "Interaction" VALUES (DEFAULT,'N01AH01','K72','The use of fentanyl is contraindicated in patients with liver failure. {information available on PMID:29083586}.');
-INSERT INTO "Interaction" VALUES (DEFAULT,'N01AH01','J01FA','Fentanyl should not be used with certain medications such as CYP3A4 inhibitors like macrolide antibiotics or azole-antifungal agents, and protease inhibitors because they may increase plasma concentrations of fentanyl, extending the opioid drug action and exacerbating the opioid-induced respiratory depression (OIRD). {information available on PMID:29083586}.');
-INSERT INTO "Interaction" VALUES (DEFAULT,'N01AH01','J05AE','Fentanyl should not be used with certain medications such as CYP3A4 inhibitors like macrolide antibiotics or azole-antifungal agents, and protease inhibitors because they may increase plasma concentrations of fentanyl, extending the opioid drug action and exacerbating the opioid-induced respiratory depression (OIRD). {information available on PMID:29083586}.');
-INSERT INTO "Interaction" VALUES (DEFAULT,'N01AH01','C08DB01','Fentanyl should not be used with certain medications such as CYP3A4 inhibitors like macrolide antibiotics or azole-antifungal agents, and protease inhibitors because they may increase plasma concentrations of fentanyl, extending the opioid drug action and exacerbating the opioid-induced respiratory depression (OIRD). {information available on PMID:29083586}.');
-INSERT INTO "Interaction" VALUES (DEFAULT,'N01AH01','J02AC02','Fentanyl should not be used with certain medications such as CYP3A4 inhibitors like macrolide antibiotics or azole-antifungal agents, and protease inhibitors because they may increase plasma concentrations of fentanyl, extending the opioid drug action and exacerbating the opioid-induced respiratory depression (OIRD). {information available on PMID:29083586}.');
-INSERT INTO "Interaction" VALUES (DEFAULT,'N01AH01','N06AF01','Fentanyl is contraindicated if a patient has used a monoamine oxidase inhibitor in the previous 14 days. {information available on PMID:29083586}.');
-INSERT INTO "Interaction" VALUES (DEFAULT,'N01AH03','B01AC06','The risk or severity of hypertension can be increased when Sufentanil is combined with Acetylsalicylic acid - severity:minor.  {information available on DrugBank}.');
-INSERT INTO "Interaction" VALUES (DEFAULT,'N01AH03','N05BA01','The risk or severity of adverse effects can be increased when Sufentanil is combined with 1,2-Benzodiazepine - severity:moderate. {information available on DrugBank}.');
-INSERT INTO "Interaction" VALUES (DEFAULT,'N01AX03','N05BA01','The risk or severity of adverse effects can be increased when Ketamine is combined with 1,2-Benzodiazepine - severity: moderate. {information available on DrugBank}.');
-INSERT INTO "Interaction" VALUES (Default,'N01AX03','Z33.3','It is not recommended to use Ketamine during obstetrics, pregnancy, or breastfeeding as it is unknown if this medication passes into breast milk. {information available on PMID:29262083}.');
-INSERT INTO "Interaction" VALUES (Default,'N01AX03','O90','It is not recommended to use Ketamine during obstetrics, pregnancy, or breastfeeding as it is unknown if this medication passes into breast milk. {information available on PMID:29262083}.');
-INSERT INTO "Interaction" VALUES (Default,'N01AX03','O94','It is not recommended to use Ketamine during obstetrics, pregnancy, or breastfeeding as it is unknown if this medication passes into breast milk. {information available on PMID:29262083}.');
-INSERT INTO "Interaction" VALUES (Default,'N01AX03','Z39.1','It is not recommended to use Ketamine during obstetrics, pregnancy, or breastfeeding as it is unknown if this medication passes into breast milk. {information available on PMID:29262083}.');
-INSERT INTO "Interaction" VALUES (Default,'N01AX03','F20.9','Ketamine is contraindicated in patients with schizophrenia due to the potential for exacerbating the underlying condition. {information available on PMID: 29262083}.');
-INSERT INTO "Interaction" VALUES (Default,'N05CD08','H40.21','Benzodiazepines are contraindicated in patients with acute narrow-angle glaucoma, {information available on Accessdata.fda.gov.');--Midazolam is a Benzodiazepine
-INSERT INTO "Interaction" VALUES (Default,'N05CD08','I95','Contraindications for the use of midazolam include acute angle-closure glaucoma, hypotension, and shock. {information available on PMID:30726006.');
-INSERT INTO "Interaction" VALUES (Default,'N05CD08','R57.9','Contraindications for the use of midazolam include acute angle-closure glaucoma, hypotension, and shock. {information available on PMID:30726006.');
-INSERT INTO "Interaction" VALUES (Default,'N05CD08','N17','Careful dose adjustment is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.');
-INSERT INTO "Interaction" VALUES (Default,'N05CD08','N18','Careful dose adjustment is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.');
-INSERT INTO "Interaction" VALUES (Default,'N05CD08','N19','Careful dose adjustment is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.');
-INSERT INTO "Interaction" VALUES (Default,'N05CD08','K70','Careful dose adjustment is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.');
-INSERT INTO "Interaction" VALUES (Default,'N05CD08','K71','Careful dose adjustment is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.');
-INSERT INTO "Interaction" VALUES (Default,'N05CD08','K72','Careful dose adjustment is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.');
-INSERT INTO "Interaction" VALUES (Default,'N05CD08','K73','Careful dose adjustment is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.');
-INSERT INTO "Interaction" VALUES (Default,'N05CD08','K74','Careful dose adjustment is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.');
-INSERT INTO "Interaction" VALUES (Default,'N05CD08','K75','Careful dose adjustment is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.');
-INSERT INTO "Interaction" VALUES (Default,'N05CD08','K76','Careful dose adjustment is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.');
-INSERT INTO "Interaction" VALUES (Default,'N05CD08','K77','Careful dose adjustment is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.');
-INSERT INTO "Interaction" VALUES (Default,'M03AB01','T20','Succinylcholine is contraindicated in patients with known decreased plasma cholinesterase activity, recent burns or trauma within 24 to 72 hours, and muscle myopathies. {information available on PMID:29763160}.');
-INSERT INTO "Interaction" VALUES (Default,'M03AB01','E88.09','Succinylcholine is contraindicated in patients with known decreased plasma cholinesterase activity, recent burns or trauma within 24 to 72 hours, and muscle myopathies. {information available on PMID:29763160}.');
-INSERT INTO "Interaction" VALUES (Default,'M03AB01','T07','Succinylcholine is contraindicated in patients with known decreased plasma cholinesterase activity, recent burns or trauma within 24 to 72 hours, and muscle myopathies. {information available on PMID:29763160}.');
-INSERT INTO "Interaction" VALUES (Default,'M03AB01','G71','Succinylcholine is contraindicated in patients with known decreased plasma cholinesterase activity, recent burns or trauma within 24 to 72 hours, and muscle myopathies. {information available on PMID:29763160}.');
-INSERT INTO "Interaction" VALUES (Default,'M03AB01','G72','Succinylcholine is contraindicated in patients with known decreased plasma cholinesterase activity, recent burns or trauma within 24 to 72 hours, and muscle myopathies. {information available on PMID:29763160}.');
-INSERT INTO "Interaction" VALUES (Default,'M03AC09','Z88.4','The absolute contraindication to using Rocuronium would be a documented allergic reaction to the drug. {information available on PMID:30969710}.');
-INSERT INTO "Interaction" VALUES (Default,'M03AC09','N05CD08','Midazolam may increase the central nervous system depressant (CNS depressant) activities of Rocuronium - severity:moderate. {information available on DrugBank}.');
-INSERT INTO "Interaction" VALUES (Default,'N01BB02','Z88.4','Lidocaine is contraindicated in patients with a known severe adverse reaction.  {information available on PMID:30969703}.');
-INSERT INTO "Interaction" VALUES (Default,'N01BB02','N01AH01','The risk or severity of adverse effects can be increased when Lidocaine is combined with Fentanyl - severity:moderate.  {information available on DrugBank}.');
-INSERT INTO "Interaction" VALUES (Default,'N01BB02','C01BD04','Dofetilide may increase the arrhythmogenic activities of Lidocaine - severity:moderate.  {information available on DrugBank}.');
-INSERT INTO "Interaction" VALUES (Default,'N01AB08','T88.3','Sevoflurane is contraindicated in any patient with known or suspected susceptibility to malignant hyperthermia.  {information available on PMID:30521202}.');
-INSERT INTO "Interaction" VALUES (Default,'N01AB08','Z88.4','Sevoflurane is contraindicated in patients with known hypersensitivity to sevoflurane or any other halogenated anesthetics.  {information available on PMID:30521202}.');
-INSERT INTO "Interaction" VALUES (Default,'N01AB08','Z88.5','Sevoflurane is contraindicated in patients with known hypersensitivity to sevoflurane or any other halogenated anesthetics.  {information available on PMID:30521202}.');
-INSERT INTO "Interaction" VALUES (Default,'N01AB08','Z88.6','Sevoflurane is contraindicated in patients with known hypersensitivity to sevoflurane or any other halogenated anesthetics.  {information available on PMID:30521202}.');
-INSERT INTO "Interaction" VALUES (Default,'N01AB08','Z88.9','Sevoflurane is contraindicated in patients with known hypersensitivity to sevoflurane or any other halogenated anesthetics.  {information available on PMID:30521202}.');
-INSERT INTO "Interaction" VALUES (Default,'N01AB08','T88.3','Patients who have genetic contraindications, such as those that carry gene variations for malignant hyperthermia, should avoid anesthetic gases.  {information available on PMID:32119427}.');--sevofluran is an inhalation anesthetic//is this the right ICD-10 code???
-INSERT INTO "Interaction" VALUES (Default,'N01AB08','D11AH08','The risk or severity of bleeding and thrombocytopenia can be increased when Sevoflurane is combined with Abrocitinib - severity: major.  {information available on DrugBank}.');
-INSERT INTO "Interaction" VALUES (Default,'N05BA01','J96','Contraindications to Diazepam include patients with severe respiratory insufficiency, myasthenia gravis, sleep apnea syndrome, and severe hepatic insufficiency.  {information available on PMID:30725707}.');
-INSERT INTO "Interaction" VALUES (Default,'N05BA01','G47.30','Contraindications to Diazepam include patients with severe respiratory insufficiency, myasthenia gravis, sleep apnea syndrome, and severe hepatic insufficiency.  {information available on PMID:30725707}.');
-INSERT INTO "Interaction" VALUES (Default,'N05BA01','K70','Contraindications to Diazepam include patients with severe respiratory insufficiency, myasthenia gravis, sleep apnea syndrome, and severe hepatic insufficiency.  {information available on PMID:30725707}.');
-INSERT INTO "Interaction" VALUES (Default,'N05BA01','K71','Contraindications to Diazepam include patients with severe respiratory insufficiency, myasthenia gravis, sleep apnea syndrome, and severe hepatic insufficiency.  {information available on PMID:30725707}.');
-INSERT INTO "Interaction" VALUES (Default,'N05BA01','K72','Contraindications to Diazepam include patients with severe respiratory insufficiency, myasthenia gravis, sleep apnea syndrome, and severe hepatic insufficiency.  {information available on PMID:30725707}.');
-INSERT INTO "Interaction" VALUES (Default,'N05BA01','K73','Contraindications to Diazepam include patients with severe respiratory insufficiency, myasthenia gravis, sleep apnea syndrome, and severe hepatic insufficiency.  {information available on PMID:30725707}.');
-INSERT INTO "Interaction" VALUES (Default,'N05BA01','K74','Contraindications to Diazepam include patients with severe respiratory insufficiency, myasthenia gravis, sleep apnea syndrome, and severe hepatic insufficiency.  {information available on PMID:30725707}.');
-INSERT INTO "Interaction" VALUES (Default,'N05BA01','K75','Contraindications to Diazepam include patients with severe respiratory insufficiency, myasthenia gravis, sleep apnea syndrome, and severe hepatic insufficiency.  {information available on PMID:30725707}.');
-INSERT INTO "Interaction" VALUES (Default,'N05BA01','K76','Contraindications to Diazepam include patients with severe respiratory insufficiency, myasthenia gravis, sleep apnea syndrome, and severe hepatic insufficiency.  {information available on PMID:30725707}.');
-INSERT INTO "Interaction" VALUES (Default,'N05BA01','K77','Contraindications to Diazepam include patients with severe respiratory insufficiency, myasthenia gravis, sleep apnea syndrome, and severe hepatic insufficiency.  {information available on PMID:30725707}.');
-INSERT INTO "Interaction" VALUES (Default,'N05BA01','H40.21','It is permissible in patients with open-angle glaucoma receiving appropriate therapy but is contraindicated in acute narrow-angle glaucoma. {information available on PMID:30725707}.');
-INSERT INTO "Interaction" VALUES (Default,'N02BA01','K27.9','Aspirin increases the risk of GI bleeding in patients who already suffer from peptic ulcer disease or gastritis. {information available on PMID:30085574}.');
-INSERT INTO "Interaction" VALUES (Default,'N02BA01','K29','Aspirin increases the risk of GI bleeding in patients who already suffer from peptic ulcer disease or gastritis. {information available on PMID: 30085574}.');
-INSERT INTO "Interaction" VALUES (Default,'N02BA01','B01AA03','Acetylsalicylic acid may increase the anticoagulant activities of Warfarin - severity: moderate. {information available on DrugBank}.');
-INSERT INTO "Interaction" VALUES (Default,'N01AX10','B01AA04','The metabolism of Phenprocoumon can be decreased when combined with Propofol - severity: major. {information available on DrugBank}.');
-INSERT INTO "Interaction" VALUES (Default,'N01AB08','B01AA04','The risk or severity of bleeding can be increased when Sevoflurane is combined with Phenprocoumon - severity: moderate. {information available on DrugBank}.');
+
+INSERT INTO "Interaction" VALUES (1,'N01AX10','Z91.012','Propofol might cause an allergic reaction to patients allergic to eggs, egg products, soy, or soy products. {information available on DOI:10.1016/j.jpainsymman.2010.07.001}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (2,'N01AX10','I95','Caution is necessry for patients with abnormally low blood pressure. {information available on PMID:28613634}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (3,'N01AH01','J46','The use of fentanyl is contraindicated in patients with respiratory depression or obstructive airway diseases (i.e., asthma, COPD, obstructive sleep apnea, obesity hyperventilation, also know as, Pickwickian syndrome). {information available on PMID:29083586}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (4,'N01AH01','J44.1','The use of fentanyl is contraindicated in patients with respiratory depression or obstructive airway diseases (i.e., asthma, COPD, obstructive sleep apnea, obesity hyperventilation, also know as, Pickwickian syndrome). {information available on PMID:29083586}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (5,'N01AH01','E66.2','The use of fentanyl is contraindicated in patients with respiratory depression or obstructive airway diseases (i.e., asthma, COPD, obstructive sleep apnea, obesity hyperventilation, also know as, Pickwickian syndrome). {information available on PMID:29083586}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (6,'N01AH01','K70','The use of fentanyl is contraindicated in patients with liver failure. {information available on PMID:29083586}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (7,'N01AH01','K71','The use of fentanyl is contraindicated in patients with liver failure. {information available on PMID:29083586}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (8,'N01AH01','K72','The use of fentanyl is contraindicated in patients with liver failure. {information available on PMID:29083586}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (9,'N01AH01','J01FA','Fentanyl should not be used with certain medications such as CYP3A4 inhibitors like macrolide antibiotics or azole-antifungal agents, and protease inhibitors because they may increase plasma concentrations of fentanyl, extending the opioid drug action and exacerbating the opioid-induced respiratory depression (OIRD). {information available on PMID:29083586}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (10,'N01AH01','J05AE','Fentanyl should not be used with certain medications such as CYP3A4 inhibitors like macrolide antibiotics or azole-antifungal agents, and protease inhibitors because they may increase plasma concentrations of fentanyl, extending the opioid drug action and exacerbating the opioid-induced respiratory depression (OIRD). {information available on PMID:29083586}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (11,'N01AH01','C08DB01','Fentanyl should not be used with certain medications such as CYP3A4 inhibitors like macrolide antibiotics or azole-antifungal agents, and protease inhibitors because they may increase plasma concentrations of fentanyl, extending the opioid drug action and exacerbating the opioid-induced respiratory depression (OIRD). {information available on PMID:29083586}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (12,'N01AH01','J02AC02','Fentanyl should not be used with certain medications such as CYP3A4 inhibitors like macrolide antibiotics or azole-antifungal agents, and protease inhibitors because they may increase plasma concentrations of fentanyl, extending the opioid drug action and exacerbating the opioid-induced respiratory depression (OIRD). {information available on PMID:29083586}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (13,'N01AH01','N06AF01','Fentanyl is contraindicated if a patient has used a monoamine oxidase inhibitor in the previous 14 days. {information available on PMID:29083586}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (14,'N01AH03','B01AC06','The risk or severity of hypertension can be increased when Sufentanil is combined with Acetylsalicylic acid - severity:minor.  {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (15,'N01AH03','N05BA01','The risk or severity of adverse effects can be increased when Sufentanil is combined with 1,2-Benzodiazepine - severity:moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (16,'N01AX03','N05BA01','The risk or severity of adverse effects can be increased when Ketamine is combined with 1,2-Benzodiazepine - severity: moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (17,'N01AX03','Z33.3','It is not recommended to use Ketamine during obstetrics, pregnancy, or breastfeeding as it is unknown if this medication passes into breast milk. {information available on PMID:29262083}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (18,'N01AX03','O90','It is not recommended to use Ketamine during obstetrics, pregnancy, or breastfeeding as it is unknown if this medication passes into breast milk. {information available on PMID:29262083}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (19,'N01AX03','O94','It is not recommended to use Ketamine during obstetrics, pregnancy, or breastfeeding as it is unknown if this medication passes into breast milk. {information available on PMID:29262083}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (20,'N01AX03','Z39.1','It is not recommended to use Ketamine during obstetrics, pregnancy, or breastfeeding as it is unknown if this medication passes into breast milk. {information available on PMID:29262083}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (21,'N01AX03','F20.9','Ketamine is contraindicated in patients with schizophrenia due to the potential for exacerbating the underlying condition. {information available on PMID: 29262083}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (22,'N05CD08','H40.21','Benzodiazepines are contraindicated in patients with acute narrow-angle glaucoma, {information available on Accessdata.fda.gov.')ON CONFLICT DO NOTHING;--Midazolam is a Benzodiazepine
+INSERT INTO "Interaction" VALUES (23,'N05CD08','I95','Contraindications for the use of midazolam include acute angle-closure glaucoma, hypotension, and shock. {information available on PMID:30726006.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (24,'N05CD08','R57.9','Contraindications for the use of midazolam include acute angle-closure glaucoma, hypotension, and shock. {information available on PMID:30726006.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (25,'N05CD08','N17','Careful dose adjustment is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (26,'N05CD08','N18','Careful dose adjustment is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (27,'N05CD08','N19','Careful dose adjustment is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (28,'N05CD08','K70','Careful dose adjustment is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (29,'N05CD08','K71','Careful dose adjustment is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (30,'N05CD08','K72','Careful dose adjustment is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (31,'N05CD08','K73','Careful dose adjustment is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (32,'N05CD08','K74','Careful dose adjustment is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (33,'N05CD08','K75','Careful dose adjustment is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (34,'N05CD08','K76','Careful dose adjustment is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (35,'N05CD08','K77','Careful dose adjustment is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (36,'M03AB01','T20','Succinylcholine is contraindicated in patients with known decreased plasma cholinesterase activity, recent burns or trauma within 24 to 72 hours, and muscle myopathies. {information available on PMID:29763160}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (37,'M03AB01','E88.09','Succinylcholine is contraindicated in patients with known decreased plasma cholinesterase activity, recent burns or trauma within 24 to 72 hours, and muscle myopathies. {information available on PMID:29763160}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (38,'M03AB01','T07','Succinylcholine is contraindicated in patients with known decreased plasma cholinesterase activity, recent burns or trauma within 24 to 72 hours, and muscle myopathies. {information available on PMID:29763160}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (39,'M03AB01','G71','Succinylcholine is contraindicated in patients with known decreased plasma cholinesterase activity, recent burns or trauma within 24 to 72 hours, and muscle myopathies. {information available on PMID:29763160}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (40,'M03AB01','G72','Succinylcholine is contraindicated in patients with known decreased plasma cholinesterase activity, recent burns or trauma within 24 to 72 hours, and muscle myopathies. {information available on PMID:29763160}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (41,'M03AC09','Z88.4','The absolute contraindication to using Rocuronium would be a documented allergic reaction to the drug. {information available on PMID:30969710}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (42,'M03AC09','N05CD08','Midazolam may increase the central nervous system depressant (CNS depressant) activities of Rocuronium - severity:moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (43,'N01BB02','Z88.4','Lidocaine is contraindicated in patients with a known severe adverse reaction.  {information available on PMID:30969703}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (44,'N01BB02','N01AH01','The risk or severity of adverse effects can be increased when Lidocaine is combined with Fentanyl - severity:moderate.  {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (45,'N01BB02','C01BD04','Dofetilide may increase the arrhythmogenic activities of Lidocaine - severity:moderate.  {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (46,'N01AB08','T88.3','Sevoflurane is contraindicated in any patient with known or suspected susceptibility to malignant hyperthermia.  {information available on PMID:30521202}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (47,'N01AB08','Z88.4','Sevoflurane is contraindicated in patients with known hypersensitivity to sevoflurane or any other halogenated anesthetics.  {information available on PMID:30521202}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (48,'N01AB08','Z88.5','Sevoflurane is contraindicated in patients with known hypersensitivity to sevoflurane or any other halogenated anesthetics.  {information available on PMID:30521202}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (49,'N01AB08','Z88.6','Sevoflurane is contraindicated in patients with known hypersensitivity to sevoflurane or any other halogenated anesthetics.  {information available on PMID:30521202}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (50,'N01AB08','Z88.9','Sevoflurane is contraindicated in patients with known hypersensitivity to sevoflurane or any other halogenated anesthetics.  {information available on PMID:30521202}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (51,'N01AB08','T88.3','Patients who have genetic contraindications, such as those that carry gene variations for malignant hyperthermia, should avoid anesthetic gases.  {information available on PMID:32119427}.')ON CONFLICT DO NOTHING;--sevofluran is an inhalation anesthetic
+INSERT INTO "Interaction" VALUES (52,'N01AB08','D11AH08','The risk or severity of bleeding and thrombocytopenia can be increased when Sevoflurane is combined with Abrocitinib - severity: major.  {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (53,'N05BA01','J96','Contraindications to Diazepam include patients with severe respiratory insufficiency, myasthenia gravis, sleep apnea syndrome, and severe hepatic insufficiency.  {information available on PMID:30725707}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (54,'N05BA01','G47.30','Contraindications to Diazepam include patients with severe respiratory insufficiency, myasthenia gravis, sleep apnea syndrome, and severe hepatic insufficiency.  {information available on PMID:30725707}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (55,'N05BA01','K70','Contraindications to Diazepam include patients with severe respiratory insufficiency, myasthenia gravis, sleep apnea syndrome, and severe hepatic insufficiency.  {information available on PMID:30725707}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (56,'N05BA01','K71','Contraindications to Diazepam include patients with severe respiratory insufficiency, myasthenia gravis, sleep apnea syndrome, and severe hepatic insufficiency.  {information available on PMID:30725707}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (57,'N05BA01','K72','Contraindications to Diazepam include patients with severe respiratory insufficiency, myasthenia gravis, sleep apnea syndrome, and severe hepatic insufficiency.  {information available on PMID:30725707}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (58,'N05BA01','K73','Contraindications to Diazepam include patients with severe respiratory insufficiency, myasthenia gravis, sleep apnea syndrome, and severe hepatic insufficiency.  {information available on PMID:30725707}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (59,'N05BA01','K74','Contraindications to Diazepam include patients with severe respiratory insufficiency, myasthenia gravis, sleep apnea syndrome, and severe hepatic insufficiency.  {information available on PMID:30725707}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (60,'N05BA01','K75','Contraindications to Diazepam include patients with severe respiratory insufficiency, myasthenia gravis, sleep apnea syndrome, and severe hepatic insufficiency.  {information available on PMID:30725707}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (61,'N05BA01','K76','Contraindications to Diazepam include patients with severe respiratory insufficiency, myasthenia gravis, sleep apnea syndrome, and severe hepatic insufficiency.  {information available on PMID:30725707}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (62,'N05BA01','K77','Contraindications to Diazepam include patients with severe respiratory insufficiency, myasthenia gravis, sleep apnea syndrome, and severe hepatic insufficiency.  {information available on PMID:30725707}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (63,'N05BA01','H40.21','It is permissible in patients with open-angle glaucoma receiving appropriate therapy but is contraindicated in acute narrow-angle glaucoma. {information available on PMID:30725707}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (64,'N02BA01','K27.9','Aspirin increases the risk of GI bleeding in patients who already suffer from peptic ulcer disease or gastritis. {information available on PMID:30085574}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (65,'N02BA01','K29','Aspirin increases the risk of GI bleeding in patients who already suffer from peptic ulcer disease or gastritis. {information available on PMID: 30085574}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (66,'N02BA01','B01AA03','Acetylsalicylic acid may increase the anticoagulant activities of Warfarin - severity: moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (67,'N01AX10','B01AA04','The metabolism of Phenprocoumon can be decreased when combined with Propofol - severity: major. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (68,'N01AB08','B01AA04','The risk or severity of bleeding can be increased when Sevoflurane is combined with Phenprocoumon - severity: moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
 
 
 
