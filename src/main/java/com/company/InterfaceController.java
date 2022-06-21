@@ -31,9 +31,9 @@ public class InterfaceController implements Initializable {
     @FXML
     private DatePicker DP;
     @FXML
-    private ChoiceBox ChoiceB_Condition;
+    private ChoiceBox<Object> ChoiceB_Condition = new ChoiceBox<>();
     @FXML
-    private ListView<String> conditionListView, patMedListView;
+    private ListView<String> conditionListView = new ListView<>(), patMedListView = new ListView<>();
 
 
 
@@ -46,7 +46,7 @@ public class InterfaceController implements Initializable {
 
 //Patient Data
 
-        DB_Patient Patient = new DB_Patient();
+        DB_Patient Patient = new DB_Patient(true);
 
 
 
