@@ -21,7 +21,7 @@ CREATE TABLE "Condition" (
 
 CREATE TABLE "Drug" (
                         "Code (ATC)" varchar(7) PRIMARY KEY ,
-                        "Name" varchar(50) NOT NULL
+                        "Name" varchar(60) NOT NULL
 );
 
 
@@ -30,7 +30,7 @@ CREATE TABLE "Interaction" (
                                "Drug" varchar(7) NOT NULL REFERENCES "Drug",
                                "Drug2" varchar(7) REFERENCES "Drug",
                                "Condition" varchar(5) REFERENCES "Condition",
-                               "Hint" varchar(50)
+                               "Hint" varchar(300)
 );
 
 
