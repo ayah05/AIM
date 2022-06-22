@@ -10,7 +10,6 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="AIM" target="16" />
       <module name="Software" target="18" />
     </bytecodeTargetLevel>
   </component>

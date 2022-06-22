@@ -8,7 +8,6 @@ import java.util.HexFormat;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
-// TODO: implement!
 public class ReadEcardGeneric /*implements Runnable*/{
 
     public static DB_Patient readCard(int terminalNo, boolean verbose){
@@ -19,27 +18,27 @@ public class ReadEcardGeneric /*implements Runnable*/{
             Card card = TerminalFactory.getDefault().terminals().list().get(terminalNo).connect("T=1");
             if(verbose){System.out.println("Connected to card: "+ card);}
             CardChannel channel = card.getBasicChannel();
-            //APDU 1: select MF (Master File = "root"), get satus word
+            //APDU 1: select MF (Master File = "root"), get status word
             int status1 = channel.transmit(new CommandAPDU(0x00, 0xA4, 0x00, 0x0C, 0x00)).getSW();
             if(verbose){
-                System.out.printf("Selecting Master File...\nStatus: %X (9000 means no further qualification -> \"everythig's fine\"\n", status1);
+                System.out.printf("Selecting Master File...\nStatus: %X (9000 means no further qualification -> \"everythig's fine\")\n", status1);
             }
             //APDU 2: execSELECT-AID-SV-PERSONENDATEN
             byte[] data1 = HexFormat.ofDelimiter(",").parseHex("D0,40,00,00,17,01,01,01");
             int status2 = channel.transmit(new CommandAPDU(0x00, 0xA4, 0x04, 0x00, data1, 0x100)).getSW();
             if(verbose){
-                System.out.printf("Selecting Application SV-PERSONENDATEN...\nStatus: %X (9000 means no further qualification -> \"everythig's fine\"\n", status2);
+                System.out.printf("Selecting Application SV-PERSONENDATEN...\nStatus: %X (9000 means no further qualification -> \"everythig's fine\")\n", status2);
             }
             //APDU 3: execSELECT-FID-GRUNDDATEN
             byte[] data2 = HexFormat.ofDelimiter(",").parseHex("EF,01");
             int status3 = channel.transmit(new CommandAPDU(0x00, 0xA4, 0x02, 0x04, data2, 0x100)).getSW();
             if(verbose){
-                System.out.printf("Selecting File GRUNDDATEN...\nStatus: %X (9000 means no further qualification -> \"everythig's fine\"\n", status3);
+                System.out.printf("Selecting File GRUNDDATEN...\nStatus: %X (9000 means no further qualification -> \"everythig's fine\")\n", status3);
             }
             //APDU 4: inputstram: read data from file GRUNDDATEN
             ResponseAPDU re = channel.transmit(new CommandAPDU(0x00, 0xB0, 0x00, 0x00, 0xFF));
             if (verbose) {
-                System.out.printf("Reading file GRUNDDATEN...\nStatus: %X (6282 means non-volatile memory unchanged -> \"everythig's fine\"\n", re.getSW());
+                System.out.printf("Reading file GRUNDDATEN...\nStatus: %X (6282 means non-volatile memory unchanged -> \"everythig's fine\")\n", re.getSW());
             }
             String responseHex = byteToHex(re.getBytes());
             if(verbose){System.out.println("GRUNDDATEN inhalt:\n"+responseHex);}
@@ -99,14 +98,14 @@ public class ReadEcardGeneric /*implements Runnable*/{
     }
     private static String getData(String response, String tag, boolean dob){
         int index = response.indexOf(tag);
-        String rest = response.substring(index + tag.length() + 4); // to get string beginning with length-byte and data
-        int lengthDecoded = Integer.parseInt(rest.substring(0, 2), 16); // get length-byte and cast it to int
-        return hexStringToString(rest.substring(2, dob ? 18 : ((lengthDecoded*2)+2) )); // finally read data, uses decoded lenght normally - except for birthdate b/c we don't need the (wrong) time info on ecard
+        String rest = response.substring(index + tag.length() + 4); // to get string with length-byte followed by the data
+        int lengthDecoded = Integer.parseInt(rest.substring(0, 2), 16)*2; // get length-byte, multiply by 2 and parse to int
+        return hexStringToString(rest.substring(2, dob ? 18 : (lengthDecoded+2) )); // uses decoded length normally - except for birthdate b/c we don't need the (wrong) time info on ecard
     }
     private static String hexStringToString(String hex) {
         byte[] bhex = new byte[hex.length() / 2];
-        for (int h = 0; h < bhex.length; h++) {
-            bhex[h] = (byte) Integer.parseInt(hex.substring(2 * h, 2 * h + 2), 16);
+        for (int i = 0; i < bhex.length; i++) {
+            bhex[i] = (byte) Integer.parseInt(hex.substring(2 * i, 2 * i + 2), 16);
         }
         return new String(bhex);
     }
