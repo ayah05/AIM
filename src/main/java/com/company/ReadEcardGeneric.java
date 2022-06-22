@@ -41,7 +41,8 @@ public class ReadEcardGeneric /*implements Runnable*/{
                 System.out.printf("Reading file GRUNDDATEN...\nStatus: %X (6282 means non-volatile memory unchanged -> \"everythig's fine\")\n", re.getSW());
             }
             String responseHex = byteToHex(re.getBytes());
-            if(verbose){System.out.println("GRUNDDATEN inhalt:\n"+responseHex);}
+            card.disconnect(false);
+            if(verbose){System.out.println("GRUNDDATEN inhalt (hex):\n"+responseHex);}
             // how the important data are tagged:
             String svnrTag = "06082A28000A0104010131";
             String firstnameTag = "060355042A31";
@@ -107,6 +108,7 @@ public class ReadEcardGeneric /*implements Runnable*/{
         for (int i = 0; i < bhex.length; i++) {
             bhex[i] = (byte) Integer.parseInt(hex.substring(2 * i, 2 * i + 2), 16);
         }
+        System.setProperty("file.encoding", "UTF-8"); // just to be _really_ sure the String(byte[])-constructor uses UTF-8
         return new String(bhex);
     }
 
