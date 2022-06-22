@@ -6,6 +6,8 @@ module com.company {
     requires org.hl7.fhir.r4;
     requires javafx.graphics;
     requires java.sql;
+    requires java.smartcardio;
+    requires org.jetbrains.annotations;
 
 
     opens com.company to javafx.fxml;

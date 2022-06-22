@@ -108,6 +108,12 @@
             <artifactId>woodstox-core</artifactId>
             <version>6.2.8</version>
         </dependency>
+        <dependency>
+            <groupId>org.jetbrains</groupId>
+            <artifactId>annotations</artifactId>
+            <version>RELEASE</version>
+            <scope>compile</scope>
+        </dependency>
 
         <!-- only necessary for validation
         <dependency>
