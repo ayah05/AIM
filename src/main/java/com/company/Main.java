@@ -6,6 +6,8 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import java.io.File;
+import java.sql.*;
+import java.util.ArrayList;
 
 public class Main extends Application {
 
@@ -36,7 +38,9 @@ public class Main extends Application {
 
 
         /* ayah test
-
+            SQLtoJava test = new SQLtoJava();
+            Connection connection = test.setConnection();
+            test.listingAllPatients(connection);
          */
     }
 
