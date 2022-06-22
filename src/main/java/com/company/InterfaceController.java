@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class InterfaceController implements Initializable {
 
@@ -94,16 +95,33 @@ public class InterfaceController implements Initializable {
         //Test Data
         /////////////////////////////////////////////////////
             //Contition
-        List<String> testConditionsAll = Arrays.asList( "O90", "Z39.1", "K27.9","K29");
-        List<String> testConditionsPAtient = Arrays.asList( "J46", "G71", "J96","I95");
+        ConcurrentHashMap<String, String> testConditionsAll = new ConcurrentHashMap<>(){{ // _concurrent_hashmap for thread safety -- dunno if important
+            put("O90","Wochenbettkomplikationen"); put("Z39.1","Betreuung und Untersuchung der stillenden Mutter");
+            put("K27.9","Ulcus pepticum, Lokalisation nicht näher bezeichnet : Weder als akut noch als chronisch bezeichnet, ohne Blutung oder Perforation");
+            put("K29.0","Akute hämorrhagische Gastritis"); put("J46","Status asthmaticus"); put("G71.0","Muskeldystrophie");
+            put("J96.0","Akute respiratorische Insuffizienz, anderenorts nicht klassifiziert");
+            put("I95","Hypotonie"); put("N18.9","Chronische Nierenkrankheit, nicht näher bezeichnet"); put("N95.1","Zustände im Zusammenhang mit der Menopause und dem Klimakterium");
+            put("Z88.0","Allergie gegenüber Penicillin");  put("Z88.1","Allergie gegenüber anderen Antibiotika");  put("Z88.4","Allergie gegenüber Anästhetikum"); put("Z88.5","Allergie gegenüber Betäubungsmittel");  put("Z88.6","Allergie gegenüber Analgetikum");
+            put("K70.4","Alkoholisches Leverversagen");
+        }} ;
+        // has to be a subset of testConditionsAll (only conditions allowed in patient, which are part of all conditions)
+        ConcurrentHashMap<String, String> testConditionsPatient = new ConcurrentHashMap<>();
+        for (Map.Entry<String, String> entry: testConditionsAll.entrySet()){
+            if(entry.getKey().equals("J46") || entry.getKey().equals("G71.0") || entry.getKey().equals("N18.9") || entry.getKey().equals("I95")){ // specify which conditions you want the parient to have
+                testConditionsPatient.put(entry.getKey(),entry.getValue());
+            }
+        }
+
             //Patien medication
-        List<String> testPatientMed = Arrays.asList( "Alkohol", "Heroin", "Crack","Methamphetamin","Weed");
+        ConcurrentHashMap<String, String> testPatientMed = new ConcurrentHashMap<>(){{
+            put("V03AZ01","Ethanol"); put("N07BC06", "Diamorphin"); put("N06BA03","Methamphetamin"); put("N01BC01","Kokain"); put("N05CD03","Flunitrazepam"); put("N05CA19", "Thiopental"); put("N02BG10","Cannabinoide"); put("A04AD10","Dronabinol (THC)"); put("N05CM01","Methaqualon"); put("N01AX11","Natriumoxybat"); put("N02AA05", "Oxycodon"); put("N06BA10","Fenetyllin");
+        }};
 
 
-        patMedListView.getItems().addAll(testPatientMed);
+        patMedListView.getItems().addAll(testPatientMed.values());
 
-        allConditions.addAll(testConditionsAll) ;
-        curentConditions.addAll(testConditionsPAtient);
+        allConditions.addAll(testConditionsAll.values());
+        curentConditions.addAll(testConditionsPatient.values());
 
         ChoiceB_Condition.getItems().addAll(allConditions);
         ChoiceB_Condition.setOnAction(this::setCondition);
@@ -121,6 +139,9 @@ public class InterfaceController implements Initializable {
            }
        });
     }
+
+
+
     private void setCondition(Event event) {
 
         curentConditions.add(String.valueOf(ChoiceB_Condition.getValue()));
