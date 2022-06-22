@@ -17,23 +17,24 @@ public class Main extends Application {
         // glaub am besten, wenn jeder seinen bereich hat dann müsste git vlt funktionieren ^^
       ///////////
 
-        /* flo test */
-        launch();
+        /* flo test
+        fails due to:
+        Caused by: javafx.fxml.LoadException: Error resolving onAction='#readEcard', either the event handler is not in the Namespace or there is an error in the script.
+        ./AIM/target/classes/InterfaceStage1.fxml:129
+        launch(); */
 
 
         /* mo test
         FHIR_IPS_parser parse = new FHIR_IPS_parser();
         System.out.println(parse.readIPS("./src/main/IPS-example-Bundle-with-renal-disease-et-al.json"));
-
         System.out.println(new DB_Patient(true)); // for testing the test DB_Patient: works just as well as readIPS on our example IPS :D
-
-        // shows all terminals:
+        // shows all terminals: */
         System.out.println("All terminals: "+ ReadEcardGeneric.getAllTerminals());
         // shows all terminals with card present (maybe easier just to make the user coose from these)
         System.out.println("Terminals with card present: " + ReadEcardGeneric.getAllTerminalsWithCardPresent());
         // reads the ecard in terminal 0, true just puts out debug-info
-        System.out.println(ReadEcardGeneric.readCard(0,true));
-        */
+        System.out.println("Created DB_Patient:\n"+ReadEcardGeneric.readCard(0,true));
+
 
 
 
