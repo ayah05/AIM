@@ -1,6 +1,8 @@
 package com.company;
 
 import javax.smartcardio.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HexFormat;
 import java.util.List;
@@ -40,11 +42,51 @@ public class ReadEcardGeneric /*implements Runnable*/{
                 System.out.printf("Reading file GRUNDDATEN...\nStatus: %X (6282 means non-volatile memory unchanged -> \"everythig's fine\"\n", re.getSW());
             }
             String responseHex = byteToHex(re.getBytes());
-            System.out.println("GRUNDDATEN inhalt:\n"+responseHex);
+            if(verbose){System.out.println("GRUNDDATEN inhalt:\n"+responseHex);}
+            // how the important data are tagged:
+            String svnrTag = "06082A28000A0104010131";
+            String firstnameTag = "060355042A31";
+            String surnameTag = "060355040431";
+            String birthdayTag = "06082B0601050507090131";
+            // initializing output:
+            String svnr = null, firstname = null, surname = null, birthdate = null;
 
+            // SVNR
+            if (responseHex.contains(svnrTag)) {
+                svnr=getData(responseHex,svnrTag,false);
+            }
+            if (svnr!=null && verbose){
+                System.out.println(svnr);
+            }
+            // firstname
+            if (responseHex.contains(firstnameTag)) {
+                firstname = getData(responseHex,firstnameTag,false);
+                }
+            if (firstname!=null && verbose){
+                System.out.println(firstname);
+            }
+            // surname
+            if (responseHex.contains(surnameTag)) {
+                surname = getData(responseHex,surnameTag,false);
+            }
+            if (surname!=null && verbose){
+                System.out.println(surname);
+            }
+            // dob
+            if (responseHex.contains(birthdayTag)) {
+                birthdate = getData(responseHex,birthdayTag,true);
+            }
+            if (birthdate!=null && verbose){
+                System.out.println(birthdate);
+            }
+            name = firstname + "\u0020" + surname;
+            SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+            dob = df.parse(birthdate);
 
         } catch (CardException e) {
             System.out.println("Sorry, something went wrong reading the card. Please leave it connected during the process!");
+        } catch (ParseException e) {
+            System.out.println("Something went wrong during parsing the birthdate from card...please contact your system administrator!");
         }
         return new DB_Patient(name, dob);
     }
@@ -54,6 +96,19 @@ public class ReadEcardGeneric /*implements Runnable*/{
             responseHex.append(String.format("%02X",b));
         }
         return responseHex.toString();
+    }
+    private static String getData(String response, String tag, boolean dob){
+        int index = response.indexOf(tag);
+        String rest = response.substring(index + tag.length() + 4); // to get string beginning with length-byte and data
+        int lengthDecoded = Integer.parseInt(rest.substring(0, 2), 16); // get length-byte and cast it to int
+        return hexStringToString(rest.substring(2, dob ? 18 : ((lengthDecoded*2)+2) )); // finally read data, uses decoded lenght normally - except for birthdate b/c we don't need the (wrong) time info on ecard
+    }
+    private static String hexStringToString(String hex) {
+        byte[] bhex = new byte[hex.length() / 2];
+        for (int h = 0; h < bhex.length; h++) {
+            bhex[h] = (byte) Integer.parseInt(hex.substring(2 * h, 2 * h + 2), 16);
+        }
+        return new String(bhex);
     }
 
 

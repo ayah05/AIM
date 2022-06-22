@@ -15,8 +15,8 @@ public class Main extends Application {
         // glaub am besten, wenn jeder seinen bereich hat dann müsste git vlt funktionieren ^^
       ///////////
 
-        /* flo test
-        launch(); */
+        /* flo test */
+        launch();
 
 
         /* mo test
@@ -30,8 +30,9 @@ public class Main extends Application {
         // shows all terminals with card present (maybe easier just to make the user coose from these)
         System.out.println("Terminals with card present: " + ReadEcardGeneric.getAllTerminalsWithCardPresent());
         // reads the ecard in terminal 0, true just puts out debug-info
-        ReadEcardGeneric.readCard(0,true);
+        System.out.println(ReadEcardGeneric.readCard(0,true));
         */
+
 
 
         /* ayah test
