@@ -59,15 +59,11 @@ public class InterfaceController implements Initializable {
         File selectedFile = fileChooser.showOpenDialog(choserStage);
     }
 
-    /*
-    public void readEcard(ActionEvent event){
-        String[] ECard = ReadEcardGeneric.readCard();
 
-       t_fname.setText(ECard[1]);
-       t_lname.setText(ECard[2]);
-       //t_wight.setText(ECard[]); // Falls das gewicht im der ECard hinterlegt ist? nein aber geburtsdatum..würde dir allerdings alles schon ausgerechnet übergeben ins GUI
+    public void readEcard(ActionEvent event, int terminal){
+        DB_Patient patient = ReadEcardGeneric.readCard(terminal,false);
     }
-     */
+
     public void switchToInterface2 (ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/InterfaceStage2.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();

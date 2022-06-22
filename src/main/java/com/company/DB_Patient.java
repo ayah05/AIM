@@ -44,10 +44,10 @@ public class DB_Patient {
         this.name = name; this.conditions = conditions; this.drugs = drugs; this.dob = dob;
         this.age = (int)((System.currentTimeMillis() - dob.getTime()) / 3.154e+10);
     }
-    // overloaded constructor with all arguments (database primary key + age)
-    public DB_Patient(@NotNull String name, List<String> conditions, List<String> drugs, int age, double weight,int key,Date dob){
+    // overloaded constructor with all arguments (database primary key + age, no DOB)
+    public DB_Patient(@NotNull String name, List<String> conditions, List<String> drugs, int age, double weight,int key){
         this.name = name; this.conditions = conditions; this.drugs = drugs; this.age = age;
-        this.weight = weight; this.patID_DB_PK = key; this.dob = dob;
+        this.weight = weight; this.patID_DB_PK = key;
     }
     // overloaded constructor with more arguments (database primary key)
     public DB_Patient(@NotNull String name, List<String> conditions, List<String> drugs, double weight, int key,@NotNull Date dob){
