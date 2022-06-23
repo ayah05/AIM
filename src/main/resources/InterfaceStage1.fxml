@@ -45,7 +45,7 @@
                            </font>
                         </Label>
                         <TextField fx:id="t_fname" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="220.0" HBox.hgrow="ALWAYS" />
-                        <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="64.0" HBox.hgrow="ALWAYS" />
+                        <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="64.0" />
                      </children>
                   </HBox>
                   <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="53.0" prefWidth="434.0">
@@ -104,6 +104,7 @@
                            </children>
                         </VBox>
                      </children></HBox>
+                  <VBox prefHeight="200.0" prefWidth="100.0" />
                </children>
             </VBox>
             <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="640.0" prefWidth="442.0" HBox.hgrow="ALWAYS">
@@ -112,9 +113,33 @@
                   <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="433.0" />
                   <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="567.0" prefWidth="433.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="207.0" prefWidth="42.0" HBox.hgrow="ALWAYS" />
-                        <ListView fx:id="patMedListView" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="522.0" prefWidth="344.0" HBox.hgrow="ALWAYS" />
-                        <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="522.0" prefWidth="43.0" HBox.hgrow="ALWAYS" />
+                        <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="433.0">
+                                 <children>
+                                    <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="151.0" prefWidth="433.0" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="50.0" />
+                                          <TextField maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="180.0" HBox.hgrow="ALWAYS" />
+                                          <ListView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="99.0" HBox.hgrow="ALWAYS" />
+                                          <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="23.0" HBox.hgrow="ALWAYS" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <VBox prefHeight="486.0" prefWidth="433.0" VBox.vgrow="ALWAYS">
+                                 <children>
+                                    <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="431.0" prefWidth="433.0" VBox.vgrow="ALWAYS">
+                                       <children>
+                                          <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="495.0" prefWidth="58.0" HBox.hgrow="ALWAYS" />
+                                          <ListView fx:id="patMedListView" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="495.0" prefWidth="344.0" HBox.hgrow="ALWAYS" />
+                                          <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="495.0" prefWidth="57.0" HBox.hgrow="ALWAYS" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </VBox>
                      </children></HBox>
                </children>
             </VBox>
@@ -126,7 +151,7 @@
             <ButtonBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
               <buttons>
                   <Button fx:id="importJason" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#fileJason" prefHeight="26.0" prefWidth="869.0" text="Json importieren" />
-                  <Button fx:id="b_ECard" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#readEcard" prefHeight="26.0" prefWidth="888.0" text="E-Card import" />
+                  <ChoiceBox fx:id="ECardBox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="150.0" />
                 <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="200.0" text="Save Patient" />
                   <Button mnemonicParsing="false" text="load Patient" />
               </buttons>
