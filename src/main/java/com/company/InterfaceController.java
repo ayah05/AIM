@@ -34,6 +34,8 @@ public class InterfaceController implements Initializable {
     @FXML
     private ChoiceBox<Object> ChoiceB_Condition = new ChoiceBox<>();
     @FXML
+    private ChoiceBox<Object>ECardBox= new ChoiceBox<>();
+    @FXML
     private ListView<String> conditionListView = new ListView<>(), patMedListView = new ListView<>();
 
 
@@ -127,6 +129,7 @@ public class InterfaceController implements Initializable {
         conditionListView.getItems().addAll(curentConditions);
 
 
+
         conditionListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
 
            @Override
@@ -137,9 +140,24 @@ public class InterfaceController implements Initializable {
 
            }
        });
+
+        //E Card Section
+        ConcurrentHashMap<String, String> eCardDevice = new ConcurrentHashMap<>(){{
+            put("01","Virtual maschien"); put("02"," FH");
+            put("03"," F 0.02");
+        }} ;
+
+        ECardBox.getItems().addAll(eCardDevice.values());
+        ECardBox.setOnAction(this::setECardDevice);
+        ECardBox.setValue("E Card Geräte");
     }
 
+    private void setECardDevice(Event event) {
+        //Mo hier ist dein arbeitsbereich
+        System.out.println(ECardBox.getValue());
 
+
+    }
 
     private void setCondition(Event event) {
 
