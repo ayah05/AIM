@@ -1,17 +1,14 @@
 package com.company;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+
 import java.sql.*;
 import java.util.ArrayList;
 
+
 public class SQLtoJava {
-    private static String url = "jdbc:postgresql://localhost:5432/AIM";
-    private static String user = "postgres";
-    private static String password = "medProjekt";
-    private static Connection connection;
+   // private static final ArrayList <DB_Patient> patientlist = new ArrayList<>();
+    private static final String url = "jdbc:postgresql://localhost:5432/AIM";
+    private static final String user = "postgres";
+    private static final String password = "medProjekt";
 
     public SQLtoJava() {
     }
@@ -43,6 +40,38 @@ public class SQLtoJava {
                 }
             }
         } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
+
+   /* public void listingAllConditions(Connection connection){
+        try{
+            ArrayList <DB_Patient> conditionlist = new ArrayList<>();
+            String query = "SELECT *FROM \"Condition\"";
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(query);
+            while (rs.next()){
+
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }*/
+
+    public void queryInteraction (Connection connection, String drug, String conditionOrDrug2){
+        String drugFormat = "'"+drug+"'";
+        String conditionOrDrug2Format = "'"+conditionOrDrug2+"'";
+        try{
+            String queryHint = "SELECT \"Hint\" FROM \"Interaction\" WHERE (\"Interaction\".\"Drug\" ="+drugFormat+") AND (\"Interaction\".\"Drug2 | Condition\" ="+conditionOrDrug2Format+")";
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(queryHint);
+            /* int columns = rs.getMetaData().getColumnCount();
+            System.out.println(columns);*/
+            while(rs.next()){
+                System.out.println(rs.getString(1));
+            }
+
+            } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     }

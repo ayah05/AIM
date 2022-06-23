@@ -157,7 +157,7 @@ public class DB_Patient {
     }
 
     public String toStringWithoutDOB() {
-        return String.format(Locale.ROOT, "\t%s, ID: %d\n\tAge: %d yrs, Weight: %.2f kg\n\tRisk factors: %s\n\tSubstances: %s", name, patID_DB_PK, age, weight, conditions, drugs);
+        return String.format(Locale.ROOT, "\t%s, ID: %d\n\tAge: %d yrs, Weight: %.2f kg\n\tRisk factors: [%s]\n\tSubstances: [%s]", name, patID_DB_PK, age, weight, condition, drug);
     }
 
      @Override

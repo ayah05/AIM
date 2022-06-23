@@ -20,8 +20,8 @@ public class Main extends Application {
         /* flo test
         fails due to:
         Caused by: javafx.fxml.LoadException: Error resolving onAction='#readEcard', either the event handler is not in the Namespace or there is an error in the script.
-        ./AIM/target/classes/InterfaceStage1.fxml:129
-        launch(); */
+        ./AIM/target/classes/InterfaceStage1.fxml:129*/
+       // launch();
 
 
         /* mo test
@@ -42,7 +42,8 @@ public class Main extends Application {
             SQLtoJava test = new SQLtoJava();
             Connection connection = test.setConnection();
             test.listingAllPatients(connection);
-*/
+            test.queryInteraction(connection,"N01AH01","J44.1");
+            */
     }
 
 

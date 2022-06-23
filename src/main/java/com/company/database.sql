@@ -34,6 +34,8 @@ CREATE TABLE "Interaction" (
 );
 
 
+TRUNCATE TABLE "Patient";
+
 INSERT INTO "Patient" VALUES (1,'','','Brigitta Haggis',34,65.6) ON CONFLICT DO NOTHING;
 INSERT INTO "Patient" VALUES (2,'','','Giulietta Cirlos',23,55.7)ON CONFLICT DO NOTHING;
 INSERT INTO "Patient" VALUES (3,'','','Alexio Jarlmann',50,88.3)ON CONFLICT DO NOTHING;
@@ -46,7 +48,9 @@ INSERT INTO "Patient" VALUES (9,'','','Kathe Camm',70,57.9)ON CONFLICT DO NOTHIN
 INSERT INTO "Patient" VALUES (10,'','','Janett Harris',30,60.1)ON CONFLICT DO NOTHING;
 INSERT INTO "Patient" VALUES (11,'','','Brigitta Haggis',34,65.2)ON CONFLICT DO NOTHING;
 INSERT INTO "Patient" VALUES (12,'','','Alexander Helks',44,90.3)ON CONFLICT DO NOTHING;
-INSERT INTO "Patient" VALUES (13,'','','Martha DeLarosa',50,63.4)ON CONFLICT DO NOTHING;
+INSERT INTO "Patient" VALUES (13,'L02BG03,G02CX04,J01FA09,B01AA03','N18.9,N95.1,Z88.0','Martha DeLarosa',50,63.4)ON CONFLICT DO NOTHING;
+
+
 --filling in drugs and atc codes
 INSERT INTO "Drug" VALUES ('N01AX10','Propofol')ON CONFLICT DO NOTHING;
 INSERT INTO "Drug" VALUES ('N01AH01','Fentanyl')ON CONFLICT DO NOTHING;--N01AH - opioid anesthetics
