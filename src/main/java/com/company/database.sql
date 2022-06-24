@@ -1,14 +1,15 @@
-DROP TABLE IF EXISTS Patient;
-DROP TABLE IF EXISTS Drug;
-DROP TABLE IF EXISTS Condition;
-DROP TABLE IF EXISTS Interaction;
+DROP TABLE IF EXISTS "Patient" CASCADE;
+DROP TABLE IF EXISTS "Drug" CASCADE ;
+DROP TABLE IF EXISTS "Condition" CASCADE ;
+DROP TABLE IF EXISTS "Interaction" CASCADE ;
 
-GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO ayah05;
-GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO kulturaffe;
+
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO postgres;
+
 CREATE TABLE "Patient" (
                            "PatientID" serial PRIMARY KEY,
-                           "Drug" varchar(7) REFERENCES "Drug",
-                           "Condition" varchar(7) REFERENCES "Condition",
+                           "Drug" varchar(50) , --REFERENCES "Drug"
+                           "Condition" varchar(50) , --REFERENCES "Condition"
                            "Name" varchar(50) NOT NULL,
                            "Age" int,
                            "Weight" real
@@ -16,20 +17,20 @@ CREATE TABLE "Patient" (
 
 CREATE TABLE "Condition" (
                              "Code (ICD-10)" varchar(7) PRIMARY KEY,
-                             "Name" varchar(50) NOT NULL
+                             "Name" varchar(100) NOT NULL
 );
 
 CREATE TABLE "Drug" (
-                        "Code (ATC)" varchar(7) PRIMARY KEY ,
-                        "Name" varchar(60) NOT NULL
+                        "Code (ATC)" varchar(8) PRIMARY KEY,
+                        "Name" varchar(100) NOT NULL
 );
 
 
 CREATE TABLE "Interaction" (
                                "InteractionID" serial PRIMARY KEY ,
-                               "Drug" varchar(7) NOT NULL REFERENCES "Drug",
-                               "Drug2" varchar(7) REFERENCES "Drug",
-                               "Condition" varchar(5) REFERENCES "Condition",
+                               "Drug" varchar(8) NOT NULL, -- REFERENCES "Drug"
+                               "Drug2" varchar(8), --REFERENCES "Drug"
+                               "Condition" varchar(7),  --REFERENCES "Condition"
                                "Hint" varchar(300)
 );
 
@@ -134,7 +135,7 @@ INSERT INTO "Condition" VALUES ('I25','Chronic ischemic heart disease') ON CONFL
 INSERT INTO "Condition" VALUES ('L20','Atopic dermatitis') ON CONFLICT DO NOTHING;
 
 --filling in several interactions
---TRUNCATE TABLE "Interaction";
+-- you filled in the text (which belongs in the fourth field) always into the third field Condition varchar(7)......
 INSERT INTO "Interaction" VALUES (1,'N01AX10','Z91.012','Propofol might cause an allergic reaction to patients allergic to eggs, egg products, soy, or soy products. {information available on DOI:10.1016/j.jpainsymman.2010.07.001}.')ON CONFLICT DO NOTHING;
 INSERT INTO "Interaction" VALUES (2,'N01AX10','I95','Caution is necessry for patients with abnormally low blood pressure. {information available on PMID:28613634}.')ON CONFLICT DO NOTHING;
 INSERT INTO "Interaction" VALUES (3,'N01AH01','J46','The use of fentanyl is contraindicated in patients with respiratory depression or obstructive airway diseases (i.e., asthma, COPD, obstructive sleep apnea, obesity hyperventilation, also know as, Pickwickian syndrome). {information available on PMID:29083586}.')ON CONFLICT DO NOTHING;
