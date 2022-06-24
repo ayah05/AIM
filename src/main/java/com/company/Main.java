@@ -21,7 +21,7 @@ public class Main extends Application {
         fails due to:
         Caused by: javafx.fxml.LoadException: Error resolving onAction='#readEcard', either the event handler is not in the Namespace or there is an error in the script.
         ./AIM/target/classes/InterfaceStage1.fxml:129*/
-       // launch();
+        launch();
 
 
         /* mo test
@@ -34,7 +34,7 @@ public class Main extends Application {
         System.out.println("Terminals with card present: " + ReadEcardGeneric.getAllTerminalsWithCardPresent());
         // reads the ecard in terminal 0, true just puts out debug-info
         System.out.println("Created DB_Patient:\n"+ReadEcardGeneric.readCard(0,true));
-       /
+        */
 
         /* ayah test*/
             SQLtoJava test = new SQLtoJava();

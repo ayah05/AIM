@@ -38,7 +38,7 @@ public class ReadEcardGeneric /*implements Runnable*/{
             //APDU 4: inputstram: read data from file GRUNDDATEN
             ResponseAPDU re = channel.transmit(new CommandAPDU(0x00, 0xB0, 0x00, 0x00, 0xFF));
             if (verbose) {
-                System.out.printf("Reading file GRUNDDATEN...\nStatus: %X (6282 means non-volatile memory unchanged -> \"everythig's fine\")\n", re.getSW());
+                System.out.printf("Reading file GRUNDDATEN...\nStatus: %X (6282 means reached end of file -> \"everythig's fine\")\n", re.getSW());
             }
             String responseHex = byteToHex(re.getBytes());
             card.disconnect(false);
@@ -122,9 +122,9 @@ public class ReadEcardGeneric /*implements Runnable*/{
             List<CardTerminal> terminals = factory.terminals().list();
             for (CardTerminal t: terminals) {
                 int idx = Integer.parseInt(t.getName().substring(t.getName().length()-1));
-                String name = t.getName().contains("Windows Hello")?
-                        t.getName().substring(0, t.getName().length()-2)+" (not recommended for use - just an internal thing for TPMs)":
-                        t.getName().substring(0, t.getName().length()-2);
+                String name = t.getName().contains("Windows Hello") ?// if
+                        t.getName().substring(0, t.getName().length()-2)+" (not recommended for use - just an internal thing for TPMs)" :// then
+                        t.getName().substring(0, t.getName().length()-2); // else
                 terminals_out.put(idx, name);
             }
         } catch (CardException e) {

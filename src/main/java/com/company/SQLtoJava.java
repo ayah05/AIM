@@ -3,13 +3,10 @@ package com.company;
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 public class SQLtoJava {
-    private static final ArrayList <DB_Patient> patientlist = new ArrayList<>();
-    private static DB_Patient patient;
-    private static final HashMap<String ,String > conditionlist = new HashMap<>();
-    private static final HashMap<String ,String > druglist = new HashMap<>();
     private static final String url = "jdbc:postgresql://localhost:5432/AIM";
     private static final String user = "postgres";
     private static final String password = "medProjekt";
@@ -29,13 +26,14 @@ public class SQLtoJava {
         return null;
     }
 
-    public void listAllPatients(Connection connection){
+    public List<DB_Patient> listAllPatients(Connection connection, boolean debug){
+        ArrayList <DB_Patient> patientlist = new ArrayList<>();
         try{
             String query = "SELECT *FROM \"Patient\"";
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(query);
             while (rs.next()){
-                patient = new DB_Patient(rs.getString("Name"),rs.getString("Condition"),rs.getString("Drug"),rs.getDouble("Weight"),rs.getInt("PatientID"),rs.getInt("Age"));
+                DB_Patient patient = new DB_Patient(rs.getString("Name"),rs.getString("Condition"),rs.getString("Drug"),rs.getDouble("Weight"),rs.getInt("PatientID"),rs.getInt("Age"));
                 patientlist.add(patient);
                 for(DB_Patient p: patientlist){
                     System.out.println(p.toStringWithoutDOB()+"\n");
@@ -44,19 +42,24 @@ public class SQLtoJava {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        return patientlist;
     }
 
-   public void listAllConditions(Connection connection){
+   public void listAllConditions(Connection connection, boolean debug){
         try{
+            HashMap<String ,String > conditionlist = new HashMap<>();
             String query = "SELECT *FROM \"Condition\"";
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(query);
+
             while (rs.next()){
                 String code = rs.getString("Code (ICD-10)");
                 String name = rs.getString("Name");
                 conditionlist.put(code,name);
-                for (String i : conditionlist.keySet()) {
-                    System.out.println(i + "," + conditionlist.get(i));
+                if(debug) {
+                    for (String i : conditionlist.keySet()) {
+                        System.out.println(i + "," + conditionlist.get(i));
+                    }
                 }
             }
         } catch (SQLException throwables) {
@@ -64,7 +67,8 @@ public class SQLtoJava {
         }
     }
 
-    public void listAllDrugs(Connection connection){
+    public HashMap<String,String> listAllDrugs(Connection connection, boolean debug){
+        HashMap<String ,String > druglist = new HashMap<>();
         try{
             String query = "SELECT *FROM \"Drug\"";
             Statement statement = connection.createStatement();
@@ -73,20 +77,25 @@ public class SQLtoJava {
                 String code = rs.getString("Code (ATC)");
                 String name = rs.getString("Name");
                 druglist.put(code,name);
-                for (String i : druglist.keySet()) {
-                    System.out.println(i + "," + druglist.get(i));
+                if(debug){
+                    for (String i : druglist.keySet()) {
+                        System.out.println(i + "," + druglist.get(i));
+                    }
                 }
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+        return druglist;
     }
 
+    // TODO
     public void queryInteraction (Connection connection, String drug, String conditionOrDrug2){
         String drugFormat = "'"+drug+"'";
         String conditionOrDrug2Format = "'"+conditionOrDrug2+"'";
         try{
-            String queryHint = "SELECT \"Hint\" FROM \"Interaction\" WHERE (\"Interaction\".\"Drug\" ="+drugFormat+") AND (\"Interaction\".\"Drug2 | Condition\" ="+conditionOrDrug2Format+")";
+            String queryHint = "SELECT \"Hint\" FROM \"Interaction\" WHERE (\"Interaction\".\"Drug\" ="+drugFormat+")" +
+                    " AND (\"Interaction\".\"Drug2 | Condition\" ="+conditionOrDrug2Format+")";
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(queryHint);
             //int columns = rs.getMetaData().getColumnCount();System.out.println(columns);
@@ -143,12 +152,13 @@ public class SQLtoJava {
         String drugFormat = "'"+drug+"'";
         String conditionFormat = "'"+condition+"'";
         String nameFormat = "'"+name+"'";
+        List<DB_Patient> patientlist = new ArrayList<>();
         try{
                 int patientID = selectLastPatientIDAndIncrement(connection);
                 String query = "INSERT INTO \"Patient\" VALUES("+patientID+","+drugFormat+","+conditionFormat+","+nameFormat+","+age+","+weight+") ON CONFLICT DO NOTHING;";
                 Statement statement = connection.createStatement();
                 statement.execute(query);
-                patient = new DB_Patient(patientID,drug,condition,name,age,weight);
+                DB_Patient patient = new DB_Patient(patientID,drug,condition,name,age,weight);
                 patientlist.add(patient);
                 System.out.println(patient.toStringWithoutDOB()+"\n");
         } catch (SQLException throwables) {
@@ -158,12 +168,13 @@ public class SQLtoJava {
 
     public void addPatient (Connection connection, String name,   int age,  double weight){
         String nameFormat = "'"+name+"'";
+        List<DB_Patient> patientlist = new ArrayList<>();
         try{
             int patientID = selectLastPatientIDAndIncrement(connection);
             String query = "INSERT INTO \"Patient\" VALUES("+patientID+",'','',"+nameFormat+","+age+","+weight+") ON CONFLICT DO NOTHING;";
             Statement statement = connection.createStatement();
             statement.execute(query);
-            patient = new DB_Patient(patientID,name,age,weight);
+            DB_Patient patient = new DB_Patient(patientID,name,age,weight);
             patientlist.add(patient);
             System.out.println(patient.toStringWithoutDOB()+"\n");
         } catch (SQLException throwables) {
@@ -172,12 +183,13 @@ public class SQLtoJava {
     public void addPatient(Connection connection,String name,int age,String drug,  double weight){
             String drugFormat = "'"+drug+"'";
             String nameFormat = "'"+name+"'";
+            List<DB_Patient> patientlist = new ArrayList<>();
             try{
                 int patientID = selectLastPatientIDAndIncrement(connection);
                 String query = "INSERT INTO \"Patient\" VALUES("+patientID+","+drugFormat+",'',"+nameFormat+","+age+","+weight+") ON CONFLICT DO NOTHING;";
                 Statement statement = connection.createStatement();
                 statement.execute(query);
-                patient = new DB_Patient(patientID,name,age,weight,drug);
+                DB_Patient patient = new DB_Patient(patientID,name,age,weight,drug);
                 patientlist.add(patient);
                 System.out.println(patient.toStringWithoutDOB()+"\n");
             } catch (SQLException throwables) {
@@ -188,12 +200,13 @@ public class SQLtoJava {
     public void addPatient(Connection connection, String condition, String name,int age,  double weight){
             String conditionFormat = "'"+condition+"'";
             String nameFormat = "'"+name+"'";
+            List<DB_Patient> patientlist = new ArrayList<>();
             try{
                 int patientID = selectLastPatientIDAndIncrement(connection);
                 String query = "INSERT INTO \"Patient\" VALUES("+patientID+",'',"+conditionFormat+","+nameFormat+","+age+","+weight+") ON CONFLICT DO NOTHING;";
                 Statement statement = connection.createStatement();
                 statement.execute(query);
-                patient = new DB_Patient(patientID,condition,name,age,weight);
+                DB_Patient patient = new DB_Patient(patientID,condition,name,age,weight);
                 patientlist.add(patient);
                 System.out.println(patient.toStringWithoutDOB()+"\n");
             } catch (SQLException throwables) {

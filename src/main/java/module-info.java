@@ -8,6 +8,7 @@ module com.company {
     requires java.sql;
     requires java.smartcardio;
     requires org.jetbrains.annotations;
+    requires org.postgresql.jdbc;
 
 
     opens com.company to javafx.fxml;
