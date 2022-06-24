@@ -41,9 +41,11 @@ public class Main extends Application {
         /* ayah test
             SQLtoJava test = new SQLtoJava();
             Connection connection = test.setConnection();
-            test.listingAllPatients(connection);
-            test.queryInteraction(connection,"N01AH01","J44.1");
-            */
+           test.listingAllConditions(connection);
+           test.listingAllDrugs(connection);
+           test.listingAllPatients(connection);
+           test.queryInteraction(connection,"N01AH01","J44.1");
+*/
     }
 
 

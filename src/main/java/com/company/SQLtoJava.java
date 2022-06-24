@@ -44,19 +44,43 @@ public class SQLtoJava {
         }
     }
 
-   /* public void listingAllConditions(Connection connection){
+   public void listingAllConditions(Connection connection){
         try{
-            ArrayList <DB_Patient> conditionlist = new ArrayList<>();
+            ArrayList <String> conditionlist = new ArrayList<>();
             String query = "SELECT *FROM \"Condition\"";
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(query);
             while (rs.next()){
-
+                String code = rs.getString("Code (ICD-10)");
+                String name = rs.getString("Name");
+                conditionlist.add(code+", "+name);
+                for (String cd: conditionlist){
+                    System.out.println(cd);
+                }
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-    }*/
+    }
+
+    public void listingAllDrugs(Connection connection){
+        try{
+            ArrayList <String> druglist = new ArrayList<>();
+            String query = "SELECT *FROM \"Drug\"";
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(query);
+            while (rs.next()){
+                String code = rs.getString("Code (ATC)");
+                String name = rs.getString("Name");
+                druglist.add(code+", "+name);
+                for (String drug: druglist){
+                    System.out.println(drug);
+                }
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 
     public void queryInteraction (Connection connection, String drug, String conditionOrDrug2){
         String drugFormat = "'"+drug+"'";

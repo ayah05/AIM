@@ -36,19 +36,19 @@ CREATE TABLE "Interaction" (
 
 TRUNCATE TABLE "Patient";
 
-INSERT INTO "Patient" VALUES (1,'','','Brigitta Haggis',34,65.6) ON CONFLICT DO NOTHING;
-INSERT INTO "Patient" VALUES (2,'','','Giulietta Cirlos',23,55.7)ON CONFLICT DO NOTHING;
-INSERT INTO "Patient" VALUES (3,'','','Alexio Jarlmann',50,88.3)ON CONFLICT DO NOTHING;
-INSERT INTO "Patient" VALUES (4,'','','Georgiana Labdon',39,70.4)ON CONFLICT DO NOTHING;
-INSERT INTO "Patient" VALUES (5,'','','York Kingscott',27,76.2)ON CONFLICT DO NOTHING;
-INSERT INTO "Patient" VALUES (6,'','','Tim Bettenson',20,65.1)ON CONFLICT DO NOTHING;
-INSERT INTO "Patient" VALUES (7,'','','Mahmud Witling',65,82.4)ON CONFLICT DO NOTHING;
-INSERT INTO "Patient" VALUES (8,'','','Rosana Jantet',45,68.8)ON CONFLICT DO NOTHING;
-INSERT INTO "Patient" VALUES (9,'','','Kathe Camm',70,57.9)ON CONFLICT DO NOTHING;
-INSERT INTO "Patient" VALUES (10,'','','Janett Harris',30,60.1)ON CONFLICT DO NOTHING;
-INSERT INTO "Patient" VALUES (11,'','','Brigitta Haggis',34,65.2)ON CONFLICT DO NOTHING;
-INSERT INTO "Patient" VALUES (12,'','','Alexander Helks',44,90.3)ON CONFLICT DO NOTHING;
-INSERT INTO "Patient" VALUES (13,'L02BG03,G02CX04,J01FA09,B01AA03','N18.9,N95.1,Z88.0','Martha DeLarosa',50,63.4)ON CONFLICT DO NOTHING;
+INSERT INTO "Patient" VALUES (1,'','J46','Brigitta Haggis',34,65.6) ON CONFLICT DO NOTHING;
+INSERT INTO "Patient" VALUES (2,'','H40.21','Giulietta Cirlos',23,55.7)ON CONFLICT DO NOTHING;
+INSERT INTO "Patient" VALUES (3,'B01AA04','I74','Alexio Jarlmann',50,88.3)ON CONFLICT DO NOTHING;
+INSERT INTO "Patient" VALUES (4,'','R57','Georgiana Labdon',39,70.4)ON CONFLICT DO NOTHING;
+INSERT INTO "Patient" VALUES (5,'N07AA01','G70.0','York Kingscott',27,76.2)ON CONFLICT DO NOTHING;
+INSERT INTO "Patient" VALUES (6,'','K74,Z88.4','Tim Bettenson',20,65.1)ON CONFLICT DO NOTHING;
+INSERT INTO "Patient" VALUES (7,'','G47.30','Mahmud Witling',65,82.4)ON CONFLICT DO NOTHING;
+INSERT INTO "Patient" VALUES (8,'C09AA02','N18','Rosana Jantet',45,68.8)ON CONFLICT DO NOTHING;
+INSERT INTO "Patient" VALUES (9,'A10AB01','Z91.012,E10','Kathe Camm',70,57.9)ON CONFLICT DO NOTHING;
+INSERT INTO "Patient" VALUES (10,'C08DB01','I25','Janett Harris',30,60.1)ON CONFLICT DO NOTHING;
+INSERT INTO "Patient" VALUES (11,'D11AH08','L20','Brigitta Haggis',34,65.2)ON CONFLICT DO NOTHING;
+INSERT INTO "Patient" VALUES (12,'C01BD04,A10BC01','I48,E11','Alexander Helks',44,90.3)ON CONFLICT DO NOTHING;
+INSERT INTO "Patient" VALUES (13,'L02BG03,G02CX04,J01FA09,B01AA03','N18,N95.1,Z88.0','Martha DeLarosa',50,63.4)ON CONFLICT DO NOTHING;
 
 
 --filling in drugs and atc codes
@@ -66,13 +66,22 @@ INSERT INTO "Drug" VALUES ('B01AA03','Warfarin')ON CONFLICT DO NOTHING; --the an
 INSERT INTO "Drug" VALUES ('B01AA04','Phenprocoumon')ON CONFLICT DO NOTHING;--the anticoagulant used most in austria: "marcoumar"
 INSERT INTO "Drug" VALUES ('B01AC06','Acetylsalicylic acid')ON CONFLICT DO NOTHING;--aspirin. used as anticoagulant (mostly <= 100 mg)
 INSERT INTO "Drug" VALUES ('N02BA01','Acetylsalicylic acid')ON CONFLICT DO NOTHING;--aspirin. used as analgesic (mostly >= 500 mg)
-INSERT INTO "Drug" VALUES ('J01FA','Macrolides')ON CONFLICT DO NOTHING; --contraindicated to fentanyl
+INSERT INTO "Drug" VALUES ('J01FA09','Clarithromycin')ON CONFLICT DO NOTHING; --contraindicated to fentanyl, Clarithromycin is a Macrolide
 INSERT INTO "Drug" VALUES ('J05AE',' Protease inhibitors')ON CONFLICT DO NOTHING; --contraindicated to fentanyl
 INSERT INTO "Drug" VALUES ('C08DB01','Diltiazem')ON CONFLICT DO NOTHING;--contraindicated to fentanyl (Diltiazem is a Benzothiazepine derivative)
 INSERT INTO "Drug" VALUES ('J02AC02','Itraconazole')ON CONFLICT DO NOTHING;--contraindicated to fentanyl (Itraconazole is an antimycotics for systemic use)
 INSERT INTO "Drug" VALUES ('N06AF01','Isocarboxazid')ON CONFLICT DO NOTHING;--contraindicated to fentanyl (is a Monoamine oxidase inhibitors (MAOIs))
-INSERT INTO "Drug" VALUES ('C01BD04','Dofetilide') ON CONFLICT DO NOTHING;--C01BD - Antiarrhythmics, class III
+INSERT INTO "Drug" VALUES ('C01BD04','Dofetilide') ON CONFLICT DO NOTHING;--C01BD - Antiarrhythmics, class III (mostly used for patients with atrial fibrillation)
 INSERT INTO "Drug" VALUES ('D11AH08','Abrocitinib') ON CONFLICT DO NOTHING;--D11AH-Agents for dermatitis, excluding corticosteroids
+--ab hier sind es neue Drugs (müssen in der DrugBank noch gecheckt werden)
+INSERT INTO "Drug" VALUES ('A10AB01','Insulin (Human)') ON CONFLICT DO NOTHING;--drug for diabetes patients
+INSERT INTO "Drug" VALUES ('A10BC01','Glymidine') ON CONFLICT DO NOTHING; --drug for diabetes patients
+INSERT INTO "Drug" VALUES ('A10BJ01','Exenatide') ON CONFLICT DO NOTHING;--drug for diabetes patients
+INSERT INTO "Drug" VALUES ('A10XA01','Tolrestat') ON CONFLICT DO NOTHING;--drug for diabetes patients
+INSERT INTO "Drug" VALUES ('C09AA02','Enalapril') ON CONFLICT DO NOTHING; --drug for patients with chronic renal disease
+INSERT INTO "Drug" VALUES ('G02CX04','Cimicifugae rhizoma') ON CONFLICT DO NOTHING;
+INSERT INTO "Drug" VALUES ('L02BG03','Anastrozole') ON CONFLICT DO NOTHING;
+INSERT INTO "Drug" VALUES ('N07AA01','Neostigmine') ON CONFLICT DO NOTHING; -- drug for patients with Myasthenia gravis
 
 --filling in several conditions
 INSERT INTO "Condition" VALUES ('J46','Status asthmaticus') ON CONFLICT DO NOTHING;--contraindicated to fentanyl
@@ -97,6 +106,8 @@ INSERT INTO "Condition" VALUES ('K74','Fibrosis and cirrhosis of liver')ON CONFL
 INSERT INTO "Condition" VALUES ('K75','Abscess of liver')ON CONFLICT DO NOTHING;
 INSERT INTO "Condition" VALUES ('K76','Other diseases of liver')ON CONFLICT DO NOTHING;
 INSERT INTO "Condition" VALUES ('K77','Liver disorders in diseases classified elsewhere')ON CONFLICT DO NOTHING;
+INSERT INTO "Condition" VALUES ('I74','Arterial embolism and thrombosis') ON CONFLICT DO NOTHING;
+INSERT INTO "Condition" VALUES ('I48','Atrial fibrillation and flutter') ON CONFLICT DO NOTHING;
 INSERT INTO "Condition" VALUES ('Z88.0','Personal history of allergy to penicillin')ON CONFLICT DO NOTHING;
 INSERT INTO "Condition" VALUES ('Z88.1','Personal history of allergy to other antibiotic agents')ON CONFLICT DO NOTHING;--any antibiotic except penicillin
 INSERT INTO "Condition" VALUES ('Z88.4','Personal history of allergy to anaesthetic agent')ON CONFLICT DO NOTHING;--mostly about flouranes, could also be about propofol, ketamine, etomidate,....
@@ -108,15 +119,19 @@ INSERT INTO "Condition" VALUES ('O94','Sequelae of complication of pregnancy, ch
 INSERT INTO "Condition" VALUES ('Z39.1','Encounter for care and examination of lactating mother')ON CONFLICT DO NOTHING;--everything else
 INSERT INTO "Condition" VALUES ('F20.9','Schizophrenia, unspecified') ON CONFLICT DO NOTHING;
 INSERT INTO "Condition" VALUES ('H40.21','Acute angle-closure glaucoma') ON CONFLICT DO NOTHING;
-INSERT INTO "Condition" VALUES ('R57.9','Shock, unspecified') ON CONFLICT DO NOTHING;
+INSERT INTO "Condition" VALUES ('R57','Shock, not elsewhere classified') ON CONFLICT DO NOTHING;
 INSERT INTO "Condition" VALUES ('E88.09','Other disorders of plasma-protein metabolism, not elsewhere classified') ON CONFLICT DO NOTHING;
 INSERT INTO "Condition" VALUES ('T07','Unspecified multiple injuries') ON CONFLICT DO NOTHING;--Polytrauma
 INSERT INTO "Condition" VALUES ('T88.3','Malignant hyperthermia due to anesthesia, initial encounter') ON CONFLICT DO NOTHING;
 INSERT INTO "Condition" VALUES ('G70.0','Myasthenia gravis') ON CONFLICT DO NOTHING;
 INSERT INTO "Condition" VALUES ('G47.30','Sleep apnea, unspecified') ON CONFLICT DO NOTHING;
-INSERT INTO "Condition" VALUES ('H40.21','Acute angle-closure glaucoma') ON CONFLICT DO NOTHING;
 INSERT INTO "Condition" VALUES ('K27.9','Peptic ulcer, site unspecified, unspecified as acute or chronic, without hemorrhage or perforation') ON CONFLICT DO NOTHING;
 INSERT INTO "Condition" VALUES ('K29','Gastritis und Duodenitis') ON CONFLICT DO NOTHING;
+INSERT INTO "Condition" VALUES ('E10','Type 1 diabetes mellitus') ON CONFLICT DO NOTHING;
+INSERT INTO "Condition" VALUES ('E11','Type 2 diabetes mellitus') ON CONFLICT DO NOTHING;
+INSERT INTO "Condition" VALUES ('N95.1','Menopausal and female climacteric states') ON CONFLICT DO NOTHING;
+INSERT INTO "Condition" VALUES ('I25','Chronic ischemic heart disease') ON CONFLICT DO NOTHING;
+INSERT INTO "Condition" VALUES ('L20','Atopic dermatitis') ON CONFLICT DO NOTHING;
 
 
 --filling in several interactions
@@ -129,7 +144,7 @@ INSERT INTO "Interaction" VALUES (5,'N01AH01','E66.2','The use of fentanyl is co
 INSERT INTO "Interaction" VALUES (6,'N01AH01','K70','The use of fentanyl is contraindicated in patients with liver failure. {information available on PMID:29083586}.')ON CONFLICT DO NOTHING;
 INSERT INTO "Interaction" VALUES (7,'N01AH01','K71','The use of fentanyl is contraindicated in patients with liver failure. {information available on PMID:29083586}.')ON CONFLICT DO NOTHING;
 INSERT INTO "Interaction" VALUES (8,'N01AH01','K72','The use of fentanyl is contraindicated in patients with liver failure. {information available on PMID:29083586}.')ON CONFLICT DO NOTHING;
-INSERT INTO "Interaction" VALUES (9,'N01AH01','J01FA','Fentanyl should not be used with certain medications such as CYP3A4 inhibitors like macrolide antibiotics or azole-antifungal agents, and protease inhibitors because they may increase plasma concentrations of fentanyl, extending the opioid drug action and exacerbating the opioid-induced respiratory depression (OIRD). {information available on PMID:29083586}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (9,'N01AH01','J01FA09','Fentanyl should not be used with certain medications such as CYP3A4 inhibitors like macrolide antibiotics or azole-antifungal agents, and protease inhibitors because they may increase plasma concentrations of fentanyl, extending the opioid drug action and exacerbating the opioid-induced respiratory depression (OIRD). {information available on PMID:29083586}.')ON CONFLICT DO NOTHING;
 INSERT INTO "Interaction" VALUES (10,'N01AH01','J05AE','Fentanyl should not be used with certain medications such as CYP3A4 inhibitors like macrolide antibiotics or azole-antifungal agents, and protease inhibitors because they may increase plasma concentrations of fentanyl, extending the opioid drug action and exacerbating the opioid-induced respiratory depression (OIRD). {information available on PMID:29083586}.')ON CONFLICT DO NOTHING;
 INSERT INTO "Interaction" VALUES (11,'N01AH01','C08DB01','Fentanyl should not be used with certain medications such as CYP3A4 inhibitors like macrolide antibiotics or azole-antifungal agents, and protease inhibitors because they may increase plasma concentrations of fentanyl, extending the opioid drug action and exacerbating the opioid-induced respiratory depression (OIRD). {information available on PMID:29083586}.')ON CONFLICT DO NOTHING;
 INSERT INTO "Interaction" VALUES (12,'N01AH01','J02AC02','Fentanyl should not be used with certain medications such as CYP3A4 inhibitors like macrolide antibiotics or azole-antifungal agents, and protease inhibitors because they may increase plasma concentrations of fentanyl, extending the opioid drug action and exacerbating the opioid-induced respiratory depression (OIRD). {information available on PMID:29083586}.')ON CONFLICT DO NOTHING;
@@ -144,7 +159,7 @@ INSERT INTO "Interaction" VALUES (20,'N01AX03','Z39.1','It is not recommended to
 INSERT INTO "Interaction" VALUES (21,'N01AX03','F20.9','Ketamine is contraindicated in patients with schizophrenia due to the potential for exacerbating the underlying condition. {information available on PMID: 29262083}.')ON CONFLICT DO NOTHING;
 INSERT INTO "Interaction" VALUES (22,'N05CD08','H40.21','Benzodiazepines are contraindicated in patients with acute narrow-angle glaucoma, {information available on Accessdata.fda.gov.')ON CONFLICT DO NOTHING;--Midazolam is a Benzodiazepine
 INSERT INTO "Interaction" VALUES (23,'N05CD08','I95','Contraindications for the use of midazolam include acute angle-closure glaucoma, hypotension, and shock. {information available on PMID:30726006.')ON CONFLICT DO NOTHING;
-INSERT INTO "Interaction" VALUES (24,'N05CD08','R57.9','Contraindications for the use of midazolam include acute angle-closure glaucoma, hypotension, and shock. {information available on PMID:30726006.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (24,'N05CD08','R57','Contraindications for the use of midazolam include acute angle-closure glaucoma, hypotension, and shock. {information available on PMID:30726006.')ON CONFLICT DO NOTHING;
 INSERT INTO "Interaction" VALUES (25,'N05CD08','N17','Careful dose adjustment is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.')ON CONFLICT DO NOTHING;
 INSERT INTO "Interaction" VALUES (26,'N05CD08','N18','Careful dose adjustment is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.')ON CONFLICT DO NOTHING;
 INSERT INTO "Interaction" VALUES (27,'N05CD08','N19','Careful dose adjustment is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.')ON CONFLICT DO NOTHING;
