@@ -34,10 +34,10 @@ CREATE TABLE "Interaction" (
 );
 
 
-TRUNCATE TABLE "Patient";
+--TRUNCATE TABLE "Patient";
 
-INSERT INTO "Patient" VALUES (1,'','J46','Brigitta Haggis',34,65.6) ON CONFLICT DO NOTHING;
-INSERT INTO "Patient" VALUES (2,'','H40.21','Giulietta Cirlos',23,55.7)ON CONFLICT DO NOTHING;
+INSERT INTO "Patient" VALUES (1,'R03AC02','J45','Brigitta Haggis',34,65.6) ON CONFLICT DO NOTHING;
+INSERT INTO "Patient" VALUES (2,'S01EB01','H40.21','Giulietta Cirlos',23,55.7)ON CONFLICT DO NOTHING;
 INSERT INTO "Patient" VALUES (3,'B01AA04','I74','Alexio Jarlmann',50,88.3)ON CONFLICT DO NOTHING;
 INSERT INTO "Patient" VALUES (4,'','R57','Georgiana Labdon',39,70.4)ON CONFLICT DO NOTHING;
 INSERT INTO "Patient" VALUES (5,'N07AA01','G70.0','York Kingscott',27,76.2)ON CONFLICT DO NOTHING;
@@ -82,9 +82,12 @@ INSERT INTO "Drug" VALUES ('C09AA02','Enalapril') ON CONFLICT DO NOTHING; --drug
 INSERT INTO "Drug" VALUES ('G02CX04','Cimicifugae rhizoma') ON CONFLICT DO NOTHING;
 INSERT INTO "Drug" VALUES ('L02BG03','Anastrozole') ON CONFLICT DO NOTHING;
 INSERT INTO "Drug" VALUES ('N07AA01','Neostigmine') ON CONFLICT DO NOTHING; -- drug for patients with Myasthenia gravis
+INSERT INTO "Drug" VALUES ('S01EB01','Pilocarpine') ON CONFLICT DO NOTHING; -- drug for patients with Acute angle-closure glaucoma
+INSERT INTO "Drug" VALUES ('R03AC02','Salbutamol') ON CONFLICT DO NOTHING; --drug for patients with Asthma
 
 --filling in several conditions
 INSERT INTO "Condition" VALUES ('J46','Status asthmaticus') ON CONFLICT DO NOTHING;--contraindicated to fentanyl
+INSERT INTO "Condition" VALUES ('J45','Asthma bronchiale') ON CONFLICT DO NOTHING;
 INSERT INTO "Condition" VALUES ('G71','Primary Myopathies')ON CONFLICT DO NOTHING;
 INSERT INTO "Condition" VALUES ('J96','Acute respiratory failure, unspecified whether with hypoxia or hypercapnia')ON CONFLICT DO NOTHING;
 INSERT INTO "Condition" VALUES ('G72','Other myopathies')ON CONFLICT DO NOTHING;

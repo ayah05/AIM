@@ -44,7 +44,7 @@ public class Main extends Application {
            test.listingAllConditions(connection);
            test.listingAllDrugs(connection);
            test.listingAllPatients(connection);
-           test.queryInteraction(connection,"N01AH01","J44.1");
+           //test.queryInteraction(connection,"N01AH01","J44.1");
 */
     }
 
