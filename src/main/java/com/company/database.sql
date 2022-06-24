@@ -79,7 +79,7 @@ INSERT INTO "Drug" VALUES ('A10BC01','Glymidine') ON CONFLICT DO NOTHING; --drug
 INSERT INTO "Drug" VALUES ('A10BJ01','Exenatide') ON CONFLICT DO NOTHING;--drug for diabetes patients
 INSERT INTO "Drug" VALUES ('A10XA01','Tolrestat') ON CONFLICT DO NOTHING;--drug for diabetes patients
 INSERT INTO "Drug" VALUES ('C09AA02','Enalapril') ON CONFLICT DO NOTHING; --drug for patients with chronic renal disease
-INSERT INTO "Drug" VALUES ('G02CX04','Cimicifugae rhizoma') ON CONFLICT DO NOTHING;
+INSERT INTO "Drug" VALUES ('G02CX04','Cimicifugae rhizoma') ON CONFLICT DO NOTHING; --?????
 INSERT INTO "Drug" VALUES ('L02BG03','Anastrozole') ON CONFLICT DO NOTHING;
 INSERT INTO "Drug" VALUES ('N07AA01','Neostigmine') ON CONFLICT DO NOTHING; -- drug for patients with Myasthenia gravis
 INSERT INTO "Drug" VALUES ('S01EB01','Pilocarpine') ON CONFLICT DO NOTHING; -- drug for patients with Acute angle-closure glaucoma
@@ -208,6 +208,58 @@ INSERT INTO "Interaction" VALUES (66,'N02BA01','B01AA03','Acetylsalicylic acid m
 INSERT INTO "Interaction" VALUES (67,'N01AX10','B01AA04','The metabolism of Phenprocoumon can be decreased when combined with Propofol - severity: major. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
 INSERT INTO "Interaction" VALUES (68,'N01AB08','B01AA04','The risk or severity of bleeding can be increased when Sevoflurane is combined with Phenprocoumon - severity: moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
 
+--START(a01)new INTERACTIONS --> Insulin to Salbutamol
+INSERT INTO "Interaction" VALUES (69,'B01AC06','A10AB01','The risk or severity of hypoglycemia can be increased when Acetylsalicylic acid is combined with Insulin human. - severity: moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (70,'C08DB01','A10AB01','The risk or severity of hypoglycemia can be increased when Diltiazem is combined with Insulin human. - severity: moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (71,'N06AF01','A10AB01','Isocarboxazid may increase the hypoglycemic activities of Insulin human. - severity: moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+
+INSERT INTO "Interaction" VALUES (71,'B01AA03','A10BJ01','Exenatide can cause an increase in the absorption of Warfarin resulting in an increased serum concentration and potentially a worsening of adverse effects. - severity: moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (72,'B01AA04','A10BJ01','Exenatide can cause an increase in the absorption of Phenprocoumon resulting in an increased serum concentration and potentially a worsening of adverse effects. - severity: moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (73,'B01AC06','A10BJ01','The risk or severity of hypoglycemia can be increased when Acetylsalicylic acid is combined with Exenatide. - severity: moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (74,'C08DB01','A10BJ01','The risk or severity of hypoglycemia can be increased when Diltiazem is combined with Exenatide - severity: moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (75,'N06AF01','A10BJ01','Isocarboxazid may increase the hypoglycemic activities of Exenatide. - severity: minor. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+
+INSERT INTO "Interaction" VALUES (76,'N01AX10','C09AA02','The risk or severity of myopathy, rhabdomyolysis, and myoglobinuria can be increased when Enalapril is combined with Propofol. - severity: moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (77,'N01AH01','C09AA02','Fentanyl may decrease the antihypertensive activities of Enalapril - severity: minor. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (78,'N01AH03','C09AA02','Sufentanil may decrease the antihypertensive activities of Enalapril. - severity: minor. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (79,'M03AB01','C09AA02','The risk or severity of hyperkalemia can be increased when Succinylcholine is combined with Enalapril. - severity: minor. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (80,'N01AB08','C09AA02','Sevoflurane may decrease the antihypertensive activities of Enalapril. - severity: minor. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (81,'B01AC06','C09AA02','The therapeutic efficacy of Enalapril can be decreased when used in combination with Acetylsalicylic acid. - severity: moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (82,'J01FA09','C09AA02','The excretion of Enalapril can be decreased when combined with Clarithromycin. - severity: moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (83,'C08DB01','C09AA02','Diltiazem may increase the hypotensive activities of Enalapril. - severity: minor. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (84,'J02AC02','C09AA02','The risk or severity of hyperkalemia can be increased when Enalapril is combined with Itraconazole. - severity: minor. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (85,'N06AF01','C09AA02','Isocarboxazid may increase the hypotensive activities of Enalapril. - severity: moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+
+INSERT INTO "Interaction" VALUES (86,'N01AX10','L02BG03','The metabolism of Anastrozole can be decreased when combined with Propofol. - severity: moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (87,'N01AX03','L02BG03','The metabolism of Ketamine can be decreased when combined with Anastrozole. - severity: moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (88,'B01AA04','L02BG03','The metabolism of Phenprocoumon can be decreased when combined with Anastrozole. - severity: major. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (89,'C08DB01','L02BG03','The metabolism of Anastrozole can be decreased when combined with Diltiazem. - severity: moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+
+INSERT INTO "Interaction" VALUES (90,'M03AB01','N07AA01','The metabolism of Succinylcholine can be decreased when combined with Neostigmine. - severity: moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (91,'M03AC09','N07AA01','The therapeutic efficacy of Rocuronium can be decreased when used in combination with Neostigmine. - severity: moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+
+INSERT INTO "Interaction" VALUES (92,'N01AH01','S01EB01','The metabolism of Fentanyl can be decreased when combined with Pilocarpine. - severity: major. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (93,'N01AX03','S01EB01','The risk or severity of adverse effects can be increased when Ketamine is combined with Pilocarpine. - severity: minor. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (94,'N05CD08','S01EB01','The serum concentration of Midazolam can be increased when it is combined with Pilocarpine. - severity: moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (95,'N01AB08','S01EB01','The metabolism of Sevoflurane can be decreased when combined with Pilocarpine. - major: moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (96,'B01AA03','S01EB01','The serum concentration of Warfarin can be increased when it is combined with Pilocarpine. - severity: moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+
+INSERT INTO "Interaction" VALUES (97,'N01AX10','R03AC02','The risk or severity of QTc prolongation can be increased when Propofol is combined with Salbutamol. - severity: moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (98,'N01AH01','R03AC02','The risk or severity of hypertension can be increased when Fentanyl is combined with Salbutamol. - severity: minor. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (99,'N01AH03','R03AC02','The risk or severity of hypertension can be increased when Sufentanil is combined with Salbutamol. - severity: minor. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (100,'N01AX03','R03AC02','Salbutamol may decrease the excretion rate of Ketamine which could result in a higher serum level. - severity: minor. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (101,'N05CD08','R03AC02','Midazolam may decrease the excretion rate of Salbutamol which could result in a higher serum level. - severity: minor. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (102,'M03AC09','R03AC02','The risk or severity of Tachycardia can be increased when Rocuronium is combined with Salbutamol. - severity: minor. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (103,'N01AB08','R03AC02','The risk or severity of QTc prolongation can be increased when Salbutamol is combined with Sevoflurane. - severity: moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (104,'N05BA01','R03AC02','Diazepam may decrease the excretion rate of Salbutamol which could result in a higher serum level. - severity: minor. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (105,'B01AA03','R03AC02','Salbutamol may decrease the excretion rate of Warfarin which could result in a higher serum level. - severity: moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (106,'B01AC06','R03AC02','The risk or severity of hypertension can be increased when Acetylsalicylic acid is combined with Salbutamol - severity: minor. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (107,'J01FA09','R03AC02','The risk or severity of QTc prolongation can be increased when Salbutamol is combined with Clarithromycin. - severity: minor. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (108,'C08DB01','R03AC02','Salbutamol may decrease the antihypertensive activities of Diltiazem.- severity: minor. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (109,'J02AC02','R03AC02','The risk or severity of QTc prolongation can be increased when Salbutamol is combined with Itraconazole. - severity: moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (110,'N06AF01','R03AC02','The risk or severity of hypertension can be increased when Salbutamol is combined with Isocarboxazid. - severity: moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (111,'C01BD04','R03AC02','The risk or severity of QTc prolongation can be increased when Salbutamol is combined with Dofetilide. - severity: moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
+-- END(a01)
 
 
 
