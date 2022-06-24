@@ -7,7 +7,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import java.io.File;
 import java.sql.*;
-import java.util.ArrayList;
 
 public class Main extends Application {
 
@@ -18,15 +17,14 @@ public class Main extends Application {
       ///////////
 
         /* flo test
-        fails due to:
-        Caused by: javafx.fxml.LoadException: Error resolving onAction='#readEcard', either the event handler is not in the Namespace or there is an error in the script.
-        ./AIM/target/classes/InterfaceStage1.fxml:129*/
         launch();
+        */
 
 
         /* mo test
         FHIR_IPS_parser parse = new FHIR_IPS_parser();
         System.out.println(parse.readIPS("./src/main/IPS-example-Bundle-with-renal-disease-et-al.json"));
+        /*
         System.out.println(new DB_Patient(true)); // for testing the test DB_Patient: works just as well as readIPS on our example IPS :D
         // shows all terminals:
         System.out.println("All terminals: "+ ReadEcardGeneric.getAllTerminals());
@@ -36,15 +34,15 @@ public class Main extends Application {
         System.out.println("Created DB_Patient:\n"+ReadEcardGeneric.readCard(0,true));
         */
 
-        /* ayah test*/
-            SQLtoJava test = new SQLtoJava();
-            Connection connection = test.setConnection();
-            /*test.addPatient(connection,"K71","Maurice Leon",55,67.8);
-            test.addPatient(connection,"C01BD04","I48","Lara Mueller",70,60.1);
-            test.addPatient(connection,"Jasmin Shawki",20,66.3);
-            test.addPatient(connection,"Sam Lewis",33,"J01FA09",60.2);
-            test.addInteraction(connection,"tDrug1","tDrug2","someHint");*/
-
+        /* ayah test
+            //deprecated, class is now satic. SQLtoJava test = new SQLtoJava();
+            Connection connection = SQLtoJava.setConnection();
+            SQLtoJava.addPatient(connection,"K71","Maurice Leon",55,67.8);
+            SQLtoJava.addPatient(connection,"C01BD04","I48","Lara Mueller",70,60.1);
+            SQLtoJava.addPatient(connection,"Jasmin Shawki",20,66.3);
+            SQLtoJava.addPatient(connection,"Sam Lewis",33,"J01FA09",60.2);
+            SQLtoJava.addInteraction(connection,"tDrug1","tDrug2","someHint");
+             */
 
     }
 

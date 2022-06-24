@@ -4,6 +4,7 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
 
 public class SQLtoJava {
@@ -14,7 +15,7 @@ public class SQLtoJava {
     public SQLtoJava() {
     }
 
-    public Connection setConnection(){
+    public static Connection setConnection(){
         try {
             Class.forName("org.postgresql.Driver");
             Connection connection = DriverManager.getConnection(url, user, password);
@@ -26,7 +27,7 @@ public class SQLtoJava {
         return null;
     }
 
-    public List<DB_Patient> listAllPatients(Connection connection, boolean debug){
+    public static List<DB_Patient> listAllPatients(Connection connection, boolean debug){
         ArrayList <DB_Patient> patientlist = new ArrayList<>();
         try{
             String query = "SELECT *FROM \"Patient\"";
@@ -35,8 +36,10 @@ public class SQLtoJava {
             while (rs.next()){
                 DB_Patient patient = new DB_Patient(rs.getString("Name"),rs.getString("Condition"),rs.getString("Drug"),rs.getDouble("Weight"),rs.getInt("PatientID"),rs.getInt("Age"));
                 patientlist.add(patient);
-                for(DB_Patient p: patientlist){
-                    System.out.println(p.toStringWithoutDOB()+"\n");
+                if (debug) {
+                    for (DB_Patient p : patientlist) {
+                        System.out.println(p.toStringWithoutDOB() + "\n");
+                    }
                 }
             }
         } catch (SQLException throwables) {
@@ -45,7 +48,7 @@ public class SQLtoJava {
         return patientlist;
     }
 
-   public void listAllConditions(Connection connection, boolean debug){
+   public static void listAllConditions(Connection connection, boolean debug){
         try{
             HashMap<String ,String > conditionlist = new HashMap<>();
             String query = "SELECT *FROM \"Condition\"";
@@ -67,7 +70,7 @@ public class SQLtoJava {
         }
     }
 
-    public HashMap<String,String> listAllDrugs(Connection connection, boolean debug){
+    public static HashMap<String,String> listAllDrugs(Connection connection, boolean debug){
         HashMap<String ,String > druglist = new HashMap<>();
         try{
             String query = "SELECT *FROM \"Drug\"";
@@ -90,7 +93,8 @@ public class SQLtoJava {
     }
 
     // TODO
-    public void queryInteraction (Connection connection, String drug, String conditionOrDrug2){
+    /*
+    public static void queryInteraction (Connection connection, String drug, String conditionOrDrug2){
         String drugFormat = "'"+drug+"'";
         String conditionOrDrug2Format = "'"+conditionOrDrug2+"'";
         try{
@@ -107,8 +111,9 @@ public class SQLtoJava {
             throwables.printStackTrace();
         }
     }
+    */
 
-    private int selectLastInteractionIDAndIncrement (Connection connection) {
+    private static int selectLastInteractionIDAndIncrement (Connection connection) {
         try {
             String queryInteractionID = "SELECT MAX(\"InteractionID\") AS max_InteractionID FROM \"Interaction\";";
             Statement statement = connection.createStatement();
@@ -120,7 +125,7 @@ public class SQLtoJava {
         }return 0;
     }
 
-    public void addInteraction(Connection connection,String drug,String conditionOrDrug2,String hint){
+    public static void addInteraction(Connection connection,String drug,String conditionOrDrug2,String hint){
         String drugFormat = "'"+drug+"'";
         String conditionOrDrug2Format = "'"+conditionOrDrug2+"'";
         String hintFormat = "'"+hint+"'";
@@ -135,7 +140,7 @@ public class SQLtoJava {
         }
     }
 
-        private int selectLastPatientIDAndIncrement (Connection connection) {
+    private static int selectLastPatientIDAndIncrement (Connection connection) {
         try {
             String queryPatientID = "SELECT MAX(\"PatientID\") AS max_patientID FROM \"Patient\";";
             Statement statement = connection.createStatement();
@@ -148,7 +153,7 @@ public class SQLtoJava {
         }return 0;
     }
 
-    public void addPatient(Connection connection, String drug, String condition, String name,   int age,  double weight){
+    public static void addPatient(Connection connection, String drug, String condition, String name,   int age,  double weight){
         String drugFormat = "'"+drug+"'";
         String conditionFormat = "'"+condition+"'";
         String nameFormat = "'"+name+"'";
@@ -166,7 +171,7 @@ public class SQLtoJava {
         }
     }
 
-    public void addPatient (Connection connection, String name,   int age,  double weight){
+    public static void addPatient (Connection connection, String name,   int age,  double weight){
         String nameFormat = "'"+name+"'";
         List<DB_Patient> patientlist = new ArrayList<>();
         try{
@@ -180,7 +185,7 @@ public class SQLtoJava {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
     }}
-    public void addPatient(Connection connection,String name,int age,String drug,  double weight){
+    public static void addPatient(Connection connection,String name,int age,String drug,  double weight){
             String drugFormat = "'"+drug+"'";
             String nameFormat = "'"+name+"'";
             List<DB_Patient> patientlist = new ArrayList<>();
@@ -197,7 +202,7 @@ public class SQLtoJava {
              }
         }
 
-    public void addPatient(Connection connection, String condition, String name,int age,  double weight){
+    public static void addPatient(Connection connection, String condition, String name,int age,  double weight){
             String conditionFormat = "'"+condition+"'";
             String nameFormat = "'"+name+"'";
             List<DB_Patient> patientlist = new ArrayList<>();
@@ -212,5 +217,45 @@ public class SQLtoJava {
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }}
+
+    /**
+     * @param connection the SQL connection
+     * @param patient a DB_Patient object of the patient
+     * @return the patient object with the assigned database ID, if operation was unsucessful just the old patient
+     */
+    public static DB_Patient /*patient_with_sqlID*/ addPatient(Connection connection, DB_Patient patient){
+        StringBuilder conditions = new StringBuilder();
+        for(String cond : patient.getConditions()) {
+            conditions.append(cond).append(",");
+        }
+        conditions.setLength(conditions.length()-1);
+
+        StringBuilder drugs = new StringBuilder();
+        for(String drug : patient.getDrugs()) {
+            drugs.append(drug).append(",");
+        }
+        drugs.setLength(drugs.length()-1);
+
+        String age = "";
+        if(patient.getAge()>=0){
+            age = String.valueOf(patient.getAge());
+        }
+
+        String weight = "";
+        if (!Double.isNaN(patient.getWeight()) && patient.getWeight()>0){
+            weight = String.format(Locale.ROOT,"%.2f",patient.getWeight());
+        }
+
+        try{
+            int patientID = selectLastPatientIDAndIncrement(connection);
+            String query = String.format("INSERT INTO \"Patient\" VALUES(%d,'%s','%s','%s',%s,%s) ON CONFLICT DO NOTHING;", patientID, drugs, conditions, patient.getName(),age,weight);
+            Statement statement = connection.createStatement();
+            statement.execute(query);
+            patient.setPatID(patientID);
+        } catch (SQLException throwables) {
+            System.out.println("An error occured reading the database, no entry was added. Please try again or contact your system administrator");
+        }
+        return patient;
+    }
 
 }
