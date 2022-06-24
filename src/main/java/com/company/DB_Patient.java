@@ -95,6 +95,36 @@ public class DB_Patient {
 
     }
 
+    public DB_Patient(int patID_DB_PK,String drug, String condition, @NotNull String name,int age, double weight) {
+        this.name = name;
+        this.condition = condition;
+        this.drug = drug;
+        ;this.weight = weight;
+        this.patID_DB_PK = patID_DB_PK;
+        this.age = age;
+
+    }
+    public DB_Patient(int patID_DB_PK,@NotNull String name,int age, double weight) {
+        this.name = name;
+        this.weight = weight;
+        this.patID_DB_PK = patID_DB_PK;
+        this.age = age;
+    }
+    public DB_Patient(int patID_DB_PK,@NotNull String name,int age, double weight,String drug) {
+        this.name = name;
+        this.weight = weight;
+        this.drug = drug;
+        this.patID_DB_PK = patID_DB_PK;
+        this.age = age;
+    }
+    public DB_Patient(int patID_DB_PK,String condition,@NotNull String name,int age, double weight) {
+        this.name = name;
+        this.weight = weight;
+        this.condition = condition;
+        this.patID_DB_PK = patID_DB_PK;
+        this.age = age;
+    }
+
     // getters and setters:
     public List<String> getConditions() {
         return this.conditions;

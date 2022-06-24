@@ -34,18 +34,18 @@ public class Main extends Application {
         System.out.println("Terminals with card present: " + ReadEcardGeneric.getAllTerminalsWithCardPresent());
         // reads the ecard in terminal 0, true just puts out debug-info
         System.out.println("Created DB_Patient:\n"+ReadEcardGeneric.readCard(0,true));
-        */
+       /
 
-
-
-        /* ayah test
+        /* ayah test*/
             SQLtoJava test = new SQLtoJava();
             Connection connection = test.setConnection();
-           test.listingAllConditions(connection);
-           test.listingAllDrugs(connection);
-           test.listingAllPatients(connection);
-           //test.queryInteraction(connection,"N01AH01","J44.1");
-*/
+            /*test.addPatient(connection,"K71","Maurice Leon",55,67.8);
+            test.addPatient(connection,"C01BD04","I48","Lara Mueller",70,60.1);
+            test.addPatient(connection,"Jasmin Shawki",20,66.3);
+            test.addPatient(connection,"Sam Lewis",33,"J01FA09",60.2);
+            test.addInteraction(connection,"tDrug1","tDrug2","someHint");*/
+
+
     }
 
 

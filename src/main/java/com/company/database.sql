@@ -33,7 +33,6 @@ CREATE TABLE "Interaction" (
                                "Hint" varchar(300)
 );
 
-
 --TRUNCATE TABLE "Patient";
 
 INSERT INTO "Patient" VALUES (1,'R03AC02','J45','Brigitta Haggis',34,65.6) ON CONFLICT DO NOTHING;
@@ -49,7 +48,6 @@ INSERT INTO "Patient" VALUES (10,'C08DB01','I25','Janett Harris',30,60.1)ON CONF
 INSERT INTO "Patient" VALUES (11,'D11AH08','L20','Brigitta Haggis',34,65.2)ON CONFLICT DO NOTHING;
 INSERT INTO "Patient" VALUES (12,'C01BD04,A10BC01','I48,E11','Alexander Helks',44,90.3)ON CONFLICT DO NOTHING;
 INSERT INTO "Patient" VALUES (13,'L02BG03,G02CX04,J01FA09,B01AA03','N18,N95.1,Z88.0','Martha DeLarosa',50,63.4)ON CONFLICT DO NOTHING;
-
 
 --filling in drugs and atc codes
 INSERT INTO "Drug" VALUES ('N01AX10','Propofol')ON CONFLICT DO NOTHING;
@@ -73,13 +71,12 @@ INSERT INTO "Drug" VALUES ('J02AC02','Itraconazole')ON CONFLICT DO NOTHING;--con
 INSERT INTO "Drug" VALUES ('N06AF01','Isocarboxazid')ON CONFLICT DO NOTHING;--contraindicated to fentanyl (is a Monoamine oxidase inhibitors (MAOIs))
 INSERT INTO "Drug" VALUES ('C01BD04','Dofetilide') ON CONFLICT DO NOTHING;--C01BD - Antiarrhythmics, class III (mostly used for patients with atrial fibrillation)
 INSERT INTO "Drug" VALUES ('D11AH08','Abrocitinib') ON CONFLICT DO NOTHING;--D11AH-Agents for dermatitis, excluding corticosteroids
---ab hier sind es neue Drugs (müssen in der DrugBank noch gecheckt werden)
 INSERT INTO "Drug" VALUES ('A10AB01','Insulin (Human)') ON CONFLICT DO NOTHING;--drug for diabetes patients
 INSERT INTO "Drug" VALUES ('A10BC01','Glymidine') ON CONFLICT DO NOTHING; --drug for diabetes patients
 INSERT INTO "Drug" VALUES ('A10BJ01','Exenatide') ON CONFLICT DO NOTHING;--drug for diabetes patients
 INSERT INTO "Drug" VALUES ('A10XA01','Tolrestat') ON CONFLICT DO NOTHING;--drug for diabetes patients
 INSERT INTO "Drug" VALUES ('C09AA02','Enalapril') ON CONFLICT DO NOTHING; --drug for patients with chronic renal disease
-INSERT INTO "Drug" VALUES ('G02CX04','Cimicifugae rhizoma') ON CONFLICT DO NOTHING; --?????
+INSERT INTO "Drug" VALUES ('G02CX04','Cimicifugae rhizoma') ON CONFLICT DO NOTHING; --common name:Black cohosh
 INSERT INTO "Drug" VALUES ('L02BG03','Anastrozole') ON CONFLICT DO NOTHING;
 INSERT INTO "Drug" VALUES ('N07AA01','Neostigmine') ON CONFLICT DO NOTHING; -- drug for patients with Myasthenia gravis
 INSERT INTO "Drug" VALUES ('S01EB01','Pilocarpine') ON CONFLICT DO NOTHING; -- drug for patients with Acute angle-closure glaucoma
@@ -136,9 +133,8 @@ INSERT INTO "Condition" VALUES ('N95.1','Menopausal and female climacteric state
 INSERT INTO "Condition" VALUES ('I25','Chronic ischemic heart disease') ON CONFLICT DO NOTHING;
 INSERT INTO "Condition" VALUES ('L20','Atopic dermatitis') ON CONFLICT DO NOTHING;
 
-
 --filling in several interactions
-
+--TRUNCATE TABLE "Interaction";
 INSERT INTO "Interaction" VALUES (1,'N01AX10','Z91.012','Propofol might cause an allergic reaction to patients allergic to eggs, egg products, soy, or soy products. {information available on DOI:10.1016/j.jpainsymman.2010.07.001}.')ON CONFLICT DO NOTHING;
 INSERT INTO "Interaction" VALUES (2,'N01AX10','I95','Caution is necessry for patients with abnormally low blood pressure. {information available on PMID:28613634}.')ON CONFLICT DO NOTHING;
 INSERT INTO "Interaction" VALUES (3,'N01AH01','J46','The use of fentanyl is contraindicated in patients with respiratory depression or obstructive airway diseases (i.e., asthma, COPD, obstructive sleep apnea, obesity hyperventilation, also know as, Pickwickian syndrome). {information available on PMID:29083586}.')ON CONFLICT DO NOTHING;
@@ -208,7 +204,6 @@ INSERT INTO "Interaction" VALUES (66,'N02BA01','B01AA03','Acetylsalicylic acid m
 INSERT INTO "Interaction" VALUES (67,'N01AX10','B01AA04','The metabolism of Phenprocoumon can be decreased when combined with Propofol - severity: major. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
 INSERT INTO "Interaction" VALUES (68,'N01AB08','B01AA04','The risk or severity of bleeding can be increased when Sevoflurane is combined with Phenprocoumon - severity: moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
 
---START(a01)new INTERACTIONS --> Insulin to Salbutamol
 INSERT INTO "Interaction" VALUES (69,'B01AC06','A10AB01','The risk or severity of hypoglycemia can be increased when Acetylsalicylic acid is combined with Insulin human. - severity: moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
 INSERT INTO "Interaction" VALUES (70,'C08DB01','A10AB01','The risk or severity of hypoglycemia can be increased when Diltiazem is combined with Insulin human. - severity: moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
 INSERT INTO "Interaction" VALUES (71,'N06AF01','A10AB01','Isocarboxazid may increase the hypoglycemic activities of Insulin human. - severity: moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
@@ -265,7 +260,7 @@ INSERT INTO "Interaction" VALUES (114,'N05CD08','G02CX04','The serum concentrati
 INSERT INTO "Interaction" VALUES (115,'N01BB02','G02CX04','The metabolism of Lidocaine can be decreased when combined with Black cohosh. - severity: moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
 INSERT INTO "Interaction" VALUES (116,'B01AA03','G02CX04','The serum concentration of Warfarin can be increased when it is combined with Black cohosh. - severity: moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
 INSERT INTO "Interaction" VALUES (117,'C08DB01','G02CX04','The metabolism of Diltiazem can be decreased when combined with Black cohosh. - severity: moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
--- END(a01)
+
 
 
 
