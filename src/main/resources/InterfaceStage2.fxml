@@ -42,7 +42,16 @@
                 <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="640.0" prefWidth="444.0" HBox.hgrow="ALWAYS">
                     <children>
                         <HBox prefHeight="46.0" prefWidth="434.0" VBox.vgrow="ALWAYS" />
-                        <HBox prefHeight="273.0" prefWidth="434.0" VBox.vgrow="ALWAYS" />
+                        <HBox prefHeight="273.0" prefWidth="434.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <HBox prefHeight="396.0" prefWidth="433.0">
+                           <children>
+                              <HBox prefHeight="396.0" prefWidth="66.0" />
+                              <ListView prefHeight="396.0" prefWidth="311.0" />
+                              <HBox prefHeight="396.0" prefWidth="43.0" />
+                           </children>
+                        </HBox>
+                     </children></HBox>
                     </children>
                 </VBox>
                 <VBox prefHeight="640.0" prefWidth="442.0" HBox.hgrow="ALWAYS">
@@ -53,7 +62,7 @@
                         <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="383.0" prefWidth="433.0">
                            <children>
                               <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="374.0" prefWidth="32.0" />
-                              <TextFlow maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="500.0" prefWidth="374.0" style="-fx-background-color: ALICEBLUE; -fx-border-color: Black;" HBox.hgrow="ALWAYS" />
+                              <ListView prefHeight="383.0" prefWidth="375.0" />
                               <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="383.0" prefWidth="35.0" />
                            </children>
                         </HBox>
