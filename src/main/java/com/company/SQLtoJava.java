@@ -129,7 +129,6 @@ public class SQLtoJava {
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(queryHint);
             return rs.next();
-  
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
