@@ -18,6 +18,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Connection;
 import java.time.LocalDate;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -94,7 +95,9 @@ public class InterfaceController implements Initializable {
         //Test Data
         /////////////////////////////////////////////////////
             //Contition
-        ConcurrentHashMap<String, String> testConditionsAll = new ConcurrentHashMap<>(){{ // _concurrent_hashmap for thread safety -- dunno if important
+            Connection connection = SQLtoJava.setConnection();
+            HashMap<String,String> conditionlist = SQLtoJava.listAllConditions(connection,false);
+            /*ConcurrentHashMap<String, String> testConditionsAll = new ConcurrentHashMap<>(){{ // _concurrent_hashmap for thread safety -- dunno if important
             put("O90","Wochenbettkomplikationen"); put("Z39.1","Betreuung und Untersuchung der stillenden Mutter");
             put("K27.9","Ulcus pepticum, Lokalisation nicht näher bezeichnet : Weder als akut noch als chronisch bezeichnet, ohne Blutung oder Perforation");
             put("K29.0","Akute hämorrhagische Gastritis"); put("J46","Status asthmaticus"); put("G71.0","Muskeldystrophie");
@@ -102,27 +105,30 @@ public class InterfaceController implements Initializable {
             put("I95","Hypotonie"); put("N18.9","Chronische Nierenkrankheit, nicht näher bezeichnet"); put("N95.1","Zustände im Zusammenhang mit der Menopause und dem Klimakterium");
             put("Z88.0","Allergie gegenüber Penicillin");  put("Z88.1","Allergie gegenüber anderen Antibiotika");  put("Z88.4","Allergie gegenüber Anästhetikum"); put("Z88.5","Allergie gegenüber Betäubungsmittel");  put("Z88.6","Allergie gegenüber Analgetikum");
             put("K70.4","Alkoholisches Leverversagen");
-        }} ;
+        }} ;*/
         // has to be a subset of testConditionsAll (only conditions allowed in patient, which are part of all conditions)
         ConcurrentHashMap<String, String> testConditionsPatient = new ConcurrentHashMap<>();
-        for (Map.Entry<String, String> entry: testConditionsAll.entrySet()){
+        for (Map.Entry<String, String> entry: conditionlist.entrySet()){
             if(entry.getKey().equals("J46") || entry.getKey().equals("G71.0") || entry.getKey().equals("N18.9") || entry.getKey().equals("I95")){ // specify which conditions you want the parient to have
                 testConditionsPatient.put(entry.getKey(),entry.getValue());
             }
         }
 
             //Patien medication
-        ConcurrentHashMap<String, String> testPatientMed = new ConcurrentHashMap<>(){{
+        HashMap<String,String> druglist = SQLtoJava.listAllDrugs(connection,false);
+        /*ConcurrentHashMap<String, String> testPatientMed = new ConcurrentHashMap<>(){{
             put("V03AZ01","Ethanol"); put("N07BC06", "Diamorphin"); put("N06BA03","Methamphetamin"); put("N01BC01","Kokain"); put("N05CD03","Flunitrazepam"); put("N05CA19", "Thiopental");
             put("N02BG10","Cannabinoide"); put("A04AD10","Dronabinol (THC)"); put("N05CM01","Methaqualon"); put("N01AX11","Natriumoxybat"); put("N02AA05", "Oxycodon"); put("N06BA10","Fenetyllin");
-            /* martha's meds: */ put("L02BG03","Anastrozol"); put("G02CX04","Cimicifugae rhizoma"); put("J01FA09","Clarithromycin"); put("B01AA03","Warfarin");
-        }};
+            /* martha's meds:  put("L02BG03","Anastrozol"); put("G02CX04","Cimicifugae rhizoma"); put("J01FA09","Clarithromycin"); put("B01AA03","Warfarin");
+        }};*/
 
 
-        patMedListView.getItems().addAll(testPatientMed.values());
+        patMedListView.getItems().addAll(druglist.values());
 
-        allConditions.addAll(testConditionsAll.values());
+        allConditions.addAll(conditionlist.values());
         curentConditions.addAll(testConditionsPatient.values());
+        //wäre es möglich iwie die daten von den 2 feldern direkt auszulesen??
+        //curentConditions.addAll(SQLtoJava.queryInteraction(connection, ,curentConditions ));
 
         ChoiceB_Condition.getItems().addAll(allConditions);
         ChoiceB_Condition.setOnAction(this::setCondition);

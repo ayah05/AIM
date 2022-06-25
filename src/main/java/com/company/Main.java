@@ -18,13 +18,14 @@ public class Main extends Application {
         ///////////
 
         /* flo test
-        launch();
+
         */
+        launch();
 
         /* mo test
         String query_tmp = String.format("SELECT \"Hint\" FROM \"Interaction\" WHERE (\"Interaction\".\"Drug\" = '%s') AND \"Interaction\".\"Drug2orCond\" = '%cs');", "N05AA5", 0x25);
         System.out.println(String.format(query_tmp, "drug2"));
-        */
+
         FHIR_IPS_parser parse = new FHIR_IPS_parser();
         DB_Patient martha = parse.readIPS("./src/main/IPS-example-Bundle-with-renal-disease-et-al.json");
         //System.out.println(martha);
@@ -32,9 +33,8 @@ public class Main extends Application {
         System.out.println("Yay hints:");
         for (String hint : hintsForMarta){
             System.out.println(hint);
-        }
-        /*
-        System.out.println(new DB_Patient(true)); // for testing the test DB_Patient: works just as well as readIPS on our example IPS :D
+        }*/
+        /* System.out.println(new DB_Patient(true)); // for testing the test DB_Patient: works just as well as readIPS on our example IPS :D
         // shows all terminals:
         System.out.println("All terminals: "+ ReadEcardGeneric.getAllTerminals());
         // shows all terminals with card present (maybe easier just to make the user coose from these)
@@ -44,14 +44,16 @@ public class Main extends Application {
         */
 
         /* ayah test
-            //deprecated, class is now satic. SQLtoJava test = new SQLtoJava();
-            Connection connection = SQLtoJava.setConnection();
+            //deprecated, class is now satic.
+
             SQLtoJava.addPatient(connection,"K71","Maurice Leon",55,67.8);
             SQLtoJava.addPatient(connection,"C01BD04","I48","Lara Mueller",70,60.1);
             SQLtoJava.addPatient(connection,"Jasmin Shawki",20,66.3);
             SQLtoJava.addPatient(connection,"Sam Lewis",33,"J01FA09",60.2);
+            Connection connection = SQLtoJava.setConnection();
             SQLtoJava.addInteraction(connection,"tDrug1","tDrug2","someHint");
-             */
+            SQLtoJava.addInteraction(connection,"M03AB01","G72","smth");*/
+
 
     }
 

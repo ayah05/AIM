@@ -33,7 +33,7 @@ CREATE TABLE "Interaction" (
                                "Hint" varchar(500)
 );
 
---TRUNCATE TABLE "Patient";
+TRUNCATE TABLE "Patient";
 
 INSERT INTO "Patient" VALUES (1,'R03AC02','J45','Brigitta Haggis',34,65.6) ON CONFLICT DO NOTHING;
 INSERT INTO "Patient" VALUES (2,'S01EB01','H40.21','Giulietta Cirlos',23,55.7)ON CONFLICT DO NOTHING;
@@ -45,7 +45,7 @@ INSERT INTO "Patient" VALUES (7,'','G47.30','Mahmud Witling',65,82.4)ON CONFLICT
 INSERT INTO "Patient" VALUES (8,'C09AA02','N18','Rosana Jantet',45,68.8)ON CONFLICT DO NOTHING;
 INSERT INTO "Patient" VALUES (9,'A10AB01','Z91.012,E10','Kathe Camm',70,57.9)ON CONFLICT DO NOTHING;
 INSERT INTO "Patient" VALUES (10,'C08DB01','I25','Janett Harris',30,60.1)ON CONFLICT DO NOTHING;
-INSERT INTO "Patient" VALUES (11,'D11AH08','L20','Brigitta Haggis',34,65.2)ON CONFLICT DO NOTHING;
+INSERT INTO "Patient" VALUES (11,'D11AH08','L20','Mena Arafa',34,65.2)ON CONFLICT DO NOTHING;
 INSERT INTO "Patient" VALUES (12,'C01BD04,A10BC01','I48,E11','Alexander Helks',44,90.3)ON CONFLICT DO NOTHING;
 INSERT INTO "Patient" VALUES (13,'L02BG03,G02CX04,J01FA09,B01AA03','N18,N95.1,Z88.0','Martha DeLarosa',50,63.4)ON CONFLICT DO NOTHING;
 
@@ -134,6 +134,7 @@ INSERT INTO "Condition" VALUES ('I25','Chronic ischemic heart disease') ON CONFL
 INSERT INTO "Condition" VALUES ('L20','Atopic dermatitis') ON CONFLICT DO NOTHING;
 
 --filling in several interactions
+TRUNCATE TABLE "Interaction";
 INSERT INTO "Interaction" VALUES (1,'N01AX10','Z91.012','Propofol might cause an allergic reaction to patients allergic to eggs, egg products, soy, or soy products. {information available on DOI:10.1016/j.jpainsymman.2010.07.001}.')ON CONFLICT DO NOTHING;
 INSERT INTO "Interaction" VALUES (2,'N01AX10','I95','Caution is necessry for patients with abnormally low blood pressure. {information available on PMID:28613634}.')ON CONFLICT DO NOTHING;
 INSERT INTO "Interaction" VALUES (3,'N01AH01','J46','The use of fentanyl is contraindicated in patients with respiratory depression or obstructive airway diseases (i.e., asthma, COPD, obstructive sleep apnea, obesity hyperventilation, also know as, Pickwickian syndrome). {information available on PMID:29083586}.')ON CONFLICT DO NOTHING;
