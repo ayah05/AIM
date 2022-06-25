@@ -96,7 +96,7 @@ public class FHIR_IPS_parser {
             // adding age, over- and underweight as risk-factors
             if(age > 85) {conditions.add("R54") /*age related physical debility*/;}
             // cheating a little instead of adding a weight observation in martha's IPS
-            if(name.equals("Martha DeLarosa")){weight=63;}
+            if(name.equals("Martha DeLarosa")){weight=63.4;}
             if(!Double.isNaN(weight)) { if(weight<45){ conditions.add("R63.6") /*underweight*/ ;} if(weight>110){ conditions.add("E66.9");/*obesity, not specified*/}}
 
         } catch (IOException e) {

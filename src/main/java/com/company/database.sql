@@ -1,7 +1,7 @@
 DROP TABLE IF EXISTS "Patient" CASCADE;
-DROP TABLE IF EXISTS "Drug" CASCADE ;
-DROP TABLE IF EXISTS "Condition" CASCADE ;
-DROP TABLE IF EXISTS "Interaction" CASCADE ;
+DROP TABLE IF EXISTS "Drug" CASCADE;
+DROP TABLE IF EXISTS "Condition" CASCADE;
+DROP TABLE IF EXISTS "Interaction" CASCADE;
 
 
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO postgres;
@@ -29,9 +29,8 @@ CREATE TABLE "Drug" (
 CREATE TABLE "Interaction" (
                                "InteractionID" serial PRIMARY KEY ,
                                "Drug" varchar(8) NOT NULL, -- REFERENCES "Drug"
-                               "Drug2" varchar(8), --REFERENCES "Drug"
-                               "Condition" varchar(7),  --REFERENCES "Condition"
-                               "Hint" varchar(300)
+                               "Drug2orCond" varchar(8) NOT NULL,
+                               "Hint" varchar(500)
 );
 
 --TRUNCATE TABLE "Patient";
@@ -135,7 +134,6 @@ INSERT INTO "Condition" VALUES ('I25','Chronic ischemic heart disease') ON CONFL
 INSERT INTO "Condition" VALUES ('L20','Atopic dermatitis') ON CONFLICT DO NOTHING;
 
 --filling in several interactions
--- you filled in the text (which belongs in the fourth field) always into the third field Condition varchar(7)......
 INSERT INTO "Interaction" VALUES (1,'N01AX10','Z91.012','Propofol might cause an allergic reaction to patients allergic to eggs, egg products, soy, or soy products. {information available on DOI:10.1016/j.jpainsymman.2010.07.001}.')ON CONFLICT DO NOTHING;
 INSERT INTO "Interaction" VALUES (2,'N01AX10','I95','Caution is necessry for patients with abnormally low blood pressure. {information available on PMID:28613634}.')ON CONFLICT DO NOTHING;
 INSERT INTO "Interaction" VALUES (3,'N01AH01','J46','The use of fentanyl is contraindicated in patients with respiratory depression or obstructive airway diseases (i.e., asthma, COPD, obstructive sleep apnea, obesity hyperventilation, also know as, Pickwickian syndrome). {information available on PMID:29083586}.')ON CONFLICT DO NOTHING;
@@ -262,6 +260,7 @@ INSERT INTO "Interaction" VALUES (115,'N01BB02','G02CX04','The metabolism of Lid
 INSERT INTO "Interaction" VALUES (116,'B01AA03','G02CX04','The serum concentration of Warfarin can be increased when it is combined with Black cohosh. - severity: moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
 INSERT INTO "Interaction" VALUES (117,'C08DB01','G02CX04','The metabolism of Diltiazem can be decreased when combined with Black cohosh. - severity: moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
 
+INSERT INTO "Interaction" VALUES (118,'G02CX04','N18.9','WORKS!, but, unfortunately, we should figure out how to get the DB to figure out how to recognise N18.9 as N18...or maybe just change the IPS lol. - severity: moderate.')ON CONFLICT DO NOTHING;
 
 
 

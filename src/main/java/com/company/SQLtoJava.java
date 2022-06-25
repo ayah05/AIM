@@ -1,28 +1,39 @@
 package com.company;
 
+import java.io.Console;
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
+import java.util.*;
 
 
 public class SQLtoJava {
     private static final String url = "jdbc:postgresql://localhost:5432/AIM";
     private static final String user = "postgres";
-    private static final String password = "medProjekt";
+    // private static String password = "medProjekt";   // i would probably mayyybe remove this and use what i did in setConnection if possible
+
 
     public SQLtoJava() {
     }
 
     public static Connection setConnection(){
         try {
+            String password = null;
+            Console console = System.console();
+            if(console != null){
+                char[] pwd = console.readPassword("Please enter database Password: ");
+                password = new String(pwd);
+            }
+            else{
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("Please enter database password (unmasked - sry..):");
+                password = scanner.nextLine();
+            }
+
             Class.forName("org.postgresql.Driver");
             Connection connection = DriverManager.getConnection(url, user, password);
-            System.out.println("Connection to the database"+url+" is successful");
+            System.out.println("Connection to the database"+url+" established successfuly");
             return connection;
         } catch (SQLException | ClassNotFoundException e) {
-            System.out.println("Something went wrong. Please try again to connect to the Database.");
+            System.out.println("Something went wrong. Please try connecting to the Database again.");
         }
         return null;
     }
@@ -92,14 +103,12 @@ public class SQLtoJava {
         return druglist;
     }
 
-    // TODO
-    /*
     public static void queryInteraction (Connection connection, String drug, String conditionOrDrug2){
         String drugFormat = "'"+drug+"'";
         String conditionOrDrug2Format = "'"+conditionOrDrug2+"'";
         try{
             String queryHint = "SELECT \"Hint\" FROM \"Interaction\" WHERE (\"Interaction\".\"Drug\" ="+drugFormat+")" +
-                    " AND (\"Interaction\".\"Drug2 | Condition\" ="+conditionOrDrug2Format+")";
+                    " AND (\"Interaction\".\"Drug2orCond\" ="+conditionOrDrug2Format+")";
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(queryHint);
             //int columns = rs.getMetaData().getColumnCount();System.out.println(columns);
@@ -111,7 +120,7 @@ public class SQLtoJava {
             throwables.printStackTrace();
         }
     }
-    */
+
 
     private static int selectLastInteractionIDAndIncrement (Connection connection) {
         try {
@@ -219,6 +228,8 @@ public class SQLtoJava {
             }}
 
     /**
+     * add a DB_Patient object to database. An ID will be assigned, age and weight will only be added if <0,
+     * if conditions or drugs are empty, an empty string will be inserted
      * @param connection the SQL connection
      * @param patient a DB_Patient object of the patient
      * @return the patient object with the assigned database ID, if operation was unsucessful just the old patient
@@ -243,7 +254,7 @@ public class SQLtoJava {
 
         String weight = "";
         if (!Double.isNaN(patient.getWeight()) && patient.getWeight()>0){
-            weight = String.format(Locale.ROOT,",%.2f",patient.getWeight());
+            weight = String.format(Locale.ROOT,",%.1f",patient.getWeight());
         }
         // auf diese art könnte man auch die anderen spalten freiwillig machen aber denk leerer string geht eh auch, mal schauen wie viel zeit/lust wir noch haben:
         String columns = String.format("\"PatientID\", \"Drug\", \"Condition\", \"Name\"%s%s",age.isBlank()?"":", \"Age\"", weight.isBlank()?"":", \"Weight\"" );
@@ -260,4 +271,41 @@ public class SQLtoJava {
         return patient;
     }
 
+    /**
+     * gets the interactions per patient rather inefficiently
+     * @param connection the database connection
+     * @param patient the patient for whom to check interactions
+     * @return a list of unique hints if successful, empty list if unseccessful
+     */
+    public static List<String> getInteractionsForPatient(Connection connection,DB_Patient patient){
+        List<String> result = new ArrayList<>();
+        for(String drug : patient.getDrugs()) {
+            String query_tmp = String.format("SELECT \"Hint\" FROM \"Interaction\" WHERE (\"Interaction\".\"Drug\" = '%s') AND (\"Interaction\".\"Drug2orCond\" = '%cs');", drug, 0x25); // 0x25 is a fancy way of including a percent sign in a format string to create what i call a second order formatstring ^^
+            try {
+                // for drug/drug interaction
+                for (String drug2 : patient.getDrugs()) {
+                    if (!drug.equals(drug2)) {
+                        String query = String.format(query_tmp, drug2);
+                        //System.out.println(query);
+                        ResultSet resultSet = connection.createStatement().executeQuery(query);
+                        if(resultSet.next()){
+                            result.add(resultSet.getString(1));
+                        }
+                    }
+                }
+                // for drug/condition interaction
+                for (String cond : patient.getConditions()) {
+                    String query = String.format(query_tmp, cond);
+                    // System.out.println(query);
+                    ResultSet resultSet = connection.createStatement().executeQuery(query);
+                    if(resultSet.next()){
+                        result.add(resultSet.getString(1));
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return result;
+    }
 }
