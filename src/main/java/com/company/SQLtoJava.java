@@ -81,7 +81,7 @@ public class SQLtoJava {
       return null;
    }
 
-  /*  public static HashMap<String,String> listAllDrugs(Connection connection, boolean debug){
+   public static HashMap<String,String> listAllDrugs(Connection connection, boolean debug){
         HashMap<String ,String > druglist = new HashMap<>();
         try{
             String query = "SELECT *FROM \"Drug\"";
@@ -101,7 +101,7 @@ public class SQLtoJava {
             throwables.printStackTrace();
         }
         return null;
-    }*/
+    }
 
 
     public static void queryInteraction (Connection connection, String drug, String conditionOrDrug2){

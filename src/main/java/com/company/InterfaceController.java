@@ -104,7 +104,7 @@ private TextField TFCondition;
         /////////////////////////////////////////////////////
             //Contition
             //
-            connection = SQLtoJava.setConnection();
+           connection = SQLtoJava.setConnection();
             HashMap<String,String> conditionlist = SQLtoJava.listAllConditions(connection,false);
             ConcurrentHashMap<String, String> testConditionsAll = new ConcurrentHashMap<>(){{ // _concurrent_hashmap for thread safety -- dunno if important
             put("O90","Wochenbettkomplikationen"); put("Z39.1","Betreuung und Untersuchung der stillenden Mutter");
@@ -118,23 +118,23 @@ private TextField TFCondition;
         // has to be a subset of testConditionsAll (only conditions allowed in patient, which are part of all conditions)
         ConcurrentHashMap<String, String> testConditionsPatient = new ConcurrentHashMap<>();
         for (Map.Entry<String, String> entry: conditionlist.entrySet()){
-           // if(entry.getKey().equals("J46") || entry.getKey().equals("G71.0") || entry.getKey().equals("N18.9") || entry.getKey().equals("I95")){ // specify which conditions you want the parient to have
-            //    testConditionsPatient.put(entry.getKey(),entry.getValue());
-           // }
-       // }
+            if(entry.getKey().equals("J46") || entry.getKey().equals("G71.0") || entry.getKey().equals("N18.9") || entry.getKey().equals("I95")){ // specify which conditions you want the parient to have
+                testConditionsPatient.put(entry.getKey(),entry.getValue());
+            }
+        }
 
             //Patien medication
-        HashMap<String,String> druglist = SQLtoJava.listAllDrugs(connection,false);
-        /*ConcurrentHashMap<String, String> testPatientMed = new ConcurrentHashMap<>(){{
+       HashMap<String,String> druglist = SQLtoJava.listAllDrugs(connection,false);
+        ConcurrentHashMap<String, String> testPatientMed = new ConcurrentHashMap<>(){{
             put("V03AZ01","Ethanol"); put("N07BC06", "Diamorphin"); put("N06BA03","Methamphetamin"); put("N01BC01","Kokain"); put("N05CD03","Flunitrazepam"); put("N05CA19", "Thiopental");
             put("N02BG10","Cannabinoide"); put("A04AD10","Dronabinol (THC)"); put("N05CM01","Methaqualon"); put("N01AX11","Natriumoxybat"); put("N02AA05", "Oxycodon"); put("N06BA10","Fenetyllin");
             /* martha's meds: */ put("L02BG03","Anastrozol"); put("G02CX04","Cimicifugae rhizoma"); put("J01FA09","Clarithromycin"); put("B01AA03","Warfarin");
         }};
 
 
-       // patMedListView.getItems().addAll(druglist.values());
+       patMedListView.getItems().addAll(druglist.values());
 
-        //allConditions.addAll(conditionlist.values());
+        allConditions.addAll(conditionlist.values());
         curentConditions.addAll(testConditionsPatient.values());
 
         ChoiceB_Condition.getItems().addAll(allConditions);
@@ -185,12 +185,10 @@ private TextField TFCondition;
 
         @FXML
         private  void drugChecker(ActionEvent event){
-        //SQLtoJava.queryInteraction(connection,drugDoctor,condition);
-        //SQLtoJava.queryInteraction(connection,drugDoctor,patientDrug);
+        SQLtoJava.queryInteraction(connection,drugDoctor,condition);
+        SQLtoJava.queryInteraction(connection,drugDoctor,patientDrug);
            // interList.setF(Font.font("Helvetica", FontWeight.BOLD, 10));
         }
 
-    public void blabla(ActionEvent event) {
-        System.out.println();
-    }
+
 }
