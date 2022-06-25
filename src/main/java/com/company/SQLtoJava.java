@@ -6,14 +6,44 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-
+// TODO: fix depencencies in InterfaceController and Main
 public class SQLtoJava {
     private static final String url = "jdbc:postgresql://localhost:5432/AIM";
     private static final String user = "postgres";
+    private static Connection connection;
 
     public SQLtoJava() {
+        try {
+            String password;
+            Console console = System.console();
+            if(console != null){
+                char[] pwd = console.readPassword("Please enter database Password: ");
+                password = new String(pwd);
+            }
+            else{
+                Scanner scanner = new Scanner(System.in);
+                System.out.println("Please enter database password (unmasked - sry..):");
+                password = scanner.nextLine();
+            }
+            Class.forName("org.postgresql.Driver");
+            connection = DriverManager.getConnection(url, user, password);
+            System.out.println("Connection to the database"+url+" established successfuly");
+        } catch (SQLException | ClassNotFoundException e) {
+            System.out.println("Something went wrong. Please try connecting to the Database again.");
+        }
     }
 
+    public SQLtoJava(String password) {
+        try {
+            Class.forName("org.postgresql.Driver");
+            connection = DriverManager.getConnection(url, user, password);
+            System.out.println("Connection to the database"+url+" established successfuly");
+        } catch (SQLException | ClassNotFoundException e) {
+            System.out.println("Something went wrong. Please try connecting to the Database again.");
+        }
+    }
+
+    // deprecated.
     public static Connection setConnection(){
         try {
          String password;
@@ -37,10 +67,10 @@ public class SQLtoJava {
         return null;
     }
 
-    public static List<DB_Patient> listAllPatients(Connection connection, boolean debug){
+    public static List<DB_Patient> listAllPatients(boolean debug){
         ArrayList <DB_Patient> patientlist = new ArrayList<>();
         try{
-            String query = "SELECT *FROM \"Patient\"";
+            String query = "SELECT * FROM \"Patient\"";
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(query);
             while (rs.next()){
@@ -58,7 +88,7 @@ public class SQLtoJava {
         return patientlist;
     }
 
-   public static HashMap<String, String> listAllConditions(Connection connection, boolean debug){
+   public HashMap<String, String> listAllConditions(boolean debug){
         try{
             HashMap<String ,String > conditionlist = new HashMap<>();
             String query = "SELECT *FROM \"Condition\"";
@@ -81,7 +111,7 @@ public class SQLtoJava {
       return null;
    }
 
-    public static HashMap<String,String> listAllDrugs(Connection connection, boolean debug){
+    public HashMap<String,String> listAllDrugs(boolean debug){
         HashMap<String ,String > druglist = new HashMap<>();
         try{
             String query = "SELECT *FROM \"Drug\"";
@@ -104,7 +134,7 @@ public class SQLtoJava {
     }
 
 
-    public static void queryInteraction (Connection connection, String drug, String conditionOrDrug2){
+    public void queryInteraction (String drug, String conditionOrDrug2){
         String drugFormat = "'"+drug+"'";
         String conditionOrDrug2Format = "'"+conditionOrDrug2+"'";
         try{
@@ -120,7 +150,7 @@ public class SQLtoJava {
         }
     }
 
-    private static boolean ifInteractionExists (Connection connection, String drug, String conditionOrDrug2) {
+    private boolean ifInteractionExists (String drug, String conditionOrDrug2) {
         String drugFormat = "'" + drug + "'";
         String conditionOrDrug2Format = "'" + conditionOrDrug2 + "'";
         try {
@@ -132,11 +162,11 @@ public class SQLtoJava {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return false;
+        return true;
     }
 
 
-    private static int selectLastInteractionIDAndIncrement (Connection connection) {
+    private int selectLastInteractionIDAndIncrement () {
         try {
             String queryInteractionID = "SELECT MAX(\"InteractionID\") AS max_InteractionID FROM \"Interaction\";";
             Statement statement = connection.createStatement();
@@ -149,16 +179,16 @@ public class SQLtoJava {
         }return 0;
     }
 //maybe adding a query to search if this interaction is already in the database
-    public static void addInteraction(Connection connection,String drug,String conditionOrDrug2,String hint){
+    public void addInteraction(String drug,String conditionOrDrug2,String hint){
         String drugFormat = "'"+drug+"'";
         String conditionOrDrug2Format = "'"+conditionOrDrug2+"'";
         String hintFormat = "'"+hint+"'";
         try{
-            if(ifInteractionExists(connection,drug,conditionOrDrug2)){
+            if(ifInteractionExists(drug,conditionOrDrug2)){
                 System.out.println("This Interaction already exists in database");
             }else{
                 Statement statement =  connection.createStatement();
-                int interactionID = selectLastInteractionIDAndIncrement(connection);
+                int interactionID = selectLastInteractionIDAndIncrement();
                 String query = "INSERT INTO \"Interaction\" VALUES(" + interactionID + "," + drugFormat + "," + conditionOrDrug2Format + "," + hintFormat + ") ON CONFLICT DO NOTHING;";
                 statement.execute(query);
                 System.out.println("Interaction with Drug: " + drugFormat + " and Drug/Condition: " + conditionOrDrug2Format + " was added to the Database with following Hint:" + hintFormat);
@@ -168,7 +198,7 @@ public class SQLtoJava {
         }
     }
 
-    private static int selectLastPatientIDAndIncrement (Connection connection) {
+    private int selectLastPatientIDAndIncrement () {
         try {
             String queryPatientID = "SELECT MAX(\"PatientID\") AS max_patientID FROM \"Patient\";";
             Statement statement = connection.createStatement();
@@ -182,13 +212,13 @@ public class SQLtoJava {
         }return 0;
     }
 
-    public static void addPatient(Connection connection, String drug, String condition, String name,   int age,  double weight){
+    public void addPatient(String drug, String condition, String name,   int age,  double weight){
         String drugFormat = "'"+drug+"'";
         String conditionFormat = "'"+condition+"'";
         String nameFormat = "'"+name+"'";
         List<DB_Patient> patientlist = new ArrayList<>();
         try{
-                int patientID = selectLastPatientIDAndIncrement(connection);
+                int patientID = selectLastPatientIDAndIncrement();
                 String query = "INSERT INTO \"Patient\" VALUES("+patientID+","+drugFormat+","+conditionFormat+","+nameFormat+","+age+","+weight+") ON CONFLICT DO NOTHING;";
                 Statement statement = connection.createStatement();
                 statement.execute(query);
@@ -200,11 +230,11 @@ public class SQLtoJava {
         }
     }
 
-    public static void addPatient (Connection connection, String name,   int age,  double weight){
+    public void addPatient ( String name,   int age,  double weight){
         String nameFormat = "'"+name+"'";
         List<DB_Patient> patientlist = new ArrayList<>();
         try{
-            int patientID = selectLastPatientIDAndIncrement(connection);
+            int patientID = selectLastPatientIDAndIncrement();
             String query = "INSERT INTO \"Patient\" VALUES("+patientID+",'','',"+nameFormat+","+age+","+weight+") ON CONFLICT DO NOTHING;";
             Statement statement = connection.createStatement();
             statement.execute(query);
@@ -214,12 +244,12 @@ public class SQLtoJava {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
     }}
-    public static void addPatient(Connection connection,String name,int age,String drug,  double weight){
+    public void addPatient(String name,int age,String drug,  double weight){
             String drugFormat = "'"+drug+"'";
             String nameFormat = "'"+name+"'";
             List<DB_Patient> patientlist = new ArrayList<>();
             try{
-                int patientID = selectLastPatientIDAndIncrement(connection);
+                int patientID = selectLastPatientIDAndIncrement();
                 String query = "INSERT INTO \"Patient\" VALUES("+patientID+","+drugFormat+",'',"+nameFormat+","+age+","+weight+") ON CONFLICT DO NOTHING;";
                 Statement statement = connection.createStatement();
                 statement.execute(query);
@@ -231,12 +261,12 @@ public class SQLtoJava {
              }
         }
 
-    public static void addPatient(Connection connection, String condition, String name,int age,  double weight){
+    public void addPatient(String condition, String name,int age,  double weight){
             String conditionFormat = "'"+condition+"'";
             String nameFormat = "'"+name+"'";
             List<DB_Patient> patientlist = new ArrayList<>();
             try{
-                int patientID = selectLastPatientIDAndIncrement(connection);
+                int patientID = selectLastPatientIDAndIncrement();
                 String query = "INSERT INTO \"Patient\" VALUES("+patientID+",'',"+conditionFormat+","+nameFormat+","+age+","+weight+") ON CONFLICT DO NOTHING;";
                 Statement statement = connection.createStatement();
                 statement.execute(query);
@@ -250,11 +280,10 @@ public class SQLtoJava {
     /**
      * add a DB_Patient object to database. An ID will be assigned, age and weight will only be added if <0,
      * if conditions or drugs are empty, an empty string will be inserted
-     * @param connection the SQL connection
      * @param patient a DB_Patient object of the patient
      * @return the patient object with the assigned database ID, if operation was unsucessful just the old patient
      */
-    public static DB_Patient /*patient_with_sqlID*/ addPatient(Connection connection, DB_Patient patient){
+    public DB_Patient /*patient_with_sqlID*/ addPatient(DB_Patient patient){
         StringBuilder conditions = new StringBuilder();
         for(String cond : patient.getConditions()) {
             conditions.append(cond).append(",");
@@ -279,7 +308,7 @@ public class SQLtoJava {
         // auf diese art könnte man auch die anderen spalten freiwillig machen aber denk leerer string geht eh auch, mal schauen wie viel zeit/lust wir noch haben:
         String columns = String.format("\"PatientID\", \"Drug\", \"Condition\", \"Name\"%s%s",age.isBlank()?"":", \"Age\"", weight.isBlank()?"":", \"Weight\"" );
         try{
-            int patientID = selectLastPatientIDAndIncrement(connection);
+            int patientID = selectLastPatientIDAndIncrement();
             String query = String.format("INSERT INTO \"Patient\" (%s) VALUES(%d,'%s','%s','%s'%s%s) ON CONFLICT DO NOTHING;",columns, patientID, drugs, conditions, patient.getName(),age,weight);
             Statement statement = connection.createStatement();
             statement.execute(query);
@@ -292,11 +321,10 @@ public class SQLtoJava {
 
     /**
      * gets the interactions per patient rather inefficiently
-     * @param connection the database connection
      * @param patient the patient for whom to check interactions
      * @return a list of unique hints if successful, empty list if unseccessful
      */
-    public static List<String> getInteractionsForPatient(Connection connection,DB_Patient patient){
+    public List<String> getInteractionsForPatient(DB_Patient patient){
         List<String> result = new ArrayList<>();
         for(String drug : patient.getDrugs()) {
             String query_tmp = String.format("SELECT \"Hint\" FROM \"Interaction\" WHERE (\"Interaction\".\"Drug\" = '%s') AND (\"Interaction\".\"Drug2orCond\" = '%cs');", drug, 0x25); // 0x25 is a fancy way of including a percent sign in a format string to create what i call a second order formatstring ^^
