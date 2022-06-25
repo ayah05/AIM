@@ -10,13 +10,13 @@ import java.util.regex.Pattern;
 public class SQLtoJava {
     private static final String url = "jdbc:postgresql://localhost:5432/AIM";
     private static final String user = "postgres";
-
+    private static final String password = "medProjekt";
     public SQLtoJava() {
     }
 
     public static Connection setConnection(){
         try {
-            String password = null;
+         /*   String password = null;
             Console console = System.console();
             if(console != null){
                 char[] pwd = console.readPassword("Please enter database Password: ");
@@ -27,7 +27,7 @@ public class SQLtoJava {
                 System.out.println("Please enter database password (unmasked - sry..):");
                 password = scanner.nextLine();
             }
-
+*/
             Class.forName("org.postgresql.Driver");
             Connection connection = DriverManager.getConnection(url, user, password);
             System.out.println("Connection to the database"+url+" established successfuly");
