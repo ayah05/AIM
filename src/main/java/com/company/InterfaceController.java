@@ -12,6 +12,9 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -38,11 +41,14 @@ public class InterfaceController implements Initializable {
     private ChoiceBox<Object>ECardBox= new ChoiceBox<>();
     @FXML
     private ListView<String> conditionListView = new ListView<>(), patMedListView = new ListView<>();
+    @FXML
+    private TextFlow interList = new TextFlow();
     private Connection connection;
     private String patientDrug;
     private  String condition;
     private  String drugDoctor;
-
+@FXML
+private TextField TFCondition;
 
     private Stage stage;
     private Scene scene;
@@ -98,9 +104,9 @@ public class InterfaceController implements Initializable {
         /////////////////////////////////////////////////////
             //Contition
             //
-          //  connection = SQLtoJava.setConnection();
+            connection = SQLtoJava.setConnection();
             HashMap<String,String> conditionlist = SQLtoJava.listAllConditions(connection,false);
-            /*ConcurrentHashMap<String, String> testConditionsAll = new ConcurrentHashMap<>(){{ // _concurrent_hashmap for thread safety -- dunno if important
+            ConcurrentHashMap<String, String> testConditionsAll = new ConcurrentHashMap<>(){{ // _concurrent_hashmap for thread safety -- dunno if important
             put("O90","Wochenbettkomplikationen"); put("Z39.1","Betreuung und Untersuchung der stillenden Mutter");
             put("K27.9","Ulcus pepticum, Lokalisation nicht näher bezeichnet : Weder als akut noch als chronisch bezeichnet, ohne Blutung oder Perforation");
             put("K29.0","Akute hämorrhagische Gastritis"); put("J46","Status asthmaticus"); put("G71.0","Muskeldystrophie");
@@ -108,10 +114,10 @@ public class InterfaceController implements Initializable {
             put("I95","Hypotonie"); put("N18.9","Chronische Nierenkrankheit, nicht näher bezeichnet"); put("N95.1","Zustände im Zusammenhang mit der Menopause und dem Klimakterium");
             put("Z88.0","Allergie gegenüber Penicillin");  put("Z88.1","Allergie gegenüber anderen Antibiotika");  put("Z88.4","Allergie gegenüber Anästhetikum"); put("Z88.5","Allergie gegenüber Betäubungsmittel");  put("Z88.6","Allergie gegenüber Analgetikum");
             put("K70.4","Alkoholisches Leverversagen");
-        }} ;*/
+        }} ;
         // has to be a subset of testConditionsAll (only conditions allowed in patient, which are part of all conditions)
         ConcurrentHashMap<String, String> testConditionsPatient = new ConcurrentHashMap<>();
-      //  for (Map.Entry<String, String> entry: conditionlist.entrySet()){
+        for (Map.Entry<String, String> entry: conditionlist.entrySet()){
            // if(entry.getKey().equals("J46") || entry.getKey().equals("G71.0") || entry.getKey().equals("N18.9") || entry.getKey().equals("I95")){ // specify which conditions you want the parient to have
             //    testConditionsPatient.put(entry.getKey(),entry.getValue());
            // }
@@ -122,8 +128,8 @@ public class InterfaceController implements Initializable {
         /*ConcurrentHashMap<String, String> testPatientMed = new ConcurrentHashMap<>(){{
             put("V03AZ01","Ethanol"); put("N07BC06", "Diamorphin"); put("N06BA03","Methamphetamin"); put("N01BC01","Kokain"); put("N05CD03","Flunitrazepam"); put("N05CA19", "Thiopental");
             put("N02BG10","Cannabinoide"); put("A04AD10","Dronabinol (THC)"); put("N05CM01","Methaqualon"); put("N01AX11","Natriumoxybat"); put("N02AA05", "Oxycodon"); put("N06BA10","Fenetyllin");
-            /* martha's meds:  put("L02BG03","Anastrozol"); put("G02CX04","Cimicifugae rhizoma"); put("J01FA09","Clarithromycin"); put("B01AA03","Warfarin");
-        }};*/
+            /* martha's meds: */ put("L02BG03","Anastrozol"); put("G02CX04","Cimicifugae rhizoma"); put("J01FA09","Clarithromycin"); put("B01AA03","Warfarin");
+        }};
 
 
        // patMedListView.getItems().addAll(druglist.values());
@@ -159,10 +165,14 @@ public class InterfaceController implements Initializable {
         ECardBox.setValue("E Card Geräte");
     }
 
+
+
     private void setECardDevice(Event event) {
         //Mo hier ist dein arbeitsbereich
-        System.out.println(ECardBox.getValue());
-
+       String input= String.valueOf(ECardBox.getValue());
+       if (!input.equals("E Card Geräte")){
+        System.out.println(input);
+           System.out.println("Index = "+ECardBox.getSelectionModel().getSelectedIndex());}
 
     }
 
@@ -177,6 +187,10 @@ public class InterfaceController implements Initializable {
         private  void drugChecker(ActionEvent event){
         //SQLtoJava.queryInteraction(connection,drugDoctor,condition);
         //SQLtoJava.queryInteraction(connection,drugDoctor,patientDrug);
+           // interList.setF(Font.font("Helvetica", FontWeight.BOLD, 10));
         }
 
+    public void blabla(ActionEvent event) {
+        System.out.println();
+    }
 }

@@ -72,7 +72,7 @@
                      <children>
                         <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="70.0" HBox.hgrow="ALWAYS" />
                         <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="268.0" text="Geburtsdatum" HBox.hgrow="ALWAYS" />
-                        <DatePicker fx:id="DP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#getDate" prefHeight="26.0" prefWidth="220.0" promptText="01.01.2020" HBox.hgrow="ALWAYS" />
+                        <DatePicker fx:id="DP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#getDate" prefHeight="26.0" prefWidth="220.0" promptText="26.01.1950" HBox.hgrow="ALWAYS" />
                         <HBox prefHeight="33.0" prefWidth="64.0" HBox.hgrow="ALWAYS" />
                      </children></HBox>
                   <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="456.0" prefWidth="434.0">
@@ -83,7 +83,7 @@
                               <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="434.0">
                                  <children>
                                     <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="35.0" />
-                                    <TextField fx:id="TFCondition" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="265.0" HBox.hgrow="ALWAYS" />
+                                    <TextField fx:id="TFCondition" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#blabla" prefHeight="26.0" prefWidth="265.0" HBox.hgrow="ALWAYS" />
                                     <ChoiceBox fx:id="ChoiceB_Condition" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="168.0" HBox.hgrow="ALWAYS" />
                                     <HBox prefHeight="26.0" prefWidth="30.0" />
                                  </children></HBox>
