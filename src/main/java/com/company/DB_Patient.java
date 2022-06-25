@@ -5,6 +5,7 @@ import org.jetbrains.annotations.NotNull;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.Month;
+import java.time.Period;
 import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
@@ -38,7 +39,7 @@ public class DB_Patient {
         this.weight = 63;
     }
 
-    public DB_Patient(@NotNull String name, List<String> conditions, List<String> drugs,@NotNull Date dob, double weight, int age) {
+    public DB_Patient(@NotNull String name, List<String> conditions, List<String> drugs, Date dob, double weight, int age) {
         this.name = name;
         this.conditions = conditions;
         this.drugs = drugs;

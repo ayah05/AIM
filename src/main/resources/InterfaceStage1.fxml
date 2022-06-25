@@ -83,7 +83,7 @@
                               <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="434.0">
                                  <children>
                                     <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="35.0" />
-                                    <TextField fx:id="TFCondition" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#blabla" prefHeight="26.0" prefWidth="265.0" HBox.hgrow="ALWAYS" />
+                                    <TextField fx:id="TFCondition" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="265.0" HBox.hgrow="ALWAYS" />
                                     <ChoiceBox fx:id="ChoiceB_Condition" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="168.0" HBox.hgrow="ALWAYS" />
                                     <HBox prefHeight="26.0" prefWidth="30.0" />
                                  </children></HBox>
@@ -120,9 +120,9 @@
                                     <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="151.0" prefWidth="433.0" VBox.vgrow="ALWAYS">
                                        <children>
                                           <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="50.0" />
-                                          <TextField maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="180.0" HBox.hgrow="ALWAYS" />
-                                          <ListView maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="99.0" HBox.hgrow="ALWAYS" />
-                                          <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="23.0" HBox.hgrow="ALWAYS" />
+                                          <TextField fx:id="t_PMedication" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="180.0" HBox.hgrow="ALWAYS" />
+                                          <ChoiceBox fx:id="ChoiceB_PatientMedication" prefWidth="150.0" />
+                                          <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="27.0" prefWidth="50.0" HBox.hgrow="ALWAYS" />
                                        </children>
                                     </HBox>
                                  </children>
@@ -132,7 +132,7 @@
                                     <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="431.0" prefWidth="433.0" VBox.vgrow="ALWAYS">
                                        <children>
                                           <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="495.0" prefWidth="58.0" HBox.hgrow="ALWAYS" />
-                                          <ListView fx:id="patMedListView" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="495.0" prefWidth="344.0" HBox.hgrow="ALWAYS" />
+                                          <ListView fx:id="patMedListView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="495.0" prefWidth="344.0" HBox.hgrow="ALWAYS" />
                                           <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="495.0" prefWidth="57.0" HBox.hgrow="ALWAYS" />
                                        </children>
                                     </HBox>
@@ -150,10 +150,10 @@
          <children>
             <ButtonBar maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
               <buttons>
-                  <Button fx:id="importJason" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#fileJason" prefHeight="26.0" prefWidth="869.0" text="Json importieren" />
+                  <Button fx:id="importJason" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#fileJson" prefHeight="26.0" prefWidth="869.0" text="Json importieren" />
                   <ChoiceBox fx:id="ECardBox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="150.0" />
-                <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="200.0" text="Save Patient" />
-                  <Button mnemonicParsing="false" text="load Patient" />
+                <Button fx:id="saveButton" mnemonicParsing="false" onAction="#savePatient" prefHeight="26.0" prefWidth="200.0" text="Save Patient" />
+                  <ChoiceBox fx:id="ChoiceB_PationLoad" prefHeight="26.0" prefWidth="150.0" />
               </buttons>
             </ButtonBar>
          </children>
