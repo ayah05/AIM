@@ -57,7 +57,6 @@ public class InterfaceController implements Initializable {
 
 
 
-
     FileChooser fileChooser = new FileChooser();
 
     public void fileJason(ActionEvent event) {
@@ -99,7 +98,7 @@ public class InterfaceController implements Initializable {
         /////////////////////////////////////////////////////
             //Contition
             //
-        connection = SQLtoJava.setConnection();
+          //  connection = SQLtoJava.setConnection();
             HashMap<String,String> conditionlist = SQLtoJava.listAllConditions(connection,false);
             /*ConcurrentHashMap<String, String> testConditionsAll = new ConcurrentHashMap<>(){{ // _concurrent_hashmap for thread safety -- dunno if important
             put("O90","Wochenbettkomplikationen"); put("Z39.1","Betreuung und Untersuchung der stillenden Mutter");
@@ -127,12 +126,10 @@ public class InterfaceController implements Initializable {
         }};*/
 
 
-        //patMedListView.getItems().addAll(druglist.values());
+       // patMedListView.getItems().addAll(druglist.values());
 
         //allConditions.addAll(conditionlist.values());
         curentConditions.addAll(testConditionsPatient.values());
-        //wäre es möglich iwie die daten von den 2 feldern direkt auszulesen??
-        //curentConditions.addAll(SQLtoJava.queryInteraction(connection, ,curentConditions ));
 
         ChoiceB_Condition.getItems().addAll(allConditions);
         ChoiceB_Condition.setOnAction(this::setCondition);
@@ -170,7 +167,6 @@ public class InterfaceController implements Initializable {
     }
 
     private void setCondition(Event event) {
-
         curentConditions.add(String.valueOf(ChoiceB_Condition.getValue()));
         conditionListView.getItems().setAll(curentConditions);
       // a check for duplicates are needed
@@ -179,8 +175,8 @@ public class InterfaceController implements Initializable {
 
         @FXML
         private  void drugChecker(ActionEvent event){
-        SQLtoJava.queryInteraction(connection,patientDrug,condition);
-        SQLtoJava.queryInteraction(connection,patientDrug,drugDoctor);
+        //SQLtoJava.queryInteraction(connection,drugDoctor,condition);
+        //SQLtoJava.queryInteraction(connection,drugDoctor,patientDrug);
         }
 
 }
