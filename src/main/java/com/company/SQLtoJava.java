@@ -3,6 +3,8 @@ package com.company;
 import java.io.Console;
 import java.sql.*;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 
 public class SQLtoJava {
@@ -295,7 +297,17 @@ public class SQLtoJava {
                 }
                 // for drug/condition interaction
                 for (String cond : patient.getConditions()) {
-                    String query = String.format(query_tmp, cond);
+                    String condition = cond;
+
+                    // kinda crude, takes any ICD- starting with A01. to S99., cuts the . and the number behind...loses the vew specific ones but hey better than the other way round like it was before
+                    Pattern pattern = Pattern.compile("^([A-S]\\d{2}\\x2E).*");
+                    Matcher matcher = pattern.matcher(condition);
+                    if (matcher.matches()){
+                        condition = matcher.group().substring(0,3);
+                        System.out.println(condition);
+                    }
+
+                    String query = String.format(query_tmp, condition);
                     // System.out.println(query);
                     ResultSet resultSet = connection.createStatement().executeQuery(query);
                     if(resultSet.next()){
