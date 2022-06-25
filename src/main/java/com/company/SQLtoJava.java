@@ -10,15 +10,13 @@ import java.util.regex.Pattern;
 public class SQLtoJava {
     private static final String url = "jdbc:postgresql://localhost:5432/AIM";
     private static final String user = "postgres";
-    // private static String password = "medProjekt";   // i would probably mayyybe remove this and use what i did in setConnection if possible
-
 
     public SQLtoJava() {
     }
 
     public static Connection setConnection(){
         try {
-            String password = null;
+         String password = null;
             Console console = System.console();
             if(console != null){
                 char[] pwd = console.readPassword("Please enter database Password: ");
@@ -29,7 +27,6 @@ public class SQLtoJava {
                 System.out.println("Please enter database password (unmasked - sry..):");
                 password = scanner.nextLine();
             }
-
             Class.forName("org.postgresql.Driver");
             Connection connection = DriverManager.getConnection(url, user, password);
             System.out.println("Connection to the database"+url+" established successfuly");
@@ -61,7 +58,7 @@ public class SQLtoJava {
         return patientlist;
     }
 
-   public static void listAllConditions(Connection connection, boolean debug){
+   public static HashMap<String, String> listAllConditions(Connection connection, boolean debug){
         try{
             HashMap<String ,String > conditionlist = new HashMap<>();
             String query = "SELECT *FROM \"Condition\"";
@@ -77,11 +74,12 @@ public class SQLtoJava {
                         System.out.println(i + "," + conditionlist.get(i));
                     }
                 }
-            }
+            } return conditionlist;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-    }
+      return null;
+   }
 
     public static HashMap<String,String> listAllDrugs(Connection connection, boolean debug){
         HashMap<String ,String > druglist = new HashMap<>();
@@ -98,12 +96,13 @@ public class SQLtoJava {
                         System.out.println(i + "," + druglist.get(i));
                     }
                 }
-            }
+            }return druglist;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        return druglist;
+        return null;
     }
+
 
     public static void queryInteraction (Connection connection, String drug, String conditionOrDrug2){
         String drugFormat = "'"+drug+"'";
@@ -113,14 +112,31 @@ public class SQLtoJava {
                     " AND (\"Interaction\".\"Drug2orCond\" ="+conditionOrDrug2Format+")";
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(queryHint);
-            //int columns = rs.getMetaData().getColumnCount();System.out.println(columns);
-            while(rs.next()){
+                rs.next();
                 System.out.println(rs.getString(1));
-            }
 
             } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
+    }
+
+    private static boolean ifInteractionExists (Connection connection, String drug, String conditionOrDrug2) {
+        String drugFormat = "'" + drug + "'";
+        String conditionOrDrug2Format = "'" + conditionOrDrug2 + "'";
+        try {
+            String queryHint = "SELECT \"Hint\" FROM \"Interaction\" WHERE (\"Interaction\".\"Drug\" =" + drugFormat + ")" +
+                    " AND (\"Interaction\".\"Drug2orCond\" =" + conditionOrDrug2Format + ")";
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(queryHint);
+            if (rs.next()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return false;
     }
 
 
@@ -129,23 +145,28 @@ public class SQLtoJava {
             String queryInteractionID = "SELECT MAX(\"InteractionID\") AS max_InteractionID FROM \"Interaction\";";
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(queryInteractionID);
+                rs.next();
                 int interactionID = rs.getInt(1);
                 return interactionID + 1;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }return 0;
     }
-
+//maybe adding a query to search if this interaction is already in the database
     public static void addInteraction(Connection connection,String drug,String conditionOrDrug2,String hint){
         String drugFormat = "'"+drug+"'";
         String conditionOrDrug2Format = "'"+conditionOrDrug2+"'";
         String hintFormat = "'"+hint+"'";
         try{
-            int interactionID = selectLastInteractionIDAndIncrement(connection);
-            String query = "INSERT INTO \"Interaction\" VALUES("+interactionID+","+drugFormat+","+conditionOrDrug2Format+","+hintFormat+") ON CONFLICT DO NOTHING;";
-            Statement statement = connection.createStatement();
-            statement.execute(query);
-            System.out.println("Interaction with Drug: "+drugFormat+" and Drug/Condition: "+conditionOrDrug2Format+" was added to the Database with following Hint:"+hintFormat);
+            if(ifInteractionExists(connection,drug,conditionOrDrug2)){
+                System.out.println("This Interaction already exists in database");
+            }else{
+                Statement statement =  connection.createStatement();
+                int interactionID = selectLastInteractionIDAndIncrement(connection);
+                String query = "INSERT INTO \"Interaction\" VALUES(" + interactionID + "," + drugFormat + "," + conditionOrDrug2Format + "," + hintFormat + ") ON CONFLICT DO NOTHING;";
+                statement.execute(query);
+                System.out.println("Interaction with Drug: " + drugFormat + " and Drug/Condition: " + conditionOrDrug2Format + " was added to the Database with following Hint:" + hintFormat);
+            }
          } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -156,6 +177,7 @@ public class SQLtoJava {
             String queryPatientID = "SELECT MAX(\"PatientID\") AS max_patientID FROM \"Patient\";";
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(queryPatientID);
+                rs.next();
                 int patientID = rs.getInt(1);
                 return patientID + 1;
 
@@ -260,7 +282,6 @@ public class SQLtoJava {
         }
         // auf diese art könnte man auch die anderen spalten freiwillig machen aber denk leerer string geht eh auch, mal schauen wie viel zeit/lust wir noch haben:
         String columns = String.format("\"PatientID\", \"Drug\", \"Condition\", \"Name\"%s%s",age.isBlank()?"":", \"Age\"", weight.isBlank()?"":", \"Weight\"" );
-
         try{
             int patientID = selectLastPatientIDAndIncrement(connection);
             String query = String.format("INSERT INTO \"Patient\" (%s) VALUES(%d,'%s','%s','%s'%s%s) ON CONFLICT DO NOTHING;",columns, patientID, drugs, conditions, patient.getName(),age,weight);
@@ -268,7 +289,7 @@ public class SQLtoJava {
             statement.execute(query);
             patient.setPatID(patientID);
         } catch (SQLException throwables) {
-            System.out.println("An error occured reading the database, no entry was added. Please try again or contact your system administrator");
+            System.out.println("An error occured reading the database, no entry was added. Please try again or contact your system administrator.");
         }
         return patient;
     }
