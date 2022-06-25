@@ -38,7 +38,10 @@ public class InterfaceController implements Initializable {
     private ChoiceBox<Object>ECardBox= new ChoiceBox<>();
     @FXML
     private ListView<String> conditionListView = new ListView<>(), patMedListView = new ListView<>();
-
+    private Connection connection;
+    private String patientDrug;
+    private  String condition;
+    private  String drugDoctor;
 
 
     private Stage stage;
@@ -95,7 +98,8 @@ public class InterfaceController implements Initializable {
         //Test Data
         /////////////////////////////////////////////////////
             //Contition
-            Connection connection = SQLtoJava.setConnection();
+            //
+        connection = SQLtoJava.setConnection();
             HashMap<String,String> conditionlist = SQLtoJava.listAllConditions(connection,false);
             /*ConcurrentHashMap<String, String> testConditionsAll = new ConcurrentHashMap<>(){{ // _concurrent_hashmap for thread safety -- dunno if important
             put("O90","Wochenbettkomplikationen"); put("Z39.1","Betreuung und Untersuchung der stillenden Mutter");
@@ -108,11 +112,11 @@ public class InterfaceController implements Initializable {
         }} ;*/
         // has to be a subset of testConditionsAll (only conditions allowed in patient, which are part of all conditions)
         ConcurrentHashMap<String, String> testConditionsPatient = new ConcurrentHashMap<>();
-        for (Map.Entry<String, String> entry: conditionlist.entrySet()){
-            if(entry.getKey().equals("J46") || entry.getKey().equals("G71.0") || entry.getKey().equals("N18.9") || entry.getKey().equals("I95")){ // specify which conditions you want the parient to have
-                testConditionsPatient.put(entry.getKey(),entry.getValue());
-            }
-        }
+      //  for (Map.Entry<String, String> entry: conditionlist.entrySet()){
+           // if(entry.getKey().equals("J46") || entry.getKey().equals("G71.0") || entry.getKey().equals("N18.9") || entry.getKey().equals("I95")){ // specify which conditions you want the parient to have
+            //    testConditionsPatient.put(entry.getKey(),entry.getValue());
+           // }
+       // }
 
             //Patien medication
         HashMap<String,String> druglist = SQLtoJava.listAllDrugs(connection,false);
@@ -123,9 +127,9 @@ public class InterfaceController implements Initializable {
         }};*/
 
 
-        patMedListView.getItems().addAll(druglist.values());
+        //patMedListView.getItems().addAll(druglist.values());
 
-        allConditions.addAll(conditionlist.values());
+        //allConditions.addAll(conditionlist.values());
         curentConditions.addAll(testConditionsPatient.values());
         //wäre es möglich iwie die daten von den 2 feldern direkt auszulesen??
         //curentConditions.addAll(SQLtoJava.queryInteraction(connection, ,curentConditions ));
@@ -171,6 +175,12 @@ public class InterfaceController implements Initializable {
         conditionListView.getItems().setAll(curentConditions);
       // a check for duplicates are needed
 
+        }
+
+        @FXML
+        private  void drugChecker(ActionEvent event){
+        SQLtoJava.queryInteraction(connection,patientDrug,condition);
+        SQLtoJava.queryInteraction(connection,patientDrug,drugDoctor);
         }
 
 }
