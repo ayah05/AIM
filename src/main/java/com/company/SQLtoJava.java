@@ -16,7 +16,7 @@ public class SQLtoJava {
 
     public static Connection setConnection(){
         try {
-         String password = null;
+         String password;
             Console console = System.console();
             if(console != null){
                 char[] pwd = console.readPassword("Please enter database Password: ");
@@ -128,11 +128,8 @@ public class SQLtoJava {
                     " AND (\"Interaction\".\"Drug2orCond\" =" + conditionOrDrug2Format + ")";
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(queryHint);
-            if (rs.next()) {
-                return true;
-            } else {
-                return false;
-            }
+            return rs.next();
+  
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
@@ -325,7 +322,7 @@ public class SQLtoJava {
                     Matcher matcher = pattern.matcher(condition);
                     if (matcher.matches()){
                         condition = matcher.group().substring(0,3);
-                        System.out.println(condition);
+                        // System.out.println(condition);
                     }
 
                     String query = String.format(query_tmp, condition);

@@ -22,6 +22,7 @@ public class Main extends Application {
         */
         launch();
 
+
         /* mo test
         String query_tmp = String.format("SELECT \"Hint\" FROM \"Interaction\" WHERE (\"Interaction\".\"Drug\" = '%s') AND \"Interaction\".\"Drug2orCond\" = '%cs');", "N05AA5", 0x25);
         System.out.println(String.format(query_tmp, "drug2"));
@@ -33,7 +34,7 @@ public class Main extends Application {
         System.out.println("Yay hints:");
         for (String hint : hintsForMarta){
             System.out.println(hint);
-        }*/
+        } // */
         /* System.out.println(new DB_Patient(true)); // for testing the test DB_Patient: works just as well as readIPS on our example IPS :D
         // shows all terminals:
         System.out.println("All terminals: "+ ReadEcardGeneric.getAllTerminals());
