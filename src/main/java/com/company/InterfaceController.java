@@ -8,12 +8,14 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -93,11 +95,17 @@ public class InterfaceController implements Initializable {
     }
 
     public void switchToInterface2 (ActionEvent event) throws IOException {
+
         Parent root = FXMLLoader.load(getClass().getResource("/InterfaceStage2.fxml"));
+
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
+
+
+
+
     }
 
     public void switchToInterface1 (ActionEvent event) throws IOException {
@@ -107,7 +115,10 @@ public class InterfaceController implements Initializable {
         stage.setScene(scene);
         stage.show();
 
+
     }
+
+
     public void getDate(ActionEvent event){
         birthdate =  Date.from(java.time.Instant.from(DP.getValue().atStartOfDay(java.time.ZoneId.systemDefault())));
     }

@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="673.0" prefWidth="866.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.company.InterfaceController">
+<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="673.0" prefWidth="866.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.company.InterfaceController">
    <children>
       <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="29.0" prefWidth="866.0" VBox.vgrow="ALWAYS">
          <children>
@@ -22,11 +22,11 @@
       <VBox prefHeight="150.0" prefWidth="866.0" />
       <VBox prefHeight="118.0" prefWidth="866.0">
          <children>
-            <HBox maxWidth="1.7976931348623157E308" prefHeight="31.0" prefWidth="866.0">
+            <HBox maxWidth="1.7976931348623157E308" prefHeight="31.0" prefWidth="866.0" VBox.vgrow="SOMETIMES">
                <children>
-                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="439.0" text="Persönliche Daten" />
-                  <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="70.0" />
-                  <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="435.0" text="Aktuelle Medication" />
+                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="439.0" text="Persönliche Daten" HBox.hgrow="ALWAYS" />
+                  <HBox maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="70.0" />
+                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="435.0" text="Aktuelle Medication" HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
          </children>

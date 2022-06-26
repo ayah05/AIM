@@ -73,5 +73,6 @@ public class Main extends Application {
         stage.getIcons().add(applicationIcon);
         stage.setScene(scene);
         stage.show();
+        stage.setMaximized(true);
     }
 }
