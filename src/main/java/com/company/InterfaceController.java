@@ -116,8 +116,8 @@ private TextField TFCondition;
         /////////////////////////////////////////////////////
             //Contition
             //
-           connection = SQLtoJava.setConnection();
-            HashMap<String,String> conditionlist = SQLtoJava.listAllConditions(connection,false);
+           SQLtoJava connection = new SQLtoJava();
+            HashMap<String,String> conditionlist = connection.listAllConditions(false);
             /*ConcurrentHashMap<String, String> testConditionsAll = new ConcurrentHashMap<>(){{ // _concurrent_hashmap for thread safety -- dunno if important
             put("O90","Wochenbettkomplikationen"); put("Z39.1","Betreuung und Untersuchung der stillenden Mutter");
             put("K27.9","Ulcus pepticum, Lokalisation nicht näher bezeichnet : Weder als akut noch als chronisch bezeichnet, ohne Blutung oder Perforation");
@@ -206,7 +206,7 @@ private TextField TFCondition;
             put("03"," Christian Strache");
         }} ;
         // TODO: 25.06.2022 SQLtoJAve shous be integradet but I'm too stupid for that
-       // currentPations =SQLtoJava.listAllPatients(connection,false);
+        currentPations =connection.listAllPatients(false);
 
         ChoiceB_PationLoad.getItems().addAll(pationList.values());
         ChoiceB_PationLoad.setOnAction(this::setLoadPation);
@@ -239,10 +239,10 @@ private TextField TFCondition;
         //////////////////
         //Medication Patient
         //////////////////
-        HashMap<String,String> patientMedicationList=SQLtoJava.listAllDrugs(connection,false);
+        HashMap<String,String> patientMedicationList=connection.listAllDrugs(false);
 
 
-        ChoiceB_PatientMedication.getItems().addAll(SQLtoJava.listAllDrugs(connection,false).values());
+        ChoiceB_PatientMedication.getItems().addAll(connection.listAllDrugs(false).values());
         //currentPatientMedication=testP.getDrugs();
         currentPatientMedication.addAll(testP.getDrugs());
         patMedListView.getItems().addAll(currentPatientMedication);
@@ -272,7 +272,8 @@ private TextField TFCondition;
 
         chosenPatient = String.valueOf(ChoiceB_PationLoad.getSelectionModel().getSelectedItem());
         //chosenPatient=  ChoiceB_PationLoad.getSelectionModel().getSelectedIndex();//The choosen patient as index (int)
-        if (!chosenPatient.equals(0)){
+        if (chosenPatient != null && !chosenPatient.isBlank() && !chosenPatient.equals(0)){ //
+        // ein string kann nie den zahlenwert 0 haben..
              if  (!chosenPatient.equals("Patient laden") ){
                 System.out.println(chosenPatient);//Port for the choosen patient as item (to String)
          }

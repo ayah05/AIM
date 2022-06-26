@@ -67,7 +67,7 @@ public class SQLtoJava {
         return null;
     }
 
-    public static List<DB_Patient> listAllPatients(boolean debug){
+    public List<DB_Patient> listAllPatients(boolean debug){
         ArrayList <DB_Patient> patientlist = new ArrayList<>();
         try{
             String query = "SELECT * FROM \"Patient\"";
