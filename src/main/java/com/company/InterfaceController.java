@@ -30,7 +30,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class InterfaceController implements Initializable {
     /// TODO: sein eigenes SQL-pw eingeben.....
-    public SQLtoJava connection = new SQLtoJava("0");
+    public SQLtoJava connection = new SQLtoJava("sql");
 
     @FXML
     private Button B_Anamnese,saveButton,importJason;
@@ -126,7 +126,7 @@ public class InterfaceController implements Initializable {
     // needet for choiceBoxes and ListView
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) { // bis 258!
-        ////////////////////////////////////////////////////////////////////////////////////////////////////////
+        /////////////////////////////////////////////////////
         //Test Data
         /////////////////////////////////////////////////////
 
@@ -357,8 +357,10 @@ public class InterfaceController implements Initializable {
             if(Patient.getDOB() != null){
                 DP.setValue(Patient.getDOB().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
             }
-
+            currentPatientMedication.addAll(Patient.getDrugs());
+            patMedListView.getItems().addAll(currentPatientMedication);
 
         }
     }
+
 }

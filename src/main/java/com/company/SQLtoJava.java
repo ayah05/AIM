@@ -3,6 +3,7 @@ package com.company;
 import java.io.Console;
 import java.sql.*;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -364,4 +365,27 @@ public class SQLtoJava {
         }
         return result;
     }
+
+
+    // dankeschöööön
+    public List<String> queryDrugNameFromDrugCode(List<String> drugCodes){
+        List<String> drugNames = new ArrayList<>();
+        for (String drugCode : drugCodes){
+            // query NAME WHERE CODE = drugNames.add(name)
+        }
+        return drugNames;
+    }
+    public List<String> queryConditionNameFromConditionCode(List<String> condCodes){
+        List<String> condNames = new ArrayList<>();
+        for (String condCode : condCodes){
+            // query NAME WHERE CODE = drugNames.add(name)
+        }
+        return condNames;
+    }
+    public ConcurrentHashMap<String,String> getAnaesthesiaDrugs(){
+        ConcurrentHashMap<String,String> anaesthesiaDrugMap = new ConcurrentHashMap<>();
+        // <Code,Name>
+        return anaesthesiaDrugMap;
+    }
+
 }
