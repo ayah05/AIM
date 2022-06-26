@@ -28,10 +28,10 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class InterfaceController implements Initializable {
     /// TODO: sein eigenes SQL-pw eingeben.....
-    public SQLtoJava connection = new SQLtoJava("sql");
+    public SQLtoJava connection = new SQLtoJava("0");
 
     @FXML
-    private Button B_Anamnese,saveButton;
+    private Button B_Anamnese,saveButton,importJason;
     @FXML
     private TextField t_fname,t_lname,t_wight;
 
@@ -40,7 +40,7 @@ public class InterfaceController implements Initializable {
     @FXML
     private ChoiceBox<Object> ChoiceB_Condition = new ChoiceBox<>();
     @FXML
-    private ChoiceBox<Object>ECardBox= new ChoiceBox<>(), ChoiceB_DoctorMedication= new ChoiceBox<>(), ChoiceB_PatientMedication = new ChoiceBox<>(),ChoiceB_PationLoad= new ChoiceBox<>();
+    private ChoiceBox<Object>ECardBox= new ChoiceBox<>(), ChoiceB_DoctorMedication= new ChoiceBox<>(), ChoiceB_PatientMedication = new ChoiceBox<>(),ChoiceB_PationLoad= new ChoiceBox<>(),ChoiceB_PationLoad2 = new ChoiceBox<>();
     @FXML
     private ListView<String> conditionListView = new ListView<>(), patMedListView = new ListView<>(), DoctorMedicationListView = new ListView<>(),checkerListView= new ListView<>();
     @FXML
@@ -200,11 +200,19 @@ public class InterfaceController implements Initializable {
        for(DB_Patient pat : connection.listAllPatients(false)){
            patientListMap.put(pat.getPatID(),pat.getName());
        }
-       patientListMap.put(0,"Patient laden");
+       //patientListMap.put(0,"Patient laden");
        ChoiceB_PationLoad.getItems().addAll(patientListMap.values());
        ChoiceB_PationLoad.setOnAction(this::setLoadPation);
        ChoiceB_PationLoad.setValue("Patient laden");
 
+        //////////////////////
+        //Pation load 2 Section
+        //////////////////////
+
+       // patientListMap.put(0,"Patient laden");
+        ChoiceB_PationLoad2.getItems().addAll(patientListMap.values());
+        ChoiceB_PationLoad2.setOnAction(this::setLoadPationHints);
+        ChoiceB_PationLoad2.setValue("Patient laden");
 
         //////////////////
         //Medication Doctor
@@ -245,6 +253,14 @@ public class InterfaceController implements Initializable {
 
 
 
+    }
+
+    private void setLoadPationHints(ActionEvent actionEvent) {
+        String chosenPatient = String.valueOf(ChoiceB_PationLoad.getSelectionModel().getSelectedItem());
+        if (!chosenPatient.isBlank() && !chosenPatient.equals("null") && !chosenPatient.equals("Patient laden")){
+            // TODO Patient2 for the hint(check) funktion
+            System.out.println(chosenPatient);//Port for the choosen patient as item (to String)
+        }
     }
 
     private void set_PatientMedication(ActionEvent actionEvent) {

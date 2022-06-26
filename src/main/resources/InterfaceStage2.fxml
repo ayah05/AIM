@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="673.0" prefWidth="866.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.company.InterfaceController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="673.0" prefWidth="866.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.company.InterfaceController">
     <children>
         <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="29.0" prefWidth="866.0">
             <children>
@@ -19,17 +19,17 @@
                     </font></Button>
             </children>
         </HBox>
-        <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="110.0" prefWidth="866.0" VBox.vgrow="ALWAYS" />
-        <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="118.0" prefWidth="866.0" VBox.vgrow="ALWAYS">
+        <VBox maxWidth="1.7976931348623157E308" prefHeight="110.0" prefWidth="866.0" VBox.vgrow="SOMETIMES" />
+        <VBox maxWidth="1.7976931348623157E308" prefHeight="118.0" prefWidth="866.0">
             <children>
-                <HBox prefHeight="31.0" prefWidth="866.0">
+                <HBox maxWidth="1.7976931348623157E308" prefHeight="31.0" prefWidth="866.0" VBox.vgrow="SOMETIMES">
                     <children>
-                        <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="433.0" text="Wähle die gewünschte Medikation" HBox.hgrow="ALWAYS">
+                        <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="43.0" prefWidth="450.0" text="Wähle die gewünschte Medikation" HBox.hgrow="ALWAYS">
                      <font>
                         <Font size="15.0" />
                      </font></Label>
-                        <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="80.0" />
-                        <Label alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="56.0" prefWidth="437.0" text="Kontrolle auf Interoperabilität" HBox.hgrow="ALWAYS">
+                        <HBox maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="59.0" />
+                        <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="43.0" prefWidth="445.0" text="Kontrolle auf Interoperabilität" HBox.hgrow="ALWAYS">
                      <font>
                         <Font size="15.0" />
                      </font></Label>
@@ -41,67 +41,63 @@
             <children>
                 <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="640.0" prefWidth="444.0" HBox.hgrow="ALWAYS">
                     <children>
-                  <HBox prefHeight="100.0" prefWidth="200.0" />
-                  <VBox prefHeight="729.0" prefWidth="434.0">
+                  <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                  <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="729.0" prefWidth="434.0" VBox.vgrow="ALWAYS">
                      <children>
                         <VBox prefHeight="0.0" prefWidth="434.0" VBox.vgrow="ALWAYS">
                            <children>
-                              <HBox prefHeight="26.0" prefWidth="434.0">
+                              <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="434.0">
                                  <children>
                                     <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="33.0" />
-                                    <TextField fx:id="TextF_DoctorMedication" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="64.0" prefWidth="95.0" HBox.hgrow="ALWAYS" />
-                                    <ChoiceBox fx:id="ChoiceB_DoctorMedication" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="35.0" HBox.hgrow="ALWAYS" />
-                                    <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="29.0" />
+                                    <TextField fx:id="TextF_DoctorMedication" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="247.0" HBox.hgrow="ALWAYS" />
+                                    <ChoiceBox fx:id="ChoiceB_DoctorMedication" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="120.0" HBox.hgrow="ALWAYS" />
+                                    <HBox prefHeight="26.0" prefWidth="30.0" />
                                  </children>
                               </HBox>
                            </children></VBox>
-                              <HBox prefHeight="490.0" prefWidth="434.0" VBox.vgrow="ALWAYS">
+                              <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="490.0" prefWidth="434.0" VBox.vgrow="ALWAYS">
                            <children>
-                              <HBox prefHeight="396.0" prefWidth="433.0">
+                              <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="396.0" prefWidth="433.0" HBox.hgrow="ALWAYS">
                                  <children>
-                                    <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="137.0" prefWidth="33.0" HBox.hgrow="ALWAYS" />
+                                    <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="137.0" prefWidth="33.0" />
                                     <ListView fx:id="DoctorMedicationListView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="502.0" prefWidth="368.0" HBox.hgrow="ALWAYS" />
                                     <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="137.0" prefWidth="30.0" />
                                  </children>
                               </HBox>
                            </children>
                         </HBox>
-                        <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="31.0" prefWidth="434.0" VBox.vgrow="ALWAYS" />
+                        <VBox maxWidth="1.7976931348623157E308" prefHeight="31.0" prefWidth="434.0" />
                      </children>
                   </VBox>
                     </children>
                 </VBox>
-                <VBox prefHeight="640.0" prefWidth="442.0" HBox.hgrow="ALWAYS">
+                <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="640.0" prefWidth="442.0" HBox.hgrow="ALWAYS">
                     <children>
                         <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="589.0" prefWidth="433.0" VBox.vgrow="ALWAYS">
                      <children>
-                        <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="511.0" prefWidth="433.0">
+                        <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="511.0" prefWidth="433.0" VBox.vgrow="ALWAYS">
                            <children>
                               <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="374.0" prefWidth="32.0" />
-                              <ListView fx:id="checkerListView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="420.0" prefWidth="369.0" />
+                              <ListView fx:id="checkerListView" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="420.0" prefWidth="369.0" HBox.hgrow="ALWAYS" />
                               <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="383.0" prefWidth="35.0" />
                            </children>
                         </HBox>
-                        <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="97.0" prefWidth="433.0" VBox.vgrow="ALWAYS" />
-                        <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="101.0" prefWidth="433.0" VBox.vgrow="ALWAYS">
+                        <HBox maxWidth="1.7976931348623157E308" prefHeight="57.0" prefWidth="433.0" VBox.vgrow="ALWAYS" />
+                        <HBox maxHeight="1.7976931348623157E308" prefHeight="37.0" prefWidth="427.0" VBox.vgrow="ALWAYS">
                            <children>
-                              <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="41.0" prefWidth="198.0" HBox.hgrow="ALWAYS" />
-                              <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#drugChecker" prefHeight="46.0" prefWidth="186.0" text="Check" HBox.hgrow="ALWAYS" />
-                              <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0" />
+                              <HBox maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="36.0" HBox.hgrow="ALWAYS" />
+                              <ChoiceBox fx:id="ChoiceB_PationLoad2" prefWidth="150.0" />
+                              <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#drugChecker" prefHeight="26.0" prefWidth="230.0" text="Check" HBox.hgrow="ALWAYS" />
+                              <HBox maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="34.0" HBox.hgrow="ALWAYS" />
                            </children>
                         </HBox>
                      </children></VBox>
-                  <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
-                  <HBox prefHeight="46.0" prefWidth="448.0">
-                     <children>
-                        <HBox prefHeight="46.0" prefWidth="120.0" HBox.hgrow="ALWAYS" />
-                        <HBox prefHeight="21.0" prefWidth="105.0" HBox.hgrow="ALWAYS" />
-                     </children>
-                  </HBox>
+                  <HBox maxWidth="1.7976931348623157E308" prefHeight="31.0" prefWidth="200.0" VBox.vgrow="ALWAYS" />
+                  <HBox maxWidth="1.7976931348623157E308" prefHeight="46.0" prefWidth="448.0" />
                     </children>
                 </VBox>
             </children>
         </HBox>
-        <VBox prefHeight="64.0" prefWidth="699.0" VBox.vgrow="ALWAYS" />
+        <VBox maxWidth="1.7976931348623157E308" prefHeight="64.0" prefWidth="699.0" VBox.vgrow="ALWAYS" />
     </children>
 </VBox>
