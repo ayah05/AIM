@@ -178,7 +178,7 @@ public class SQLtoJava {
             throwables.printStackTrace();
         }return 0;
     }
-//maybe adding a query to search if this interaction is already in the database
+
     public void addInteraction(String drug,String conditionOrDrug2,String hint){
         String drugFormat = "'"+drug+"'";
         String conditionOrDrug2Format = "'"+conditionOrDrug2+"'";
@@ -368,29 +368,113 @@ public class SQLtoJava {
 
 
     // dankeschöööön
+    /*//method was implemented to check if queryDrugNameFromDrugCode method works
+    public List<String> listAllDrugCodes(boolean debug){
+        List<String> drugCodelist = new ArrayList<>();
+        try{
+            String query = "SELECT *FROM \"Drug\"";
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(query);
+            while (rs.next()){
+                String code = rs.getString("Code (ATC)");
+                drugCodelist.add(code);
+                if(debug){
+                    for (String cd : drugCodelist) {
+                        System.out.println(cd);
+                    }
+                }
+            }return drugCodelist;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        return null;
+    }*/
+
     public List<String> queryDrugNameFromDrugCode(List<String> drugCodes){
         List<String> drugNames = new ArrayList<>();
-        for (String drugCode : drugCodes){
+        try{
             // query NAME WHERE CODE = drugNames.add(name)
+            for (String drugCode : drugCodes) {
+                String query = "SELECT \"Drug\".\"Name\" FROM \"Drug\" WHERE \"Code (ATC)\" = '" + drugCode + "'";
+                Statement statement = connection.createStatement();
+                ResultSet rs = statement.executeQuery(query);
+                while (rs.next()) {
+                   String name = rs.getString("Name");
+                   drugNames.add(name);
+                }
+            }
+            for (String nm : drugNames) {
+                System.out.println(nm);
+            }
+            return drugNames;
+        }catch(SQLException e) {
+            e.printStackTrace();
         }
-        return drugCodes;//
-    }
-    public List<String> queryConditionNameFromConditionCode(List<String> condCodes){
-        List<String> condNames = new ArrayList<>();
-        for (String condCode : condCodes){
-            // query NAME WHERE CODE = drugNames.add(name)
-        }
-        return condCodes;//
-    }
-    public ConcurrentHashMap<String,String> getAnaesthesiaDrugs(){
-        ConcurrentHashMap<String,String> anaesthesiaDrugMap = new ConcurrentHashMap<>();
-        // <Code,Name>
-        return anaesthesiaDrugMap;
-    }
-    public DB_Patient queryPatient(int patientID){
-        DB_Patient pat = new DB_Patient(true);
-        pat.setPatID(patientID);
-        return pat;
+       return null;
     }
 
+    public List<String> queryConditionNameFromConditionCode(List<String> condCodes){
+        List<String> condNames = new ArrayList<>();
+        try {
+            for (String condCode : condCodes) {
+                // query NAME WHERE CODE = drugNames.add(name)
+                String query = "SELECT \"Condition\".\"Name\" FROM \"Condition\" WHERE \"Code (ICD-10)\" ='" + condCode + "'";
+                Statement statement = connection.createStatement();
+                ResultSet rs = statement.executeQuery(query);
+                while (rs.next()) {
+                    String name = rs.getString("Name");
+                    condNames.add(name);
+                }
+            }
+            for (String nm : condNames) {
+                System.out.println(nm);//sollen codeNamen ausgegeben werden oder nur als liste zurückgegeben werden?(wenn nur returnen, dann zeile 429-431 auskommentieren)
+            }
+            return condNames;
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return condNames;
+    }
+
+    public ConcurrentHashMap<String,String> getAnaesthesiaDrugs(){
+        ConcurrentHashMap<String,String> anaesthesiaDrugMap = new ConcurrentHashMap<>();
+        try {
+            String query = "SELECT * FROM \"Drug\"";
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(query);
+            while(rs.next()){
+                String code = rs.getString("Code (ATC)");
+                Pattern pattern = Pattern.compile("[NM]0[1-5]*");//N01,N02,N05,M03
+                Matcher matcher = pattern.matcher(code);
+               if (matcher.matches()) {
+                    anaesthesiaDrugMap.put(code,rs.getString("Name"));
+                    }
+                }
+
+            for (String i : anaesthesiaDrugMap.keySet()) {
+                System.out.println(i + "," + anaesthesiaDrugMap.get(i));
+            }
+            return anaesthesiaDrugMap;
+        }catch(SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    public DB_Patient queryPatient(int patientID){
+        try {
+            String query = "SELECT * FROM \"Patient\" WHERE \"PatientID\" =" + patientID;
+            Statement statement = connection.createStatement();
+            ResultSet rs = statement.executeQuery(query);
+            DB_Patient patient = new DB_Patient();
+            if(rs.next()) {
+                patient = new DB_Patient(rs.getInt("PatientID"),rs.getString("Drug"), rs.getString("Condition"), rs.getString("Name"), rs.getInt("Age"), rs.getDouble("Weight"));
+            }
+            System.out.println(patient.toStringWithoutDOB());
+            return patient;
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return null;
+    }
 }

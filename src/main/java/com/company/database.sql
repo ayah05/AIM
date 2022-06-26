@@ -53,7 +53,7 @@ INSERT INTO "Patient" VALUES (13,'L02BG03,G02CX04,J01FA09,B01AA03','N18,N95.1,Z8
 INSERT INTO "Drug" VALUES ('N01AX10','Propofol')ON CONFLICT DO NOTHING;
 INSERT INTO "Drug" VALUES ('N01AH01','Fentanyl')ON CONFLICT DO NOTHING;--N01AH - opioid anesthetics
 INSERT INTO "Drug" VALUES ('N01AH03','Sufentanil')ON CONFLICT DO NOTHING;--N01A (Allgemeinanästhesie);N01B(Lokalanästhetika)
-INSERT INTO "Drug" VALUES ('N01AX03 ','Ketamine')ON CONFLICT DO NOTHING;--N01AX - other general anesthetics
+INSERT INTO "Drug" VALUES ('N01AX03','Ketamine')ON CONFLICT DO NOTHING;--N01AX - other general anesthetics
 INSERT INTO "Drug" VALUES ('N05CD08','Midazolam')ON CONFLICT DO NOTHING; -- N05C - hypnotics and sedatives
 INSERT INTO "Drug" VALUES ('M03AB01','Suxamethonium')ON CONFLICT DO NOTHING;--M03A - muscle relaxants, peripherally acting
 INSERT INTO "Drug" VALUES ('M03AC09','Rocuronium Bromide')ON CONFLICT DO NOTHING;

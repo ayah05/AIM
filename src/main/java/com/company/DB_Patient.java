@@ -103,7 +103,6 @@ public class DB_Patient {
         ;this.weight = weight;
         this.patID_DB_PK = patID_DB_PK;
         this.age = age;
-
     }
     public DB_Patient(int patID_DB_PK,@NotNull String name,int age, double weight) {
         this.name = name;

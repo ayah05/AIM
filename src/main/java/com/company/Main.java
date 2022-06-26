@@ -9,7 +9,10 @@ import javafx.scene.robot.Robot;
 import javafx.stage.Stage;
 import java.io.File;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
+
+import static com.company.SQLtoJava.setConnection;
 
 public class Main extends Application {
     public static void main(String[] args) {
@@ -19,9 +22,9 @@ public class Main extends Application {
         ///////////
 
         /* flo test
-
+            launch();
         */
-         launch();
+
 
         // mo test
         //String query_tmp = String.format("SELECT \"Hint\" FROM \"Interaction\" WHERE (\"Interaction\".\"Drug\" = '%s') AND \"Interaction\".\"Drug2orCond\" = '%cs');", "N05AA5", 0x25);
@@ -51,9 +54,25 @@ public class Main extends Application {
             SQLtoJava.addPatient(connection,"C01BD04","I48","Lara Mueller",70,60.1);
             SQLtoJava.addPatient(connection,"Jasmin Shawki",20,66.3);
             SQLtoJava.addPatient(connection,"Sam Lewis",33,"J01FA09",60.2);
-            Connection connection = SQLtoJava.setConnection();
             SQLtoJava.addInteraction(connection,"tDrug1","tDrug2","someHint");
             SQLtoJava.addInteraction(connection,"M03AB01","G72","smth");*/
+            SQLtoJava test = new SQLtoJava("medProjekt");
+
+            /*List <String> drugCodelist = new ArrayList<>();
+            drugCodelist.add("N01AX03");
+            drugCodelist.add("N05CD08");
+            test.queryDrugNameFromDrugCode(drugCodelist);
+
+
+            List<String> conditionCodelist = new ArrayList<>();
+            conditionCodelist.add("J46");
+            conditionCodelist.add("J45");
+            test.queryConditionNameFromConditionCode(conditionCodelist);*/
+
+        test.getAnaesthesiaDrugs();
+       // test.queryPatient(1);
+
+
 
 
     }
