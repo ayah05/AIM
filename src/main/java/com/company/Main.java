@@ -67,7 +67,6 @@ public class Main extends Application {
         Scene scene = new Scene(fxmlLoader.load(), Color.WHITE);
         stage.setTitle("AIM");
 
-
         File fileIcon = new File("src/main/resources/Images/ICON.png");
         Image applicationIcon = new Image(fileIcon.toURI().toString());
         stage.getIcons().add(applicationIcon);

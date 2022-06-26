@@ -44,7 +44,7 @@
                               <Font size="13.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="t_fname" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyTyped="#textSave" prefHeight="26.0" prefWidth="220.0" HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="t_fname" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyTyped="#nameListener" prefHeight="26.0" prefWidth="220.0" HBox.hgrow="ALWAYS" />
                         <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="64.0" HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>
@@ -64,7 +64,7 @@
                               <Font size="13.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="t_wight" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyTyped="#wightlisener" prefHeight="26.0" prefWidth="220.0" HBox.hgrow="ALWAYS" />
+                        <TextField fx:id="t_wight" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyTyped="#weightListener" prefHeight="26.0" prefWidth="220.0" HBox.hgrow="ALWAYS" />
                         <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="64.0" HBox.hgrow="ALWAYS" />
                      </children>
                   </HBox>

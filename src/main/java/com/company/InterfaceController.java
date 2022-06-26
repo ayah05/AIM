@@ -8,16 +8,13 @@ import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Rectangle2D;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.input.DragEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
-import javafx.stage.Screen;
 import javafx.stage.Stage;
 
 import java.io.File;
@@ -32,7 +29,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class InterfaceController implements Initializable {
     /// TODO: sein eigenes SQL-pw eingeben.....
-    public SQLtoJava connection = new SQLtoJava("0");
+    public SQLtoJava connection = new SQLtoJava("sql");
 
     @FXML
     private Button B_Anamnese,saveButton,importJason;
@@ -83,6 +80,7 @@ public class InterfaceController implements Initializable {
         fileChooser.setTitle("Please choose a FHIR-R4-IPS in JavaScript Object Notation!");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("FHIR JSON File", "*.json"));
         Stage choserStage = new Stage();
+        choserStage.setMaximized(true);
         File selectedFile = fileChooser.showOpenDialog(choserStage); //gives the chosen adress
         if (selectedFile != null && selectedFile.canRead()){
             try{
@@ -97,16 +95,11 @@ public class InterfaceController implements Initializable {
     }
 
     public void switchToInterface2 (ActionEvent event) throws IOException {
-
         Parent root = FXMLLoader.load(getClass().getResource("/InterfaceStage2.fxml"));
-
         stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
         stage.show();
-
-
-
 
     }
 
@@ -202,22 +195,17 @@ public class InterfaceController implements Initializable {
         //Pation load Section
         //////////////////////
 
+        for(DB_Patient pat : connection.listAllPatients(false)){
+            patientListMap.put(pat.getPatID(),  patientListMap.values().contains(pat.getName()) ?
+                   pat.getName()+String.valueOf(pat.getPatID()) :
+                   pat.getName());
+        }
+        ChoiceB_PationLoad.getItems().addAll(patientListMap.values());
+        ChoiceB_PationLoad.setOnAction(this::setLoadPation);
+        ChoiceB_PationLoad.setValue("Patient laden");
 
-       for(DB_Patient pat : connection.listAllPatients(false)){
-           patientListMap.put(pat.getPatID(),pat.getName());
-       }
-       patientListMap.put(0,"Patient laden");
-       ChoiceB_PationLoad.getItems().addAll(patientListMap.values());
-       ChoiceB_PationLoad.setOnAction(this::setLoadPation);
-       ChoiceB_PationLoad.setValue("Patient laden");
-
-        //////////////////////
-        //Pation load 2 Section
-        //////////////////////
-
-        // patientListMap.put(0,"Patient laden"); passiert das nicht eh oben schon?
         ChoiceB_PationLoad2.getItems().addAll(patientListMap.values());
-        ChoiceB_PationLoad2.setOnAction(this::setLoadPationHints);
+        ChoiceB_PationLoad2.setOnAction(this::setLoadPation);
         ChoiceB_PationLoad2.setValue("Patient laden");
 
         //////////////////
@@ -245,16 +233,8 @@ public class InterfaceController implements Initializable {
 
     }
 
-    private void setLoadPationHints(ActionEvent actionEvent) {
-        String chosenPatient = String.valueOf(ChoiceB_PationLoad.getSelectionModel().getSelectedItem());
-        if (!chosenPatient.isBlank() && !chosenPatient.equals("null") && !chosenPatient.equals("Patient laden")){
-            // TODO Patient2 for the hint(check) funktion
-            System.out.println(chosenPatient);//Port for the choosen patient as item (to String)
-        }
-    }
 
     private void set_PatientMedication(ActionEvent actionEvent) {
-
         currentPatientMedication.add(String.valueOf(ChoiceB_PatientMedication.getValue()));
         patMedListView.getItems().setAll(currentPatientMedication);
     }
@@ -305,7 +285,7 @@ public class InterfaceController implements Initializable {
                         }
                         displayPatient();
                     }
-                } catch (ClassCastException just_do_nothing){}
+                } catch (ClassCastException ignored){}
         }
     }
 
@@ -320,26 +300,31 @@ public class InterfaceController implements Initializable {
 
         @FXML
         private  void drugChecker(ActionEvent event){//Here the check button click is received and the query interaction is carried out
-            // TODO: 25.06.2022 hint proccess integrieren und in  checkerListView ausgeben
-      //  SQLtoJava.queryInteraction(connection,drugDoctor,condition);
-      //  SQLtoJava.queryInteraction(connection,drugDoctor,patientDrug);
             //Test Code
-            ConcurrentHashMap<String, String> hints = new ConcurrentHashMap<>(){{
-                put("O01","Ein Aderlass wird empfohlen");
-                put("O02","Empfählen Sie den Patienten eine Granderwasser Aufbereitunganlage");
-
-            }} ;
-            checkerListView.getItems().setAll(hints.values());
+            List<String> hints = connection.getInteractionsForPatient(Patient);
+                    //new ConcurrentHashMap<>(){{put("O01","Ein Aderlass wird empfohlen");put("O02","Empfählen Sie den Patienten eine Granderwasser Aufbereitunganlage");}} ;
+            checkerListView.getItems().setAll(hints);
         }
 
-    // TODO: 25.06.2022 save Patient needet to be conected to DB_Patient
+
     public void savePatient(ActionEvent actionEvent) {
-        String name = t_fname.getText()+t_lname.getText();
+        connection.addPatient(Patient);
+        System.out.println("Patient added:"+Patient);
 
-        double wight = Double.parseDouble(String.valueOf(t_wight));
+        for(DB_Patient pat : connection.listAllPatients(false)){
+            patientListMap.put(pat.getPatID(),  patientListMap.values().contains(pat.getName()) ?
+                    pat.getName()+String.valueOf(pat.getPatID()) :
+                    pat.getName());
+        }
+        ChoiceB_PationLoad.getItems().clear();
+        ChoiceB_PationLoad.getItems().addAll(patientListMap.values());
+        ChoiceB_PationLoad.setOnAction(this::setLoadPation);
+        ChoiceB_PationLoad.setValue("Patient laden");
 
-      //  DB_Patient PSave = new DB_Patient(name,currentConditions,currentPatientMedication,now,wight,age);
-
+        ChoiceB_PationLoad.getItems().clear();
+        ChoiceB_PationLoad2.getItems().addAll(patientListMap.values());
+        ChoiceB_PationLoad2.setOnAction(this::setLoadPation);
+        ChoiceB_PationLoad2.setValue("Patient laden");
     }
 
 
@@ -368,13 +353,13 @@ public class InterfaceController implements Initializable {
         }
     }
 
-    // TODO: 27.06.2022  
-    public void textSave(KeyEvent keyEvent) {
-        System.out.println(t_fname.getText());
-
+    public void nameListener(KeyEvent keyEvent) {
+        Patient.setName(t_fname.getText());
     }
 
-    public void wightlisener(KeyEvent keyEvent) {
-        System.out.println(t_wight.getText());
+    public void weightListener(KeyEvent keyEvent) {
+        try {
+            Patient.setWeight(Double.parseDouble(t_wight.getText()));
+        } catch (NumberFormatException e){t_wight.setText("Bitte . statt , eingeben!");}
     }
 }
