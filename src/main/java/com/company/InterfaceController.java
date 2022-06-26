@@ -13,6 +13,8 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.input.DragEvent;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
 import javafx.stage.Screen;
@@ -30,7 +32,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class InterfaceController implements Initializable {
     /// TODO: sein eigenes SQL-pw eingeben.....
-    public SQLtoJava connection = new SQLtoJava("sql");
+    public SQLtoJava connection = new SQLtoJava("0");
 
     @FXML
     private Button B_Anamnese,saveButton,importJason;
@@ -363,4 +365,13 @@ public class InterfaceController implements Initializable {
         }
     }
 
+    // TODO: 27.06.2022  
+    public void textSave(KeyEvent keyEvent) {
+        System.out.println(t_fname.getText());
+
+    }
+
+    public void wightlisener(KeyEvent keyEvent) {
+        System.out.println(t_wight.getText());
+    }
 }
