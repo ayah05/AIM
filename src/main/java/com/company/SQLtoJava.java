@@ -6,7 +6,6 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-// TODO: fix depencencies in InterfaceController and Main
 public class SQLtoJava {
     private static final String url = "jdbc:postgresql://localhost:5432/AIM";
     private static final String user = "postgres";

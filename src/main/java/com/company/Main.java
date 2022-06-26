@@ -12,7 +12,6 @@ import java.sql.*;
 import java.util.List;
 
 public class Main extends Application {
-
     public static void main(String[] args) {
         ////////////
         //  Wenn die GUI nervt einfach mit // (oder /* */ xd) launch(); auskommentieren :D
@@ -25,7 +24,7 @@ public class Main extends Application {
          launch();
 
         // mo test
-        //0String query_tmp = String.format("SELECT \"Hint\" FROM \"Interaction\" WHERE (\"Interaction\".\"Drug\" = '%s') AND \"Interaction\".\"Drug2orCond\" = '%cs');", "N05AA5", 0x25);
+        //String query_tmp = String.format("SELECT \"Hint\" FROM \"Interaction\" WHERE (\"Interaction\".\"Drug\" = '%s') AND \"Interaction\".\"Drug2orCond\" = '%cs');", "N05AA5", 0x25);
         //System.out.println(String.format(query_tmp, "drug2"));
 /*
         FHIR_IPS_parser parse = new FHIR_IPS_parser();
@@ -68,12 +67,11 @@ public class Main extends Application {
         Scene scene = new Scene(fxmlLoader.load(), Color.WHITE);
         stage.setTitle("AIM");
 
+
         File fileIcon = new File("src/main/resources/Images/ICON.png");
         Image applicationIcon = new Image(fileIcon.toURI().toString());
         stage.getIcons().add(applicationIcon);
         stage.setScene(scene);
         stage.show();
-
-
     }
 }

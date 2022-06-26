@@ -64,8 +64,7 @@ INSERT INTO "Drug" VALUES ('B01AA03','Warfarin')ON CONFLICT DO NOTHING; --the an
 INSERT INTO "Drug" VALUES ('B01AA04','Phenprocoumon')ON CONFLICT DO NOTHING;--the anticoagulant used most in austria: "marcoumar"
 INSERT INTO "Drug" VALUES ('B01AC06','Acetylsalicylic acid')ON CONFLICT DO NOTHING;--aspirin. used as anticoagulant (mostly <= 100 mg)
 INSERT INTO "Drug" VALUES ('N02BA01','Acetylsalicylic acid')ON CONFLICT DO NOTHING;--aspirin. used as analgesic (mostly >= 500 mg)
-INSERT INTO "Drug" VALUES ('J01FA09','Clarithromycin')ON CONFLICT DO NOTHING; --contraindicated to fentanyl, Clarithromycin is a Macrolide
-INSERT INTO "Drug" VALUES ('J05AE',' Protease inhibitors')ON CONFLICT DO NOTHING; --contraindicated to fentanyl
+INSERT INTO "Drug" VALUES ('J01FA09','Clarithromycin')ON CONFLICT DO NOTHING; --contraindicated to fentanyl, Clarithromycin is a Macrolide --protease inhibitorS ist kein medikament......contraindicated to fentanyl
 INSERT INTO "Drug" VALUES ('C08DB01','Diltiazem')ON CONFLICT DO NOTHING;--contraindicated to fentanyl (Diltiazem is a Benzothiazepine derivative)
 INSERT INTO "Drug" VALUES ('J02AC02','Itraconazole')ON CONFLICT DO NOTHING;--contraindicated to fentanyl (Itraconazole is an antimycotics for systemic use)
 INSERT INTO "Drug" VALUES ('N06AF01','Isocarboxazid')ON CONFLICT DO NOTHING;--contraindicated to fentanyl (is a Monoamine oxidase inhibitors (MAOIs))

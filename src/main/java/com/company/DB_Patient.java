@@ -131,8 +131,12 @@ public class DB_Patient {
         return this.conditions;
     }
 
-    public void addConditions(List<String> cond) {
-        this.conditions.addAll(cond);
+    public void addConditions(List<String> conds) {
+        for(String cond : conds){
+            if(!conds.contains(cond)){
+                this.drugs.add(cond);
+            }
+        }
     }
 
     public List<String> getDrugs() {
@@ -140,7 +144,11 @@ public class DB_Patient {
     }
 
     public void addDrugs(List<String> drgs) {
-        this.drugs.addAll(drgs);
+        for(String drg : drgs){
+            if(!drgs.contains(drg)){
+                this.drugs.add(drg);
+            }
+        }
     }
 
     public String getName() {

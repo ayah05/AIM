@@ -19,16 +19,16 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.time.LocalDate;
-import java.time.Period;
+
+import java.time.ZoneId;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static java.time.LocalDate.now;
-import static java.time.Period.between;
+
 
 public class InterfaceController implements Initializable {
+    /// TODO: sein eigenes SQL-pw eingeben.....
+    public SQLtoJava connection = new SQLtoJava("sql");
 
     @FXML
     private Button B_Anamnese,saveButton;
@@ -40,46 +40,53 @@ public class InterfaceController implements Initializable {
     @FXML
     private ChoiceBox<Object> ChoiceB_Condition = new ChoiceBox<>();
     @FXML
-    private ChoiceBox<Object>ECardBox= new ChoiceBox<>(),ChoiceB_DoctorMedication= new ChoiceBox<>(),ChoiceB_PatientMedication= new ChoiceBox<>(),ChoiceB_PationLoad= new ChoiceBox<>();
+    private ChoiceBox<Object>ECardBox= new ChoiceBox<>(), ChoiceB_DoctorMedication= new ChoiceBox<>(), ChoiceB_PatientMedication = new ChoiceBox<>(),ChoiceB_PationLoad= new ChoiceBox<>();
     @FXML
-    private ListView<String> conditionListView = new ListView<>(), patMedListView = new ListView<>(),DoctorMedicationListView = new ListView<>(),checkerListView= new ListView<>();
+    private ListView<String> conditionListView = new ListView<>(), patMedListView = new ListView<>(), DoctorMedicationListView = new ListView<>(),checkerListView= new ListView<>();
     @FXML
     private TextFlow interList = new TextFlow();
     @FXML
     private TextField TextF_DoctorMedication;
-    private Connection connection;
+
+
     private String patientDrug;
     private  String condition;
-    private  String drugDoctor,chosenPatient;
+    private  String drugDoctor;
 
-@FXML
-private TextField TFCondition;
+    @FXML
+    private TextField TFCondition;
 
     private Stage stage;
     private Scene scene;
-    private LocalDate birthdate;
+    private Date birthdate;
 
-    private List <String> currentDrMedication = new ArrayList<>();
-    private List <String> currentConditions = new ArrayList<>();
-    private List <String> allConditions = new ArrayList<>();
-    private List <String> currentPatientMedication = new ArrayList<>();
-    private List<DB_Patient> currentPations=new ArrayList<DB_Patient>();
+    FHIR_IPS_parser parse = new FHIR_IPS_parser();
+
+    private final List <String> currentDrMedication = new ArrayList<>();
+    private final List <String> currentConditions = new ArrayList<>();
+    private final List <String> allConditions = new ArrayList<>();
+    private final List <String> currentPatientMedication = new ArrayList<>();
 
 
 //Patient Data
 
-        DB_Patient Patient = new DB_Patient(true);
-        DB_Patient testP = new DB_Patient();
-
-
+        DB_Patient Patient = new DB_Patient();
+        DB_Patient testP = new DB_Patient(true);
 
     FileChooser fileChooser = new FileChooser();
 
     public void fileJson(ActionEvent event) {
+        fileChooser.setTitle("Please choose a FHIR-R4-IPS in JavaScript Object Notation!");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("FHIR JSON File", "*.json"));
         Stage choserStage = new Stage();
-        File selectedFile = fileChooser.showOpenDialog(choserStage);//gives the chosen adress
+        File selectedFile = fileChooser.showOpenDialog(choserStage); //gives the chosen adress
+        if (selectedFile != null && selectedFile.canRead()){
+            try{
+                Patient = parse.readIPS(selectedFile.getPath());
+                displayPatient();
+            }catch (Exception ignored){}
+        }
     }
-
 
     public void readEcard(ActionEvent event, int terminal){
         DB_Patient patient = ReadEcardGeneric.readCard(terminal,false);
@@ -93,32 +100,28 @@ private TextField TFCondition;
         stage.show();
     }
 
-
-
     public void switchToInterface1 (ActionEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("/InterfaceStage1.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene= new Scene(root);
         stage.setScene(scene);
         stage.show();
+
     }
     public void getDate(ActionEvent event){
-        LocalDate myDate =  DP.getValue();
-       birthdate = myDate;
-
+        birthdate =  Date.from(java.time.Instant.from(DP.getValue().atStartOfDay(java.time.ZoneId.systemDefault())));
     }
 
     // needet for choiceBoxes and ListView
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
+    public void initialize(URL url, ResourceBundle resourceBundle) { // bis 258!
         ////////////////////////////////////////////////////////////////////////////////////////////////////////
         //Test Data
         /////////////////////////////////////////////////////
-            //Contition
-            //
-           SQLtoJava connection = new SQLtoJava();
-            HashMap<String,String> conditionlist = connection.listAllConditions(false);
-            /*ConcurrentHashMap<String, String> testConditionsAll = new ConcurrentHashMap<>(){{ // _concurrent_hashmap for thread safety -- dunno if important
+
+        if(connection == null){ connection = new SQLtoJava(); }
+        HashMap<String,String> conditionlist = connection.listAllConditions(false);
+            /* ConcurrentHashMap<String, String> testConditionsAll = new ConcurrentHashMap<>(){{ // _concurrent_hashmap for thread safety -- dunno if important
             put("O90","Wochenbettkomplikationen"); put("Z39.1","Betreuung und Untersuchung der stillenden Mutter");
             put("K27.9","Ulcus pepticum, Lokalisation nicht näher bezeichnet : Weder als akut noch als chronisch bezeichnet, ohne Blutung oder Perforation");
             put("K29.0","Akute hämorrhagische Gastritis"); put("J46","Status asthmaticus"); put("G71.0","Muskeldystrophie");
@@ -134,12 +137,13 @@ private TextField TFCondition;
                 testConditionsPatient.put(entry.getKey(),entry.getValue());
             }
         }*/
-        // TODO: 25.06.2022  testP.getConditions() ist working I cant  recall the test data
+        // adds all conditions to a list, which does nothing else...why?
         allConditions.addAll(conditionlist.values());
+        // adds all conditions to choice box
         ChoiceB_Condition.getItems().addAll(allConditions);
-        System.out.println(testP.getConditions());
+        //System.out.println(testP.getConditions());
         currentConditions.addAll(testP.getConditions());
-        conditionListView.getItems().addAll(currentConditions);
+        // conditionListView.getItems().addAll(currentConditions);
         ChoiceB_Condition.setOnAction(this::setCondition);
         conditionListView.getItems().addAll(currentConditions);
 
@@ -148,15 +152,10 @@ private TextField TFCondition;
 
         //remove methode for condition ListView
         conditionListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-
            @Override
            public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-
                currentConditions.remove(conditionListView.getSelectionModel().getSelectedItem());
                Platform.runLater(() -> conditionListView.getItems().setAll(currentConditions));
-
-
-
            }
        });
         //remove methode for DrMedication ListView
@@ -174,14 +173,10 @@ private TextField TFCondition;
 
         //remove methode for Pation medikation ListView
         patMedListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-
                 currentPatientMedication.remove(patMedListView.getSelectionModel().getSelectedItem());
                 Platform.runLater(() -> patMedListView.getItems().setAll(currentPatientMedication));
-
-
             }
         });
 
@@ -200,17 +195,15 @@ private TextField TFCondition;
         //Pation load Section
         //////////////////////
 
-        //ChoiceB_PationLoad.getItems().addAll(SQLtoJava.listAllPatients(connection,false));
-       ConcurrentHashMap<String, String> pationList = new ConcurrentHashMap<>(){{//Test Data
-            put("01","Maria Müller"); put("02"," Klaus hansl");
-            put("03"," Christian Strache");
-        }} ;
-        // TODO: 25.06.2022 SQLtoJAve shous be integradet but I'm too stupid for that
-        currentPations =connection.listAllPatients(false);
+       ConcurrentHashMap <Integer, String> patientListMap = new ConcurrentHashMap<>();
 
-        ChoiceB_PationLoad.getItems().addAll(pationList.values());
-        ChoiceB_PationLoad.setOnAction(this::setLoadPation);
-        ChoiceB_PationLoad.setValue("Patient laden");
+       for(DB_Patient pat : connection.listAllPatients(false)){
+           patientListMap.put(pat.getPatID(),pat.getName());
+       }
+       patientListMap.put(0,"Patient laden");
+       ChoiceB_PationLoad.getItems().addAll(patientListMap.values());
+       ChoiceB_PationLoad.setOnAction(this::setLoadPation);
+       ChoiceB_PationLoad.setValue("Patient laden");
 
 
         //////////////////
@@ -240,21 +233,14 @@ private TextField TFCondition;
         //Medication Patient
         //////////////////
         HashMap<String,String> patientMedicationList=connection.listAllDrugs(false);
-
-
         ChoiceB_PatientMedication.getItems().addAll(connection.listAllDrugs(false).values());
-        //currentPatientMedication=testP.getDrugs();
+
         currentPatientMedication.addAll(testP.getDrugs());
         patMedListView.getItems().addAll(currentPatientMedication);
 
+
+
         ChoiceB_PatientMedication.setOnAction(this::set_PatientMedication);
-        DoctorMedicationListView.getItems().addAll(currentPatientMedication);
-
-        //Patien medication
-
-
-
-       patMedListView.getItems().addAll(currentPatientMedication);
 
 
 
@@ -268,15 +254,10 @@ private TextField TFCondition;
     }
 
     private void setLoadPation(ActionEvent actionEvent) {
-
-
-        chosenPatient = String.valueOf(ChoiceB_PationLoad.getSelectionModel().getSelectedItem());
-        //chosenPatient=  ChoiceB_PationLoad.getSelectionModel().getSelectedIndex();//The choosen patient as index (int)
-        if (chosenPatient != null && !chosenPatient.isBlank() && !chosenPatient.equals(0)){ //
-        // ein string kann nie den zahlenwert 0 haben..
-             if  (!chosenPatient.equals("Patient laden") ){
-                System.out.println(chosenPatient);//Port for the choosen patient as item (to String)
-         }
+        String chosenPatient = String.valueOf(ChoiceB_PationLoad.getSelectionModel().getSelectedItem());
+        if (!chosenPatient.isBlank() && !chosenPatient.equals("null") && !chosenPatient.equals("Patient laden")){
+            // TODO displayPatient
+            System.out.println(chosenPatient);//Port for the choosen patient as item (to String)
         }
     }
 
@@ -314,7 +295,6 @@ private TextField TFCondition;
             // TODO: 25.06.2022 hint proccess integrieren und in  checkerListView ausgeben
       //  SQLtoJava.queryInteraction(connection,drugDoctor,condition);
       //  SQLtoJava.queryInteraction(connection,drugDoctor,patientDrug);
-
             //Test Code
             ConcurrentHashMap<String, String> hints = new ConcurrentHashMap<>(){{
                 put("O01","Ein Aderlass wird empfohlen");
@@ -327,10 +307,9 @@ private TextField TFCondition;
     // TODO: 25.06.2022 save Patient needet to be conected to DB_Patient
     public void savePatient(ActionEvent actionEvent) {
         String name = t_fname.getText()+t_lname.getText();
-        LocalDate now = now();
-        Period age=between(birthdate,now);
+
         double wight = Double.parseDouble(String.valueOf(t_wight));
-        System.out.println(age);
+
       //  DB_Patient PSave = new DB_Patient(name,currentConditions,currentPatientMedication,now,wight,age);
 
     }
@@ -338,5 +317,21 @@ private TextField TFCondition;
     public void cardReader(ActionEvent actionEvent) {
 
         ECardBox.getItems().addAll(ReadEcardGeneric.getAllTerminalsWithCardPresent());
+    }
+
+    public void displayPatient(){
+        if(Patient != null){
+            if(Patient.getName() != null){
+                t_fname.setText(Patient.getName());
+            }
+            if (!Double.isNaN(Patient.getWeight()) && Patient.getWeight() > 0){
+                t_wight.setText(String.format(Locale.ROOT,"%.2f",Patient.getWeight()));
+            }
+            if(Patient.getDOB() != null){
+                DP.setValue(Patient.getDOB().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
+            }
+
+
+        }
     }
 }
