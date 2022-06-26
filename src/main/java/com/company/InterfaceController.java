@@ -334,4 +334,9 @@ private TextField TFCondition;
       //  DB_Patient PSave = new DB_Patient(name,currentConditions,currentPatientMedication,now,wight,age);
 
     }
+
+    public void cardReader(ActionEvent actionEvent) {
+
+        ECardBox.getItems().addAll(ReadEcardGeneric.getAllTerminalsWithCardPresent());
+    }
 }
