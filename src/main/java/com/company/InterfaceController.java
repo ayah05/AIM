@@ -227,8 +227,8 @@ private TextField TFCondition;
             put("O06","Fentanyl");
             put("O07","Sufentanil");
             put("O08","Alfentanil");
-            put("O08","Remifentanil");
-            put("O08","Dipidolor");
+            put("O09","Remifentanil");
+            put("O10","Dipidolor");
         }} ;
 
         ChoiceB_DoctorMedication.getItems().addAll(doctorMedicationList.values());
