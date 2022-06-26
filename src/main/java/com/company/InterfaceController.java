@@ -68,7 +68,7 @@ public class InterfaceController implements Initializable {
     private final List <String> currentConditions = new ArrayList<>();
     private final List <String> allConditions = new ArrayList<>();
     private final List <String> currentPatientMedication = new ArrayList<>();
-
+    private ConcurrentHashMap <Integer, String> patientListMap = new ConcurrentHashMap<>();
 
 //Patient Data
 
@@ -191,27 +191,20 @@ public class InterfaceController implements Initializable {
             }
         });
 
-        //E Card Section
-        ConcurrentHashMap<String, String> eCardDevice = new ConcurrentHashMap<>(){{
-            put("01","Virtual maschien"); put("02"," FH");
-            put("03"," F 0.02");
-        }} ;
 
-        ECardBox.getItems().addAll(eCardDevice.values());
-        ECardBox.setOnAction(this::setECardDevice);
-        ECardBox.setValue("E Card Geräte");
+        ECardBox.getItems().addAll(ReadEcardGeneric.getAllTerminalsWithCardPresent());
+        ECardBox.setOnAction(this::readDataFromEcard);
+        ECardBox.setValue("Kartenlesegerät wählen");
 
-        // TODO: 25.06.2022 integrate listAllPatients
         //////////////////////
         //Pation load Section
         //////////////////////
 
-       ConcurrentHashMap <Integer, String> patientListMap = new ConcurrentHashMap<>();
 
        for(DB_Patient pat : connection.listAllPatients(false)){
            patientListMap.put(pat.getPatID(),pat.getName());
        }
-       //patientListMap.put(0,"Patient laden");
+       patientListMap.put(0,"Patient laden");
        ChoiceB_PationLoad.getItems().addAll(patientListMap.values());
        ChoiceB_PationLoad.setOnAction(this::setLoadPation);
        ChoiceB_PationLoad.setValue("Patient laden");
@@ -220,7 +213,7 @@ public class InterfaceController implements Initializable {
         //Pation load 2 Section
         //////////////////////
 
-       // patientListMap.put(0,"Patient laden");
+        // patientListMap.put(0,"Patient laden"); passiert das nicht eh oben schon?
         ChoiceB_PationLoad2.getItems().addAll(patientListMap.values());
         ChoiceB_PationLoad2.setOnAction(this::setLoadPationHints);
         ChoiceB_PationLoad2.setValue("Patient laden");
@@ -229,19 +222,8 @@ public class InterfaceController implements Initializable {
         //Medication Doctor
         //////////////////
 
-        //HashMap<String,String> DoctorMedicationList = SQLtoJava.listAllAnesthesieMed(connection,false);
-        ConcurrentHashMap<String, String> doctorMedicationList = new ConcurrentHashMap<>(){{//Quelle: https://www.dr-gumpert.de/html/narkosemittel.html
-            put("O01","Propofol");
-            put("O02","Thipental");
-            put("O03","Etomidat");
-            put("O04","Ketamin");
-            put("O05","Morphin");
-            put("O06","Fentanyl");
-            put("O07","Sufentanil");
-            put("O08","Alfentanil");
-            put("O09","Remifentanil");
-            put("O10","Dipidolor");
-        }} ;
+        ConcurrentHashMap<String, String> doctorMedicationList = connection.getAnaesthesiaDrugs();
+
 
         ChoiceB_DoctorMedication.getItems().addAll(doctorMedicationList.values());
         ChoiceB_DoctorMedication.setOnAction(this::set_DoctorMedication);
@@ -257,12 +239,7 @@ public class InterfaceController implements Initializable {
         currentPatientMedication.addAll(testP.getDrugs());
         patMedListView.getItems().addAll(currentPatientMedication);
 
-
-
         ChoiceB_PatientMedication.setOnAction(this::set_PatientMedication);
-
-
-
 
     }
 
@@ -283,7 +260,19 @@ public class InterfaceController implements Initializable {
     private void setLoadPation(ActionEvent actionEvent) {
         String chosenPatient = String.valueOf(ChoiceB_PationLoad.getSelectionModel().getSelectedItem());
         if (!chosenPatient.isBlank() && !chosenPatient.equals("null") && !chosenPatient.equals("Patient laden")){
-            // TODO displayPatient
+            List<Integer> results = new ArrayList<>();
+            if (patientListMap.containsValue(chosenPatient)){
+                for(Map.Entry<Integer,String> entry: patientListMap.entrySet()){
+                    if (Objects.equals(entry.getValue(),chosenPatient)) {
+                        results.add(entry.getKey());
+                    }
+                }
+                if (!results.isEmpty()){
+                    // queries only for the first result
+                    Patient = connection.queryPatient(results.get(0));
+                    displayPatient();
+                }
+            }
             System.out.println(chosenPatient);//Port for the choosen patient as item (to String)
         }
     }
@@ -299,13 +288,23 @@ public class InterfaceController implements Initializable {
     }
 
 
-    private void setECardDevice(Event event) {
-        // TODO: 25.06.2022 E card daten abrufen und in Felder integrieren
-       String input= String.valueOf(ECardBox.getValue());
-       if (!input.equals("E Card Geräte")){
-        System.out.println(input);
-           System.out.println("Index = "+ECardBox.getSelectionModel().getSelectedIndex());}
-
+    public void scanForTerminalsWithCard(ActionEvent actionEvent) {
+        ECardBox.getItems().clear();
+        ECardBox.getItems().addAll(ReadEcardGeneric.getAllTerminalsWithCardPresent().isEmpty()?"Keine Karte erkannt..":ReadEcardGeneric.getAllTerminalsWithCardPresent());
+    }
+    private void readDataFromEcard(Event event) {
+        if (!Objects.equals(ECardBox.getValue(),"Keine Karte erkannt..")||!Objects.equals(ECardBox.getValue(),"Kartenlesegerät wählen")){
+           // System.out.println(ECardBox.getValue().getClass().getName());
+            try{
+                    ConcurrentHashMap<Integer,String> chosenTerminal= (ConcurrentHashMap<Integer,String>) ECardBox.getValue();
+                    if(!chosenTerminal.isEmpty()) {
+                        for(Map.Entry<Integer,String> terminal : chosenTerminal.entrySet()){
+                            Patient = ReadEcardGeneric.readCard(terminal.getKey(),false);
+                        }
+                        displayPatient();
+                    }
+                } catch (ClassCastException just_do_nothing){}
+        }
     }
 
     private void setCondition(Event event) {
@@ -341,25 +340,29 @@ public class InterfaceController implements Initializable {
 
     }
 
-    public void cardReader(ActionEvent actionEvent) {
-
-        ECardBox.getItems().addAll(ReadEcardGeneric.getAllTerminalsWithCardPresent());
-    }
 
     public void displayPatient(){
         if(Patient != null){
+            // name (all in firstname for now)
             if(Patient.getName() != null){
                 t_fname.setText(Patient.getName());
             }
+            // weight
             if (!Double.isNaN(Patient.getWeight()) && Patient.getWeight() > 0){
-                t_wight.setText(String.format(Locale.ROOT,"%.2f",Patient.getWeight()));
+                t_wight.setText(String.format(Locale.ROOT,"%.1f",Patient.getWeight()));
             }
+            // birthdate
             if(Patient.getDOB() != null){
                 DP.setValue(Patient.getDOB().toInstant().atZone(ZoneId.systemDefault()).toLocalDate());
             }
-            currentPatientMedication.addAll(Patient.getDrugs());
+            // current medication
+            currentPatientMedication.clear();
+            currentPatientMedication.addAll(connection.queryDrugNameFromDrugCode(Patient.getDrugs()));
             patMedListView.getItems().addAll(currentPatientMedication);
-
+            // current conditions
+            currentConditions.clear();
+            currentConditions.addAll(connection.queryConditionNameFromConditionCode(Patient.getConditions()));
+            conditionListView.getItems().addAll(currentConditions);
         }
     }
 
