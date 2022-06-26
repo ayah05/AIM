@@ -151,7 +151,7 @@
               <buttons>
                   <Button fx:id="importJason" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#fileJson" prefHeight="26.0" prefWidth="869.0" text="Json importieren" />
                   <ChoiceBox fx:id="ECardBox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="150.0" />
-                  <Button fx:id="B_Ecard" minWidth="68.0" mnemonicParsing="false" onAction="#cardReader" prefHeight="26.0" text="scan E-Card" />
+                  <Button fx:id="B_Ecard" minWidth="68.0" mnemonicParsing="false" onAction="#scanForTerminalsWithCard" prefHeight="26.0" text="scan E-Card" />
                 <Button fx:id="saveButton" mnemonicParsing="false" onAction="#savePatient" prefHeight="26.0" prefWidth="200.0" text="Save Patient" />
                   <ChoiceBox fx:id="ChoiceB_PationLoad" prefHeight="26.0" prefWidth="150.0" />
               </buttons>

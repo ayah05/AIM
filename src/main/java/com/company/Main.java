@@ -26,7 +26,7 @@ public class Main extends Application {
         // mo test
         //String query_tmp = String.format("SELECT \"Hint\" FROM \"Interaction\" WHERE (\"Interaction\".\"Drug\" = '%s') AND \"Interaction\".\"Drug2orCond\" = '%cs');", "N05AA5", 0x25);
         //System.out.println(String.format(query_tmp, "drug2"));
-/*
+        /*
         FHIR_IPS_parser parse = new FHIR_IPS_parser();
         DB_Patient martha = parse.readIPS("./src/main/IPS-example-Bundle-with-renal-disease-et-al.json");
         //System.out.println(martha);

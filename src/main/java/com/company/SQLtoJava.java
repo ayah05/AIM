@@ -373,19 +373,24 @@ public class SQLtoJava {
         for (String drugCode : drugCodes){
             // query NAME WHERE CODE = drugNames.add(name)
         }
-        return drugNames;
+        return drugCodes;//
     }
     public List<String> queryConditionNameFromConditionCode(List<String> condCodes){
         List<String> condNames = new ArrayList<>();
         for (String condCode : condCodes){
             // query NAME WHERE CODE = drugNames.add(name)
         }
-        return condNames;
+        return condCodes;//
     }
     public ConcurrentHashMap<String,String> getAnaesthesiaDrugs(){
         ConcurrentHashMap<String,String> anaesthesiaDrugMap = new ConcurrentHashMap<>();
         // <Code,Name>
         return anaesthesiaDrugMap;
+    }
+    public DB_Patient queryPatient(int patientID){
+        DB_Patient pat = new DB_Patient(true);
+        pat.setPatID(patientID);
+        return pat;
     }
 
 }
