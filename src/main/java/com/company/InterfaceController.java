@@ -37,6 +37,12 @@ public class InterfaceController implements Initializable {
     // TODO: how did i destroy saving >.<
     // TODO: aus listview zu patient adden
     // TODO: nach speichern geht load patient nimma..
+    // TODO: duplikate in
+    // TODO: update patient in DB
+    // TODO: mayyybe geb-datum
+    // TODO: mehr infos im UI
+    // TODO: namen in vor- und nachname
+    // TODO: ordnung in der Liste (alphabet)
 
     @FXML
     private Button B_Anamnese,saveButton,importJason;

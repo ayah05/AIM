@@ -10,7 +10,7 @@ CREATE TABLE "Patient" (
                            "PatientID" serial PRIMARY KEY,
                            "Drug" varchar(50) , --REFERENCES "Drug"
                            "Condition" varchar(50) , --REFERENCES "Condition"
-                           "Name" varchar(50) NOT NULL,
+                           "Name" varchar(100) NOT NULL,
                            "Age" int,
                            "Weight" real
 );
