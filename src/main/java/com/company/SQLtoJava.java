@@ -299,12 +299,16 @@ public class SQLtoJava {
         for(String cond : patient.getConditions()) {
             conditions.append(cond).append(",");
         }
-        conditions.setLength(conditions.length()-1);
+        if(conditions.length() >0){
+            conditions.setLength(conditions.length()-1);
+        }
+        // TODO: add values from listView to patient.
 
         StringBuilder drugs = new StringBuilder();
         for(String drug : patient.getDrugs()) {
             drugs.append(drug).append(",");
         }
+        if(drugs.length()<0);
         drugs.setLength(drugs.length()-1);
 
         String age = "";

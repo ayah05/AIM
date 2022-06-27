@@ -30,6 +30,13 @@ import java.util.concurrent.ConcurrentHashMap;
 public class InterfaceController implements Initializable {
     /// TODO: sein eigenes SQL-pw eingeben.....
     public SQLtoJava connection = new SQLtoJava("sql");
+    // public SQLtoJava connection = new SQLtoJava("0");
+    // public SQLtoJava connection = new SQLtoJava("medProjekt");
+
+    // TODO: choice boxen auf standradwert stellen
+    // TODO: how did i destroy saving >.<
+    // TODO: aus listview zu patient adden
+    // TODO: nach speichern geht load patient nimma..
 
     @FXML
     private Button B_Anamnese,saveButton,importJason;
@@ -184,8 +191,9 @@ public class InterfaceController implements Initializable {
         ConcurrentHashMap<String, String> doctorMedicationListMap = connection.getAnaesthesiaDrugs();
         //System.out.println(doctorMedicationListMap.values());
         ChoiceB_DoctorMedication.getItems().addAll(doctorMedicationListMap.values());
+        ChoiceB_DoctorMedication.setValue("Medikation wählen:");
         ChoiceB_DoctorMedication.setOnAction(this::set_DoctorMedication);
-        DoctorMedicationListView.getItems().addAll(doctorMedicationListMap.values());
+        //DoctorMedicationListView.getItems().addAll(doctorMedicationListMap.values());
 
 
         //////////////////
@@ -351,7 +359,9 @@ public class InterfaceController implements Initializable {
 
     public void weightListener(KeyEvent keyEvent) {
         try {
+
             Patient.setWeight(Double.parseDouble(t_wight.getText()));
-        } catch (NumberFormatException e){t_wight.setText("Bitte . statt , eingeben!");}
+        } catch (NumberFormatException e) {//t_wight.setText("Bitte . statt , eingeben!");}
+        };
     }
 }
