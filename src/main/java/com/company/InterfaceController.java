@@ -72,7 +72,7 @@ public class InterfaceController implements Initializable {
 //Patient Data
 
         DB_Patient Patient = new DB_Patient();
-        DB_Patient testP = new DB_Patient(true);
+        //DB_Patient testP = new DB_Patient(true);
 
     FileChooser fileChooser = new FileChooser();
 
@@ -120,41 +120,18 @@ public class InterfaceController implements Initializable {
 
     // needet for choiceBoxes and ListView
     @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) { // bis 258!
-        /////////////////////////////////////////////////////
-        //Test Data
-        /////////////////////////////////////////////////////
-
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        conditionListView.getItems().clear(); patMedListView.getItems().clear(); DoctorMedicationListView.getItems().clear(); checkerListView.getItems().clear();
         if(connection == null){ connection = new SQLtoJava(); }
         HashMap<String,String> conditionlist = connection.listAllConditions(false);
-            /* ConcurrentHashMap<String, String> testConditionsAll = new ConcurrentHashMap<>(){{ // _concurrent_hashmap for thread safety -- dunno if important
-            put("O90","Wochenbettkomplikationen"); put("Z39.1","Betreuung und Untersuchung der stillenden Mutter");
-            put("K27.9","Ulcus pepticum, Lokalisation nicht näher bezeichnet : Weder als akut noch als chronisch bezeichnet, ohne Blutung oder Perforation");
-            put("K29.0","Akute hämorrhagische Gastritis"); put("J46","Status asthmaticus"); put("G71.0","Muskeldystrophie");
-            put("J96.0","Akute respiratorische Insuffizienz, anderenorts nicht klassifiziert");
-            put("I95","Hypotonie"); put("N18.9","Chronische Nierenkrankheit, nicht näher bezeichnet"); put("N95.1","Zustände im Zusammenhang mit der Menopause und dem Klimakterium");
-            put("Z88.0","Allergie gegenüber Penicillin");  put("Z88.1","Allergie gegenüber anderen Antibiotika");  put("Z88.4","Allergie gegenüber Anästhetikum"); put("Z88.5","Allergie gegenüber Betäubungsmittel");  put("Z88.6","Allergie gegenüber Analgetikum");
-            put("K70.4","Alkoholisches Leverversagen");
-        }} ;
-        // has to be a subset of testConditionsAll (only conditions allowed in patient, which are part of all conditions)
-        ConcurrentHashMap<String, String> testConditionsPatient = new ConcurrentHashMap<>();
-        for (Map.Entry<String, String> entry: conditionlist.entrySet()){
-            if(entry.getKey().equals("J46") || entry.getKey().equals("G71.0") || entry.getKey().equals("N18.9") || entry.getKey().equals("I95")){ // specify which conditions you want the parient to have
-                testConditionsPatient.put(entry.getKey(),entry.getValue());
-            }
-        }*/
-        // adds all conditions to a list, which does nothing else...why?
+
         allConditions.addAll(conditionlist.values());
-        // adds all conditions to choice box
+
         ChoiceB_Condition.getItems().addAll(allConditions);
         //System.out.println(testP.getConditions());
-        currentConditions.addAll(testP.getConditions());
-        // conditionListView.getItems().addAll(currentConditions);
+        //currentConditions.addAll(testP.getConditions());
         ChoiceB_Condition.setOnAction(this::setCondition);
         conditionListView.getItems().addAll(currentConditions);
-
-
-
 
         //remove methode for condition ListView
         conditionListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
@@ -166,17 +143,12 @@ public class InterfaceController implements Initializable {
        });
         //remove methode for DrMedication ListView
         DoctorMedicationListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
-
             @Override
             public void changed(ObservableValue<? extends String> observableValue, String s, String t1) {
-
                 currentDrMedication.remove(DoctorMedicationListView.getSelectionModel().getSelectedItem());
                 Platform.runLater(() -> DoctorMedicationListView.getItems().setAll(currentDrMedication));
-
-
             }
         });
-
         //remove methode for Pation medikation ListView
         patMedListView.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<String>() {
             @Override
@@ -186,7 +158,6 @@ public class InterfaceController implements Initializable {
             }
         });
 
-
         ECardBox.getItems().addAll(ReadEcardGeneric.getAllTerminalsWithCardPresent());
         ECardBox.setOnAction(this::readDataFromEcard);
         ECardBox.setValue("Kartenlesegerät wählen");
@@ -194,7 +165,6 @@ public class InterfaceController implements Initializable {
         //////////////////////
         //Pation load Section
         //////////////////////
-
         for(DB_Patient pat : connection.listAllPatients(false)){
             patientListMap.put(pat.getPatID(),  patientListMap.values().contains(pat.getName()) ?
                    pat.getName()+String.valueOf(pat.getPatID()) :
@@ -205,32 +175,27 @@ public class InterfaceController implements Initializable {
         ChoiceB_PationLoad.setValue("Patient laden");
 
         ChoiceB_PationLoad2.getItems().addAll(patientListMap.values());
-        ChoiceB_PationLoad2.setOnAction(this::setLoadPation);
+        ChoiceB_PationLoad2.setOnAction(this::setLoadPation2);
         ChoiceB_PationLoad2.setValue("Patient laden");
 
         //////////////////
         //Medication Doctor
         //////////////////
-
-        ConcurrentHashMap<String, String> doctorMedicationList = connection.getAnaesthesiaDrugs();
-
-
-        ChoiceB_DoctorMedication.getItems().addAll(doctorMedicationList.values());
+        ConcurrentHashMap<String, String> doctorMedicationListMap = connection.getAnaesthesiaDrugs();
+        //System.out.println(doctorMedicationListMap.values());
+        ChoiceB_DoctorMedication.getItems().addAll(doctorMedicationListMap.values());
         ChoiceB_DoctorMedication.setOnAction(this::set_DoctorMedication);
-        DoctorMedicationListView.getItems().addAll(currentDrMedication);
+        DoctorMedicationListView.getItems().addAll(doctorMedicationListMap.values());
 
 
         //////////////////
         //Medication Patient
         //////////////////
-        HashMap<String,String> patientMedicationList=connection.listAllDrugs(false);
         ChoiceB_PatientMedication.getItems().addAll(connection.listAllDrugs(false).values());
 
-        currentPatientMedication.addAll(testP.getDrugs());
+        // currentPatientMedication.addAll(connection.queryDrugNameFromDrugCode(testP.getDrugs()));
         patMedListView.getItems().addAll(currentPatientMedication);
-
         ChoiceB_PatientMedication.setOnAction(this::set_PatientMedication);
-
     }
 
 
@@ -250,12 +215,28 @@ public class InterfaceController implements Initializable {
                     }
                 }
                 if (!results.isEmpty()){
-                    // queries only for the first result
                     Patient = connection.queryPatient(results.get(0));
                     displayPatient();
                 }
             }
-            System.out.println(chosenPatient);//Port for the choosen patient as item (to String)
+        }
+    }
+    private void setLoadPation2(ActionEvent actionEvent) {
+        String chosenPatient = String.valueOf(ChoiceB_PationLoad2.getSelectionModel().getSelectedItem());
+        if (!chosenPatient.isBlank() && !chosenPatient.equals("null") && !chosenPatient.equals("Patient laden")){
+            List<Integer> results = new ArrayList<>();
+            if (patientListMap.containsValue(chosenPatient)){
+                for(Map.Entry<Integer,String> entry: patientListMap.entrySet()){
+                    if (Objects.equals(entry.getValue(),chosenPatient)) {
+                        results.add(entry.getKey());
+                    }
+                }
+                if (!results.isEmpty()){
+                    Patient = connection.queryPatient(results.get(0));
+                    //System.out.println(Patient);
+                }
+            }
+            //System.out.println(chosenPatient);
         }
     }
 
@@ -295,35 +276,46 @@ public class InterfaceController implements Initializable {
       // a check for duplicates is (nur ein check) needed
         }
 
-        //
 
         @FXML
         private  void drugChecker(ActionEvent event){//Here the check button click is received and the query interaction is carried out
-            //Test Code
-            List<String> hints = connection.getInteractionsForPatient(Patient);
-                    //new ConcurrentHashMap<>(){{put("O01","Ein Aderlass wird empfohlen");put("O02","Empfählen Sie den Patienten eine Granderwasser Aufbereitunganlage");}} ;
-            System.out.println(hints);
-            checkerListView.getItems().setAll(hints);
+        List<String> drugCodes = new ArrayList<>();
+        Set<Map.Entry<String,String>> drMedListSet = connection.listAllDrugs(false).entrySet();
+        System.out.println(DoctorMedicationListView.getItems());
+        for(String drugName : DoctorMedicationListView.getItems()) {
+            if (connection.listAllDrugs(false).containsValue(drugName)){
+            for(Map.Entry<String,String> entry: drMedListSet){
+                if (Objects.equals(entry.getValue(),drugName) && !drugCodes.contains(entry.getKey())) {
+                    drugCodes.add(entry.getKey());
+                }
+            }}
         }
+        System.out.println(drugCodes);
+        Patient.addDrugs(drugCodes);
+        //System.out.println(Patient);
+        List<String> hints = connection.getInteractionsForPatient(Patient);
+        //new ConcurrentHashMap<>(){{put("O01","Ein Aderlass wird empfohlen");put("O02","Empfählen Sie den Patienten eine Granderwasser Aufbereitunganlage");}} ;
+        checkerListView.getItems().setAll(hints);
+    }
 
 
     public void savePatient(ActionEvent actionEvent) {
+                patMedListView.getItems();
+        // TODO Patient.addDrugs();
         connection.addPatient(Patient);
-        System.out.println("Patient added:"+Patient);
+        //System.out.println("Patient added:"+Patient);
 
         for(DB_Patient pat : connection.listAllPatients(false)){
-            patientListMap.put(pat.getPatID(),  patientListMap.values().contains(pat.getName()) ?
-                    pat.getName()+String.valueOf(pat.getPatID()) :
-                    pat.getName());
+            patientListMap.put(pat.getPatID(),  patientListMap.containsValue(pat.getName()) ?
+                                                               pat.getName()+pat.getPatID() :
+                                                                              pat.getName());
         }
         ChoiceB_PationLoad.getItems().clear();
         ChoiceB_PationLoad.getItems().addAll(patientListMap.values());
-        ChoiceB_PationLoad.setOnAction(this::setLoadPation);
         ChoiceB_PationLoad.setValue("Patient laden");
 
         ChoiceB_PationLoad.getItems().clear();
         ChoiceB_PationLoad2.getItems().addAll(patientListMap.values());
-        ChoiceB_PationLoad2.setOnAction(this::setLoadPation);
         ChoiceB_PationLoad2.setValue("Patient laden");
     }
 

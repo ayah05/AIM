@@ -91,7 +91,7 @@ public class SQLtoJava {
                 patientlist.add(patient);
                 if (debug) {
                     for (DB_Patient p : patientlist) {
-                        System.out.println(p.toStringWithoutDOB() + "\n");
+                        System.out.println(p.toString() + "\n");
                     }
                 }
             }
@@ -455,16 +455,17 @@ public class SQLtoJava {
             ResultSet rs = statement.executeQuery(query);
             while(rs.next()){
                 String code = rs.getString("Code (ATC)");
-                Pattern pattern = Pattern.compile("[NM]0[1-5]*");//N01,N02,N05,M03
+                Pattern pattern = Pattern.compile("(^N01.*)|(^N02A.*)|(^M03.*)");//[NM]0[1-5].* N01,N02,N05,M03
                 Matcher matcher = pattern.matcher(code);
                if (matcher.matches()) {
                     anaesthesiaDrugMap.put(code,rs.getString("Name"));
                     }
                 }
-
+            /*
             for (String i : anaesthesiaDrugMap.keySet()) {
                 System.out.println(i + "," + anaesthesiaDrugMap.get(i));
             }
+            */
             return anaesthesiaDrugMap;
         }catch(SQLException e){
             e.printStackTrace();
@@ -479,9 +480,12 @@ public class SQLtoJava {
             ResultSet rs = statement.executeQuery(query);
             DB_Patient patient = new DB_Patient();
             if(rs.next()) {
-                patient = new DB_Patient();
+                // loooool ich wollte keinen leeren DB_Patient zurück sondern mit den daten xd
+                List<String> conditions = getListFromString(rs.getString("Condition"));
+                List<String> drugs = getListFromString(rs.getString("Drug"));
+                patient = new DB_Patient(rs.getString("Name"),conditions,drugs,rs.getDouble("Weight"),rs.getInt("PatientID"),rs.getInt("Age"));
             }
-            System.out.println(patient.toStringWithoutDOB());
+            System.out.println(patient);
             return patient;
         }catch (SQLException e){
             e.printStackTrace();

@@ -133,12 +133,12 @@ public class DB_Patient {
         }
     }
 
-    public String toStringWithoutDOB() {
+    @Override
+    public String  toString(){
         return String.format(Locale.ROOT, "\t%s, ID: %d\n\tAge: %d yrs, Weight: %.2f kg\n\tRisk factors: %s\n\tSubstances: %s", name, patID_DB_PK, age, weight,conditions, drugs);
     }
 
-     @Override
-    public String toString() {
+    public String toStringWithDOB() {
         SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
         return String.format(Locale.ROOT, "\t%s, ID: %d\n\tAge: %d yrs, Weight: %.2f kg\n\tDOB: %s\n\tRisk factors: %s\n\tSubstances: %s", name, patID_DB_PK, age, weight, fmt.format(dob), conditions, drugs);
     }

@@ -35,18 +35,18 @@ CREATE TABLE "Interaction" (
 
 TRUNCATE TABLE "Patient";
 
-INSERT INTO "Patient" VALUES (1,'R03AC02','J45','Brigitta Haggis',34,65.6) ON CONFLICT DO NOTHING;
-INSERT INTO "Patient" VALUES (2,'S01EB01','H40.21','Giulietta Cirlos',23,55.7)ON CONFLICT DO NOTHING;
-INSERT INTO "Patient" VALUES (3,'B01AA04','I74','Alexio Jarlmann',50,88.3)ON CONFLICT DO NOTHING;
-INSERT INTO "Patient" VALUES (4,'','R57','Georgiana Labdon',39,70.4)ON CONFLICT DO NOTHING;
+INSERT INTO "Patient" VALUES (1,'R03AC02,N05BA01','J45,K70','Brigitta Haggis',34,65.6) ON CONFLICT DO NOTHING;
+INSERT INTO "Patient" VALUES (2,'S01EB01,N05BA01','H40.21,K70','Giulietta Cirlos',23,55.7)ON CONFLICT DO NOTHING;
+INSERT INTO "Patient" VALUES (3,'B01AA04,N05BA01','I74,K70,H40.21','Alexio Jarlmann',50,88.3)ON CONFLICT DO NOTHING;
+INSERT INTO "Patient" VALUES (4,'N05BA01','R57,H40.21','Georgiana Labdon',39,70.4)ON CONFLICT DO NOTHING;
 INSERT INTO "Patient" VALUES (5,'N07AA01','G70.0','York Kingscott',27,76.2)ON CONFLICT DO NOTHING;
-INSERT INTO "Patient" VALUES (6,'','K74,Z88.4','Tim Bettenson',20,65.1)ON CONFLICT DO NOTHING;
-INSERT INTO "Patient" VALUES (7,'','G47.30','Mahmud Witling',65,82.4)ON CONFLICT DO NOTHING;
-INSERT INTO "Patient" VALUES (8,'C09AA02','N18','Rosana Jantet',45,68.8)ON CONFLICT DO NOTHING;
+INSERT INTO "Patient" VALUES (6,'N05BA01','K74,Z88.4','Tim Bettenson',20,65.1)ON CONFLICT DO NOTHING;
+INSERT INTO "Patient" VALUES (7,'N05BA01','G47.30','Mahmud Witling',65,82.4)ON CONFLICT DO NOTHING;
+INSERT INTO "Patient" VALUES (8,'C09AA02','N18','Rosana Jantet',45,66.6666)ON CONFLICT DO NOTHING;
 INSERT INTO "Patient" VALUES (9,'A10AB01','Z91.012,E10','Kathe Camm',70,57.9)ON CONFLICT DO NOTHING;
 INSERT INTO "Patient" VALUES (10,'C08DB01','I25','Janett Harris',30,60.1)ON CONFLICT DO NOTHING;
-INSERT INTO "Patient" VALUES (11,'D11AH08','L20','Mena Arafa',34,65.2)ON CONFLICT DO NOTHING;
-INSERT INTO "Patient" VALUES (12,'C01BD04,A10BC01','I48,E11','Alexander Helks',44,90.3)ON CONFLICT DO NOTHING;
+INSERT INTO "Patient" VALUES (11,'D11AH08','L20,T07','Mena Arafa',34,65.2)ON CONFLICT DO NOTHING;
+INSERT INTO "Patient" VALUES (12,'C01BD04,A10BC01,N05BA01','I48,E11','Alexander Helks',44,90.3)ON CONFLICT DO NOTHING;
 INSERT INTO "Patient" VALUES (13,'L02BG03,G02CX04,J01FA09,B01AA03','N18,N95.1,Z88.0','Martha DeLarosa',50,63.4)ON CONFLICT DO NOTHING;
 
 --filling in drugs and atc codes
@@ -158,17 +158,17 @@ INSERT INTO "Interaction" VALUES (21,'N01AX03','F20','Ketamine is contraindicate
 INSERT INTO "Interaction" VALUES (22,'N05CD08','H40.21','Benzodiazepines are contraindicated in patients with acute narrow-angle glaucoma, {information available on Accessdata.fda.gov.')ON CONFLICT DO NOTHING;--Midazolam is a Benzodiazepine
 INSERT INTO "Interaction" VALUES (23,'N05CD08','I95','Contraindications for the use of midazolam include acute angle-closure glaucoma, hypotension, and shock. {information available on PMID:30726006.')ON CONFLICT DO NOTHING;
 INSERT INTO "Interaction" VALUES (24,'N05CD08','R57','Contraindications for the use of midazolam include acute angle-closure glaucoma, hypotension, and shock. {information available on PMID:30726006.')ON CONFLICT DO NOTHING;
-INSERT INTO "Interaction" VALUES (25,'N05CD08','N17','Careful dose adjustment is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.')ON CONFLICT DO NOTHING;
-INSERT INTO "Interaction" VALUES (26,'N05CD08','N18','Careful dose adjustment is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.')ON CONFLICT DO NOTHING;
-INSERT INTO "Interaction" VALUES (27,'N05CD08','N19','Careful dose adjustment is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.')ON CONFLICT DO NOTHING;
-INSERT INTO "Interaction" VALUES (28,'N05CD08','K70','Careful dose adjustment is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.')ON CONFLICT DO NOTHING;
-INSERT INTO "Interaction" VALUES (29,'N05CD08','K71','Careful dose adjustment is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.')ON CONFLICT DO NOTHING;
-INSERT INTO "Interaction" VALUES (30,'N05CD08','K72','Careful dose adjustment is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.')ON CONFLICT DO NOTHING;
-INSERT INTO "Interaction" VALUES (31,'N05CD08','K73','Careful dose adjustment is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.')ON CONFLICT DO NOTHING;
-INSERT INTO "Interaction" VALUES (32,'N05CD08','K74','Careful dose adjustment is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.')ON CONFLICT DO NOTHING;
-INSERT INTO "Interaction" VALUES (33,'N05CD08','K75','Careful dose adjustment is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.')ON CONFLICT DO NOTHING;
-INSERT INTO "Interaction" VALUES (34,'N05CD08','K76','Careful dose adjustment is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.')ON CONFLICT DO NOTHING;
-INSERT INTO "Interaction" VALUES (35,'N05CD08','K77','Careful dose adjustment is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (25,'N05CD08','N17','Careful dose adjustment of midazolam is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (26,'N05CD08','N18','Careful dose adjustment of midazolam is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (27,'N05CD08','N19','Careful dose adjustment of midazolam is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (28,'N05CD08','K70','Careful dose adjustment of midazolam is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (29,'N05CD08','K71','Careful dose adjustment of midazolam is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (30,'N05CD08','K72','Careful dose adjustment of midazolam is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (31,'N05CD08','K73','Careful dose adjustment of midazolam is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (32,'N05CD08','K74','Careful dose adjustment of midazolam is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (33,'N05CD08','K75','Careful dose adjustment of midazolam is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (34,'N05CD08','K76','Careful dose adjustment of midazolam is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (35,'N05CD08','K77','Careful dose adjustment of midazolam is necessary in cases of kidney and liver diseases, alcohol, and drug-dependent individuals. {information available on PMID:30726006}.')ON CONFLICT DO NOTHING;
 INSERT INTO "Interaction" VALUES (36,'M03AB01','T20','Succinylcholine is contraindicated in patients with known decreased plasma cholinesterase activity, recent burns or trauma within 24 to 72 hours, and muscle myopathies. {information available on PMID:29763160}.')ON CONFLICT DO NOTHING;
 INSERT INTO "Interaction" VALUES (37,'M03AB01','E88.09','Succinylcholine is contraindicated in patients with known decreased plasma cholinesterase activity, recent burns or trauma within 24 to 72 hours, and muscle myopathies. {information available on PMID:29763160}.')ON CONFLICT DO NOTHING;
 INSERT INTO "Interaction" VALUES (38,'M03AB01','T07','Succinylcholine is contraindicated in patients with known decreased plasma cholinesterase activity, recent burns or trauma within 24 to 72 hours, and muscle myopathies. {information available on PMID:29763160}.')ON CONFLICT DO NOTHING;
@@ -196,7 +196,7 @@ INSERT INTO "Interaction" VALUES (59,'N05BA01','K74','Contraindications to Diaze
 INSERT INTO "Interaction" VALUES (60,'N05BA01','K75','Contraindications to Diazepam include patients with severe respiratory insufficiency, myasthenia gravis, sleep apnea syndrome, and severe hepatic insufficiency.  {information available on PMID:30725707}.')ON CONFLICT DO NOTHING;
 INSERT INTO "Interaction" VALUES (61,'N05BA01','K76','Contraindications to Diazepam include patients with severe respiratory insufficiency, myasthenia gravis, sleep apnea syndrome, and severe hepatic insufficiency.  {information available on PMID:30725707}.')ON CONFLICT DO NOTHING;
 INSERT INTO "Interaction" VALUES (62,'N05BA01','K77','Contraindications to Diazepam include patients with severe respiratory insufficiency, myasthenia gravis, sleep apnea syndrome, and severe hepatic insufficiency.  {information available on PMID:30725707}.')ON CONFLICT DO NOTHING;
-INSERT INTO "Interaction" VALUES (63,'N05BA01','H40.21','It is permissible in patients with open-angle glaucoma receiving appropriate therapy but is contraindicated in acute narrow-angle glaucoma. {information available on PMID:30725707}.')ON CONFLICT DO NOTHING;
+INSERT INTO "Interaction" VALUES (63,'N05BA01','H40.21','Diazepam is permissible in patients with open-angle glaucoma receiving appropriate therapy but is contraindicated in acute narrow-angle glaucoma. {information available on PMID:30725707}.')ON CONFLICT DO NOTHING;
 INSERT INTO "Interaction" VALUES (64,'N02BA01','K27','Aspirin increases the risk of GI bleeding in patients who already suffer from peptic ulcer disease or gastritis. {information available on PMID:30085574}.')ON CONFLICT DO NOTHING;
 INSERT INTO "Interaction" VALUES (65,'N02BA01','K29','Aspirin increases the risk of GI bleeding in patients who already suffer from peptic ulcer disease or gastritis. {information available on PMID: 30085574}.')ON CONFLICT DO NOTHING;
 INSERT INTO "Interaction" VALUES (66,'N02BA01','B01AA03','Acetylsalicylic acid may increase the anticoagulant activities of Warfarin - severity: moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
@@ -260,7 +260,7 @@ INSERT INTO "Interaction" VALUES (115,'N01BB02','G02CX04','The metabolism of Lid
 INSERT INTO "Interaction" VALUES (116,'B01AA03','G02CX04','The serum concentration of Warfarin can be increased when it is combined with Black cohosh. - severity: moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
 INSERT INTO "Interaction" VALUES (117,'C08DB01','G02CX04','The metabolism of Diltiazem can be decreased when combined with Black cohosh. - severity: moderate. {information available on DrugBank}.')ON CONFLICT DO NOTHING;
 
-INSERT INTO "Interaction" VALUES (118,'G02CX04','N18','WORKS!')ON CONFLICT DO NOTHING;
+--INSERT INTO "Interaction" VALUES (118,'G02CX04','N18','WORKS!')ON CONFLICT DO NOTHING;
 
 
 
