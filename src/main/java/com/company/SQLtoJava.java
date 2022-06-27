@@ -43,7 +43,7 @@ public class SQLtoJava {
         }
     }
 
-    // deprecated.
+    /*// deprecated.
     public static Connection setConnection(){
         try {
          String password;
@@ -65,16 +65,29 @@ public class SQLtoJava {
             System.out.println("Something went wrong. Please try connecting to the Database again.");
         }
         return null;
-    }
+    } */
 
+    private List<String> getListFromString(String stuff){
+        Scanner scan = new Scanner(stuff);
+        List<String> result = new ArrayList<>();
+        scan.useDelimiter(",");
+        while (scan.hasNext()){
+            result.add(scan.next());
+        }
+        return result;
+    }
     public List<DB_Patient> listAllPatients(boolean debug){
-        ArrayList <DB_Patient> patientlist = new ArrayList<>();
+        List <DB_Patient> patientlist = new ArrayList<>();
         try{
             String query = "SELECT * FROM \"Patient\"";
             Statement statement = connection.createStatement();
             ResultSet rs = statement.executeQuery(query);
             while (rs.next()){
-                DB_Patient patient = new DB_Patient(rs.getString("Name"),rs.getString("Condition"),rs.getString("Drug"),rs.getDouble("Weight"),rs.getInt("PatientID"),rs.getInt("Age"));
+                // rs.getString("Condition"),rs.getString("Drug")
+                List<String> conditions = getListFromString(rs.getString("Condition"));
+                List<String> drugs = getListFromString(rs.getString("Drug"));
+                DB_Patient patient = new DB_Patient(rs.getString("Name"),conditions,drugs,rs.getDouble("Weight"),rs.getInt("PatientID"),rs.getInt("Age"));
+
                 patientlist.add(patient);
                 if (debug) {
                     for (DB_Patient p : patientlist) {
@@ -212,7 +225,7 @@ public class SQLtoJava {
         }return 0;
     }
 
-    public void addPatient(String drug, String condition, String name,   int age,  double weight){
+    /*public void addPatient(String drug, String condition, String name,   int age,  double weight){
         String drugFormat = "'"+drug+"'";
         String conditionFormat = "'"+condition+"'";
         String nameFormat = "'"+name+"'";
@@ -222,14 +235,13 @@ public class SQLtoJava {
                 String query = "INSERT INTO \"Patient\" VALUES("+patientID+","+drugFormat+","+conditionFormat+","+nameFormat+","+age+","+weight+") ON CONFLICT DO NOTHING;";
                 Statement statement = connection.createStatement();
                 statement.execute(query);
-                DB_Patient patient = new DB_Patient(patientID,drug,condition,name,age,weight);
-                patientlist.add(patient);
-                System.out.println(patient.toStringWithoutDOB()+"\n");
+                //DB_Patient patient = new DB_Patient(patientID,drug,condition,name,age,weight,patientID);
+                //patientlist.add(patient);
+                //System.out.println(patient.toStringWithoutDOB()+"\n");
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
     }
-
     public void addPatient ( String name,   int age,  double weight){
         String nameFormat = "'"+name+"'";
         List<DB_Patient> patientlist = new ArrayList<>();
@@ -260,7 +272,6 @@ public class SQLtoJava {
                 throwables.printStackTrace();
              }
         }
-
     public void addPatient(String condition, String name,int age,  double weight){
             String conditionFormat = "'"+condition+"'";
             String nameFormat = "'"+name+"'";
@@ -270,12 +281,12 @@ public class SQLtoJava {
                 String query = "INSERT INTO \"Patient\" VALUES("+patientID+",'',"+conditionFormat+","+nameFormat+","+age+","+weight+") ON CONFLICT DO NOTHING;";
                 Statement statement = connection.createStatement();
                 statement.execute(query);
-                DB_Patient patient = new DB_Patient(patientID,condition,name,age,weight);
-                patientlist.add(patient);
-                System.out.println(patient.toStringWithoutDOB()+"\n");
+                //DB_Patient patient = new DB_Patient(patientID,condition,name,age,weight);
+                //patientlist.add(patient);
+                //System.out.println(patient.toStringWithoutDOB()+"\n");
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
-            }}
+            }} */
 
     /**
      * add a DB_Patient object to database. An ID will be assigned, age and weight will only be added if <0,
@@ -367,7 +378,7 @@ public class SQLtoJava {
     }
 
 
-    // dankeschöööön
+
     /*//method was implemented to check if queryDrugNameFromDrugCode method works
     public List<String> listAllDrugCodes(boolean debug){
         List<String> drugCodelist = new ArrayList<>();
@@ -468,7 +479,7 @@ public class SQLtoJava {
             ResultSet rs = statement.executeQuery(query);
             DB_Patient patient = new DB_Patient();
             if(rs.next()) {
-                patient = new DB_Patient(rs.getInt("PatientID"),rs.getString("Drug"), rs.getString("Condition"), rs.getString("Name"), rs.getInt("Age"), rs.getDouble("Weight"));
+                patient = new DB_Patient();
             }
             System.out.println(patient.toStringWithoutDOB());
             return patient;

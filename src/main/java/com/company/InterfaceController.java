@@ -292,8 +292,7 @@ public class InterfaceController implements Initializable {
     private void setCondition(Event event) {
         currentConditions.add(String.valueOf(ChoiceB_Condition.getValue()));
         conditionListView.getItems().setAll(currentConditions);
-      // a check for duplicates are needed
-
+      // a check for duplicates is (nur ein check) needed
         }
 
         //
@@ -303,6 +302,7 @@ public class InterfaceController implements Initializable {
             //Test Code
             List<String> hints = connection.getInteractionsForPatient(Patient);
                     //new ConcurrentHashMap<>(){{put("O01","Ein Aderlass wird empfohlen");put("O02","Empfählen Sie den Patienten eine Granderwasser Aufbereitunganlage");}} ;
+            System.out.println(hints);
             checkerListView.getItems().setAll(hints);
         }
 

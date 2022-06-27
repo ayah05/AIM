@@ -3,7 +3,6 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
-import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.robot.Robot;
 import javafx.stage.Stage;
@@ -12,7 +11,6 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.company.SQLtoJava.setConnection;
 
 public class Main extends Application {
     public static void main(String[] args) {
@@ -22,8 +20,8 @@ public class Main extends Application {
         ///////////
 
         /* flo test
-            launch();
-        */
+
+        */launch();
 
 
         // mo test
@@ -48,7 +46,7 @@ public class Main extends Application {
         */
 
         /* ayah test
-            //deprecated, class is now satic.
+            //SQLtoJava test = new SQLtoJava("medProjekt");
 
             SQLtoJava.addPatient(connection,"K71","Maurice Leon",55,67.8);
             SQLtoJava.addPatient(connection,"C01BD04","I48","Lara Mueller",70,60.1);
@@ -56,7 +54,7 @@ public class Main extends Application {
             SQLtoJava.addPatient(connection,"Sam Lewis",33,"J01FA09",60.2);
             SQLtoJava.addInteraction(connection,"tDrug1","tDrug2","someHint");
             SQLtoJava.addInteraction(connection,"M03AB01","G72","smth");*/
-            SQLtoJava test = new SQLtoJava("medProjekt");
+
 
             /*List <String> drugCodelist = new ArrayList<>();
             drugCodelist.add("N01AX03");
@@ -69,7 +67,7 @@ public class Main extends Application {
             conditionCodelist.add("J45");
             test.queryConditionNameFromConditionCode(conditionCodelist);*/
 
-        test.getAnaesthesiaDrugs();
+       // test.getAnaesthesiaDrugs();
        // test.queryPatient(1);
 
 

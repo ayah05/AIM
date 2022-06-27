@@ -19,8 +19,6 @@ import java.util.Locale;
 public class DB_Patient {
     private List<String> conditions = new ArrayList<>();
     private List<String> drugs = new ArrayList<>();
-    private String condition;
-    private String drug;
     private String name;
     private Date dob;
     private int age = -1;
@@ -55,75 +53,16 @@ public class DB_Patient {
         this.age = (int) ((System.currentTimeMillis() - dob.getTime()) / 3.154e+10);
     }
 
-    // overloaded constructor with less arguments #1
-    public DB_Patient(@NotNull String name, List<String> conditions, List<String> drugs,@NotNull Date dob) {
-        this.name = name;
+
+    public DB_Patient(@NotNull String name,List<String>conditions, List<String>drugs , double weight, int key, int age) {
         this.conditions = conditions;
         this.drugs = drugs;
-        this.dob = dob;
-        this.age = (int) ((System.currentTimeMillis() - dob.getTime()) / 3.154e+10);
-    }
-
-    // overloaded constructor with all arguments (database primary key + age)
-    public DB_Patient(@NotNull String name, List<String> conditions, List<String> drugs, int age, double weight, int key,@NotNull Date dob) {
         this.name = name;
-        this.conditions = conditions;
-        this.drugs = drugs;
-        this.age = age;
-        this.weight = weight;
-        this.patID_DB_PK = key;
-        this.dob = dob;
-    }
-
-    // overloaded constructor with more arguments (database primary key)
-    public DB_Patient(@NotNull String name, List<String> conditions, List<String> drugs, double weight, int key,@NotNull Date dob) {
-        this.name = name;
-        this.conditions = conditions;
-        this.drugs = drugs;
-        this.weight = weight;
-        this.patID_DB_PK = key;
-        this.dob = dob;
-        this.age = (int) ((System.currentTimeMillis() - dob.getTime()) / 3.154e+10);
-    }
-
-    public DB_Patient(@NotNull String name, String condition, String drug, double weight, int key, int age) {
-        this.name = name;
-        this.condition = condition;
-        this.drug = drug;
         this.weight = weight;
         this.patID_DB_PK = key;
         this.age = age;
-
     }
 
-    public DB_Patient(int patID_DB_PK,String drug, String condition, @NotNull String name,int age, double weight) {
-        this.name = name;
-        this.condition = condition;
-        this.drug = drug;
-        ;this.weight = weight;
-        this.patID_DB_PK = patID_DB_PK;
-        this.age = age;
-    }
-    public DB_Patient(int patID_DB_PK,@NotNull String name,int age, double weight) {
-        this.name = name;
-        this.weight = weight;
-        this.patID_DB_PK = patID_DB_PK;
-        this.age = age;
-    }
-    public DB_Patient(int patID_DB_PK,@NotNull String name,int age, double weight,String drug) {
-        this.name = name;
-        this.weight = weight;
-        this.drug = drug;
-        this.patID_DB_PK = patID_DB_PK;
-        this.age = age;
-    }
-    public DB_Patient(int patID_DB_PK,String condition,@NotNull String name,int age, double weight) {
-        this.name = name;
-        this.weight = weight;
-        this.condition = condition;
-        this.patID_DB_PK = patID_DB_PK;
-        this.age = age;
-    }
 
     // getters and setters:
     public List<String> getConditions() {
@@ -195,7 +134,7 @@ public class DB_Patient {
     }
 
     public String toStringWithoutDOB() {
-        return String.format(Locale.ROOT, "\t%s, ID: %d\n\tAge: %d yrs, Weight: %.2f kg\n\tRisk factors: [%s]\n\tSubstances: [%s]", name, patID_DB_PK, age, weight, condition, drug);
+        return String.format(Locale.ROOT, "\t%s, ID: %d\n\tAge: %d yrs, Weight: %.2f kg\n\tRisk factors: %s\n\tSubstances: %s", name, patID_DB_PK, age, weight,conditions, drugs);
     }
 
      @Override
