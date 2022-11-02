@@ -262,25 +262,3 @@ INSERT INTO "Interaction" VALUES (117,'C08DB01','G02CX04','The metabolism of Dil
 
 --INSERT INTO "Interaction" VALUES (118,'G02CX04','N18','WORKS!')ON CONFLICT DO NOTHING;
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

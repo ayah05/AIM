@@ -28,7 +28,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 
 public class InterfaceController implements Initializable {
-    /// TODO: sein eigenes SQL-pw eingeben.....
+    // TODO: sein eigenes SQL-pw eingeben...
     public SQLtoJava connection = new SQLtoJava("sql");
     // public SQLtoJava connection = new SQLtoJava("0");
     // public SQLtoJava connection = new SQLtoJava("medProjekt");
@@ -367,7 +367,7 @@ public class InterfaceController implements Initializable {
         try {
 
             Patient.setWeight(Double.parseDouble(t_wight.getText()));
-        } catch (NumberFormatException e) {//t_wight.setText("Bitte . statt , eingeben!");}
-        };
+        } catch (NumberFormatException ignored) {//t_wight.setText("Bitte . statt , eingeben!");}
+        }
     }
 }
