@@ -183,10 +183,11 @@ public class InterfaceController implements Initializable {
                    pat.getName()+String.valueOf(pat.getPatID()) :
                    pat.getName());
         }
+        // interface stage 1
         ChoiceB_PationLoad.getItems().addAll(patientListMap.values());
         ChoiceB_PationLoad.setOnAction(this::setLoadPation);
         ChoiceB_PationLoad.setValue("Patient laden");
-
+        // interface stage 2
         ChoiceB_PationLoad2.getItems().addAll(patientListMap.values());
         ChoiceB_PationLoad2.setOnAction(this::setLoadPation2);
         ChoiceB_PationLoad2.setValue("Patient laden");
@@ -218,6 +219,7 @@ public class InterfaceController implements Initializable {
         patMedListView.getItems().setAll(currentPatientMedication);
     }
 
+    // können easy in eine fkt refactored werden:
     private void setLoadPation(ActionEvent actionEvent) {
         String chosenPatient = String.valueOf(ChoiceB_PationLoad.getSelectionModel().getSelectedItem());
         if (!chosenPatient.isBlank() && !chosenPatient.equals("null") && !chosenPatient.equals("Patient laden")){
