@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="673.0" prefWidth="866.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.company.InterfaceController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minWidth="-Infinity" prefHeight="673.0" prefWidth="866.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.company.InterfaceController">
     <children>
         <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="29.0" prefWidth="866.0">
             <children>
@@ -12,7 +12,7 @@
                     <font>
                         <Font size="15.0" />
                     </font></Button>
-                <Pane prefHeight="31.0" prefWidth="59.0" style="-fx-background-color: #d3eff5;" />
+                <Pane prefHeight="31.0" prefWidth="86.0" style="-fx-background-color: #d3eff5;" />
                 <Button fx:id="B_medication" alignment="CENTER" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#switchToInterface2" prefHeight="26.0" prefWidth="430.0" text="Medication" HBox.hgrow="ALWAYS">
                     <font>
                         <Font size="15.0" />
@@ -24,12 +24,12 @@
             <children>
                 <HBox maxWidth="1.7976931348623157E308" prefHeight="31.0" prefWidth="866.0" VBox.vgrow="SOMETIMES">
                     <children>
-                        <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="43.0" prefWidth="450.0" text="Wähle die gewünschte Medikation" HBox.hgrow="ALWAYS">
+                        <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="43.0" prefWidth="450.0" text="Choose the medication you want to use" HBox.hgrow="ALWAYS">
                      <font>
                         <Font size="15.0" />
                      </font></Label>
                         <HBox maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="59.0" />
-                        <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="43.0" prefWidth="445.0" text="Kontrolle auf Interoperabilität" HBox.hgrow="ALWAYS">
+                        <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="43.0" prefWidth="445.0" text="Here are possible hazardous interactions" HBox.hgrow="ALWAYS">
                      <font>
                         <Font size="15.0" />
                      </font></Label>
@@ -49,7 +49,7 @@
                               <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="434.0">
                                  <children>
                                     <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="33.0" />
-                                    <TextField fx:id="TextF_DoctorMedication" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="247.0" HBox.hgrow="ALWAYS" />
+                                    <TextField fx:id="TextF_DoctorMedication" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="247.0" promptText="Tipp in a medikatiom" HBox.hgrow="ALWAYS" />
                                     <ChoiceBox fx:id="ChoiceB_DoctorMedication" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="120.0" HBox.hgrow="ALWAYS" />
                                     <HBox prefHeight="26.0" prefWidth="30.0" />
                                  </children>

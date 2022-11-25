@@ -4,16 +4,16 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefHeight="673.0" prefWidth="866.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.company.InterfaceController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="673.0" prefWidth="866.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.company.InterfaceController">
    <children>
       <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="29.0" prefWidth="866.0" VBox.vgrow="ALWAYS">
          <children>
-            <Button fx:id="B_Anamnese" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="26.0" prefWidth="430.0" text="Anamnese" HBox.hgrow="ALWAYS">
+            <Button fx:id="B_Anamnese" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="31.0" prefWidth="382.0" text="Anamnese" HBox.hgrow="ALWAYS">
                <font>
                   <Font size="15.0" />
                </font></Button>
-            <Pane prefHeight="31.0" prefWidth="59.0" style="-fx-background-color: #d3eff5;" />
-            <Button fx:id="B_medication" alignment="CENTER" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#switchToInterface2" prefHeight="26.0" prefWidth="430.0" text="Medication" HBox.hgrow="ALWAYS">
+            <Pane prefHeight="31.0" prefWidth="73.0" style="-fx-background-color: #d3eff5;" />
+            <Button fx:id="B_medication" alignment="CENTER" contentDisplay="RIGHT" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#switchToInterface2" prefHeight="31.0" prefWidth="342.0" text="Medication" HBox.hgrow="ALWAYS">
                <font>
                   <Font size="15.0" />
                </font></Button>
@@ -24,9 +24,9 @@
          <children>
             <HBox maxWidth="1.7976931348623157E308" prefHeight="31.0" prefWidth="866.0" VBox.vgrow="SOMETIMES">
                <children>
-                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="439.0" text="Persönliche Daten" HBox.hgrow="ALWAYS" />
+                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="439.0" text="Personal data" HBox.hgrow="ALWAYS" />
                   <HBox maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="70.0" />
-                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="435.0" text="Aktuelle Medication" HBox.hgrow="ALWAYS" />
+                  <Label alignment="CENTER" maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="435.0" text="Select the current medication that matches the patient " HBox.hgrow="ALWAYS" />
                </children>
             </HBox>
          </children>
@@ -39,7 +39,7 @@
                   <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="46.0" prefWidth="434.0" VBox.vgrow="ALWAYS">
                      <children>
                         <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="70.0" HBox.hgrow="ALWAYS" />
-                        <Label contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="268.0" text="Vorname" HBox.hgrow="ALWAYS">
+                        <Label contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="268.0" text="First Name" HBox.hgrow="ALWAYS">
                            <font>
                               <Font size="13.0" />
                            </font>
@@ -51,7 +51,7 @@
                   <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="46.0" prefWidth="434.0" VBox.vgrow="ALWAYS">
                      <children>
                         <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="70.0" HBox.hgrow="ALWAYS" />
-                        <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="268.0" text="Nachname" HBox.hgrow="ALWAYS" />
+                        <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="268.0" text="Surname" HBox.hgrow="ALWAYS" />
                         <TextField fx:id="t_lname" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="220.0" HBox.hgrow="ALWAYS" />
                         <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="64.0" HBox.hgrow="ALWAYS" />
                      </children>
@@ -59,7 +59,7 @@
                   <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="46.0" prefWidth="434.0" VBox.vgrow="ALWAYS">
                      <children>
                         <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="70.0" HBox.hgrow="ALWAYS" />
-                        <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="268.0" text="Gewicht" HBox.hgrow="ALWAYS">
+                        <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="268.0" text="Weight" HBox.hgrow="ALWAYS">
                            <font>
                               <Font size="13.0" />
                            </font>
@@ -71,7 +71,7 @@
                   <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="46.0" prefWidth="434.0" VBox.vgrow="ALWAYS">
                      <children>
                         <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="70.0" HBox.hgrow="ALWAYS" />
-                        <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="268.0" text="Geburtsdatum" HBox.hgrow="ALWAYS" />
+                        <Label maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="268.0" text="Date of birth" HBox.hgrow="ALWAYS" />
                         <DatePicker fx:id="DP" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#getDate" prefHeight="26.0" prefWidth="220.0" promptText="26.01.1950" HBox.hgrow="ALWAYS" />
                         <HBox prefHeight="26.0" prefWidth="64.0" HBox.hgrow="ALWAYS" />
                      </children></HBox>
@@ -79,11 +79,11 @@
                      <children>
                         <VBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="422.0" prefWidth="483.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="34.0" prefWidth="432.0" text="Vorerkrankungen" />
+                              <Label alignment="CENTER" contentDisplay="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="34.0" prefWidth="432.0" text="Select the condition that matches the patient " />
                               <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="434.0">
                                  <children>
                                     <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="35.0" />
-                                    <TextField fx:id="TFCondition" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="265.0" HBox.hgrow="ALWAYS" />
+                                    <TextField fx:id="TFCondition" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="265.0" promptText="Tipp in a condition" HBox.hgrow="ALWAYS" />
                                     <ChoiceBox fx:id="ChoiceB_Condition" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="168.0" HBox.hgrow="ALWAYS" />
                                     <HBox prefHeight="26.0" prefWidth="30.0" />
                                  </children></HBox>
@@ -119,7 +119,7 @@
                                     <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="151.0" prefWidth="433.0" VBox.vgrow="ALWAYS">
                                        <children>
                                           <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="58.0" HBox.hgrow="ALWAYS" />
-                                          <TextField fx:id="t_PMedication" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="173.0" HBox.hgrow="ALWAYS" />
+                                          <TextField fx:id="t_PMedication" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="173.0" promptText="Tipp in a medikation" HBox.hgrow="ALWAYS" />
                                           <ChoiceBox fx:id="ChoiceB_PatientMedication" prefHeight="26.0" prefWidth="140.0" HBox.hgrow="ALWAYS" />
                                           <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="27.0" prefWidth="57.0" HBox.hgrow="ALWAYS" />
                                        </children>
@@ -149,7 +149,7 @@
          <children>
             <ButtonBar maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
               <buttons>
-                  <Button fx:id="importJason" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#fileJson" prefHeight="26.0" prefWidth="869.0" text="Json importieren" />
+                  <Button fx:id="importJason" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#fileJson" prefHeight="26.0" prefWidth="869.0" text="Json import" />
                   <ChoiceBox fx:id="ECardBox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="150.0" />
                   <Button fx:id="B_Ecard" minWidth="68.0" mnemonicParsing="false" onAction="#scanForTerminalsWithCard" prefHeight="26.0" text="scan E-Card" />
                 <Button fx:id="saveButton" mnemonicParsing="false" onAction="#savePatient" prefHeight="26.0" prefWidth="200.0" text="Save Patient" />
@@ -158,5 +158,6 @@
             </ButtonBar>
          </children>
       </VBox>
+      <HBox prefHeight="100.0" prefWidth="200.0" />
    </children>
 </VBox>

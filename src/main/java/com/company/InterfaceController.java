@@ -141,6 +141,7 @@ public class InterfaceController implements Initializable {
         allConditions.addAll(conditionlist.values());
 
         ChoiceB_Condition.getItems().addAll(allConditions);
+        ChoiceB_Condition.setValue("Choose condition:");
         //System.out.println(testP.getConditions());
         //currentConditions.addAll(testP.getConditions());
         ChoiceB_Condition.setOnAction(this::setCondition);
@@ -186,11 +187,11 @@ public class InterfaceController implements Initializable {
         // interface stage 1
         ChoiceB_PationLoad.getItems().addAll(patientListMap.values());
         ChoiceB_PationLoad.setOnAction(this::setLoadPation);
-        ChoiceB_PationLoad.setValue("Patient laden");
+        ChoiceB_PationLoad.setValue("load patient");
         // interface stage 2
         ChoiceB_PationLoad2.getItems().addAll(patientListMap.values());
         ChoiceB_PationLoad2.setOnAction(this::setLoadPation2);
-        ChoiceB_PationLoad2.setValue("Patient laden");
+        ChoiceB_PationLoad2.setValue("load patient");
 
         //////////////////
         //Medication Doctor
@@ -198,7 +199,7 @@ public class InterfaceController implements Initializable {
         ConcurrentHashMap<String, String> doctorMedicationListMap = connection.getAnaesthesiaDrugs();
         //System.out.println(doctorMedicationListMap.values());
         ChoiceB_DoctorMedication.getItems().addAll(doctorMedicationListMap.values());
-        ChoiceB_DoctorMedication.setValue("Medikation wählen:");
+        ChoiceB_DoctorMedication.setValue("Choose medikation:");
         ChoiceB_DoctorMedication.setOnAction(this::set_DoctorMedication);
         //DoctorMedicationListView.getItems().addAll(doctorMedicationListMap.values());
 
@@ -207,6 +208,7 @@ public class InterfaceController implements Initializable {
         //Medication Patient
         //////////////////
         ChoiceB_PatientMedication.getItems().addAll(connection.listAllDrugs(false).values());
+        ChoiceB_PatientMedication.setValue("Choose medication:");
 
         // currentPatientMedication.addAll(connection.queryDrugNameFromDrugCode(testP.getDrugs()));
         patMedListView.getItems().addAll(currentPatientMedication);
@@ -287,6 +289,7 @@ public class InterfaceController implements Initializable {
     }
 
     private void setCondition(Event event) {
+
         currentConditions.add(String.valueOf(ChoiceB_Condition.getValue()));
         conditionListView.getItems().setAll(currentConditions);
       // a check for duplicates is (nur ein check) needed
@@ -328,11 +331,11 @@ public class InterfaceController implements Initializable {
         }
         ChoiceB_PationLoad.getItems().clear();
         ChoiceB_PationLoad.getItems().addAll(patientListMap.values());
-        ChoiceB_PationLoad.setValue("Patient laden");
+        ChoiceB_PationLoad.setValue("Load patient");
 
         ChoiceB_PationLoad.getItems().clear();
         ChoiceB_PationLoad2.getItems().addAll(patientListMap.values());
-        ChoiceB_PationLoad2.setValue("Patient laden");
+        ChoiceB_PationLoad2.setValue("Load patient");
     }
 
 

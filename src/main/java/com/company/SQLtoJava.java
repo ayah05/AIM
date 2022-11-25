@@ -9,6 +9,7 @@ import java.util.regex.Pattern;
 
 public class SQLtoJava {
     private static final String url = "jdbc:postgresql://localhost:5432/AIM";
+
     private static final String user = "postgres";
     private static Connection connection;
 

@@ -46,7 +46,7 @@ public class Main extends Application {
         */
 
         /* ayah test
-            //SQLtoJava test = new SQLtoJava("medProjekt");
+            SQLtoJava test = new SQLtoJava("medProjekt");
 
             SQLtoJava.addPatient(connection,"K71","Maurice Leon",55,67.8);
             SQLtoJava.addPatient(connection,"C01BD04","I48","Lara Mueller",70,60.1);
@@ -89,6 +89,6 @@ public class Main extends Application {
         stage.getIcons().add(applicationIcon);
         stage.setScene(scene);
         stage.show();
-        stage.setMaximized(true);
+        //stage.setMaximized(true);
     }
 }
