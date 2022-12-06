@@ -343,7 +343,8 @@ public class InterfaceController implements Initializable {
         if(Patient != null){
             // name (all in firstname for now)
             if(Patient.getFirstname()!=null && Patient.getLastname() != null){
-                t_fname.setText(Patient.getFirstname()+" "+Patient.getLastname());
+                t_fname.setText(Patient.getFirstname());
+                t_lname.setText(Patient.getLastname());
             }
             // weight
             if (!Double.isNaN(Patient.getWeight()) && Patient.getWeight() > 0){
