@@ -87,7 +87,7 @@ public class SQLtoJava {
                 // rs.getString("Condition"),rs.getString("Drug")
                 List<String> conditions = getListFromString(rs.getString("Condition"));
                 List<String> drugs = getListFromString(rs.getString("Drug"));
-                DB_Patient patient = new DB_Patient(rs.getString("Name"),conditions,drugs,rs.getDouble("Weight"),rs.getInt("PatientID"),rs.getInt("Age"));
+                DB_Patient patient = new DB_Patient(rs.getString("Firstname"),rs.getString("Lastname"),conditions,drugs,rs.getDouble("Weight"),rs.getInt("PatientID"),rs.getInt("Age"));
 
                 patientlist.add(patient);
                 if (debug) {
@@ -325,7 +325,7 @@ public class SQLtoJava {
         String columns = String.format("\"PatientID\", \"Drug\", \"Condition\", \"Name\"%s%s",age.isBlank()?"":", \"Age\"", weight.isBlank()?"":", \"Weight\"" );
         try{
             int patientID = selectLastPatientIDAndIncrement();
-            String query = String.format("INSERT INTO \"Patient\" (%s) VALUES(%d,'%s','%s','%s'%s%s) ON CONFLICT DO NOTHING;",columns, patientID, drugs, conditions, patient.getName(),age,weight);
+            String query = String.format("INSERT INTO \"Patient\" (%s) VALUES(%d,'%s','%s','%s','%s',%d,%f) ON CONFLICT DO NOTHING;",columns, patientID, drugs, conditions, patient.getFirstname(),patient.getLastname(),age,weight);
             Statement statement = connection.createStatement();
             statement.execute(query);
             patient.setPatID(patientID);
@@ -488,7 +488,7 @@ public class SQLtoJava {
                 // loooool ich wollte keinen leeren DB_Patient zurück sondern mit den daten xd
                 List<String> conditions = getListFromString(rs.getString("Condition"));
                 List<String> drugs = getListFromString(rs.getString("Drug"));
-                patient = new DB_Patient(rs.getString("Name"),conditions,drugs,rs.getDouble("Weight"),rs.getInt("PatientID"),rs.getInt("Age"));
+                patient = new DB_Patient(rs.getString("Firstname"),rs.getString("Lastname"),conditions,drugs,rs.getDouble("Weight"),rs.getInt("PatientID"),rs.getInt("Age"));
             }
             System.out.println(patient);
             return patient;

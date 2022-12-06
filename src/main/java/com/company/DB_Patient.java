@@ -18,7 +18,8 @@ import java.util.Locale;
 public class DB_Patient {
     private List<String> conditions = new ArrayList<>();
     private List<String> drugs = new ArrayList<>();
-    private String name;
+    private String firstname;
+    private String lastname;
     private Date dob;
     private int age = -1;
     private double weight = Double.NaN;
@@ -28,7 +29,8 @@ public class DB_Patient {
     }
 
     public DB_Patient(boolean test) {
-        this.name = "Martha DeLarosa";
+        this.firstname = "Martha";
+        this.lastname = "DeLarosa";
         this.age = 50;
         this.dob = Date.from(LocalDate.of(1972, Month.MAY, 1).atStartOfDay(ZoneId.of("Europe/Amsterdam")).toInstant());
         this.conditions.addAll(List.of("N18.9", "N95.1", "Z88.0"));
@@ -36,8 +38,9 @@ public class DB_Patient {
         this.weight = 63;
     }
 
-    public DB_Patient(@NotNull String name, List<String> conditions, List<String> drugs, Date dob, double weight, int age) {
-        this.name = name;
+    public DB_Patient(@NotNull String firstname,@NotNull String lastname, List<String> conditions, List<String> drugs, Date dob, double weight, int age) {
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.conditions = conditions;
         this.drugs = drugs;
         this.dob = dob;
@@ -46,17 +49,19 @@ public class DB_Patient {
     }
 
     // constructor for ecard-ID-purpouses
-    public DB_Patient(@NotNull String name,@NotNull Date dob) {
-        this.name = name;
+    public DB_Patient(@NotNull String firstname,@NotNull String lastname,@NotNull Date dob) {
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.dob = dob;
         this.age = (int) ((System.currentTimeMillis() - dob.getTime()) / 3.154e+10);
     }
 
 
-    public DB_Patient(@NotNull String name,List<String>conditions, List<String>drugs , double weight, int key, int age) {
+    public DB_Patient(@NotNull String firstname,@NotNull String lastname,List<String>conditions, List<String>drugs , double weight, int key, int age) {
         this.conditions = conditions;
         this.drugs = drugs;
-        this.name = name;
+        this.firstname = firstname;
+        this.lastname = lastname;
         this.weight = weight;
         this.patID_DB_PK = key;
         this.age = age;
@@ -88,12 +93,20 @@ public class DB_Patient {
         }
     }
 
-    public String getName() {
-        return this.name;
+    public String getFirstname() {
+        return this.firstname;
     }
 
-    public void setName(String new_name) {
-        this.name = new_name;
+    public void setFirstname(String firstname) {
+        this.firstname = firstname;
+    }
+
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
+    }
+
+    public String getLastname() {
+        return this.lastname;
     }
 
     public int getAge() {
@@ -134,12 +147,12 @@ public class DB_Patient {
 
     @Override
     public String  toString(){
-        return String.format(Locale.ROOT, "\t%s, ID: %d\n\tAge: %d yrs, Weight: %.2f kg\n\tRisk factors: %s\n\tSubstances: %s", name, patID_DB_PK, age, weight,conditions, drugs);
+        return String.format(Locale.ROOT, "\t%s  %s, ID: %d\n\tAge: %d yrs, Weight: %.2f kg\n\tRisk factors: %s\n\tSubstances: %s", firstname,lastname, patID_DB_PK, age, weight,conditions, drugs);
     }
 
     public String toStringWithDOB() {
         SimpleDateFormat fmt = new SimpleDateFormat("yyyy-MM-dd");
-        return String.format(Locale.ROOT, "\t%s, ID: %d\n\tAge: %d yrs, Weight: %.2f kg\n\tDOB: %s\n\tRisk factors: %s\n\tSubstances: %s", name, patID_DB_PK, age, weight, fmt.format(dob), conditions, drugs);
+        return String.format(Locale.ROOT, "\t%s %s, ID: %d\n\tAge: %d yrs, Weight: %.2f kg\n\tDOB: %s\n\tRisk factors: %s\n\tSubstances: %s", firstname,lastname, patID_DB_PK, age, weight, fmt.format(dob), conditions, drugs);
     }
 
 }

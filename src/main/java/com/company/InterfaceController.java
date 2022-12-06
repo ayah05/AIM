@@ -180,9 +180,9 @@ public class InterfaceController implements Initializable {
         //Pation load Section
         //////////////////////
         for(DB_Patient pat : connection.listAllPatients(false)){
-            patientListMap.put(pat.getPatID(),  patientListMap.values().contains(pat.getName()) ?
-                   pat.getName()+String.valueOf(pat.getPatID()) :
-                   pat.getName());
+            patientListMap.put(pat.getPatID(),  patientListMap.values().contains(pat.getFirstname()+" "+pat.getLastname()) ?
+                    pat.getFirstname()+" "+pat.getLastname()+String.valueOf(pat.getPatID()) :
+                    pat.getFirstname()+" "+pat.getLastname());
         }
         // interface stage 1
         ChoiceB_PationLoad.getItems().addAll(patientListMap.values());
@@ -325,9 +325,9 @@ public class InterfaceController implements Initializable {
         //System.out.println("Patient added:"+Patient);
 
         for(DB_Patient pat : connection.listAllPatients(false)){
-            patientListMap.put(pat.getPatID(),  patientListMap.containsValue(pat.getName()) ?
-                                                               pat.getName()+pat.getPatID() :
-                                                                              pat.getName());
+            patientListMap.put(pat.getPatID(),  patientListMap.containsValue(pat.getFirstname()+" "+pat.getLastname()) ?
+                                                               pat.getFirstname()+" "+pat.getLastname()+pat.getPatID() :
+                    pat.getFirstname()+" "+pat.getLastname());
         }
         ChoiceB_PationLoad.getItems().clear();
         ChoiceB_PationLoad.getItems().addAll(patientListMap.values());
@@ -342,8 +342,8 @@ public class InterfaceController implements Initializable {
     public void displayPatient(){
         if(Patient != null){
             // name (all in firstname for now)
-            if(Patient.getName() != null){
-                t_fname.setText(Patient.getName());
+            if(Patient.getFirstname()!=null && Patient.getLastname() != null){
+                t_fname.setText(Patient.getFirstname()+" "+Patient.getLastname());
             }
             // weight
             if (!Double.isNaN(Patient.getWeight()) && Patient.getWeight() > 0){
@@ -365,7 +365,8 @@ public class InterfaceController implements Initializable {
     }
 
     public void nameListener(KeyEvent keyEvent) {
-        Patient.setName(t_fname.getText());
+        Patient.setFirstname(t_fname.getText());
+        Patient.setLastname(t_lname.getText());
     }
 
     public void weightListener(KeyEvent keyEvent) {

@@ -30,7 +30,7 @@ public class ReadEcardGeneric /*implements Runnable*/{
                 System.out.printf("Selecting Application SV-PERSONENDATEN...\nStatus: %X (9000 means no further qualification -> \"everythig's fine\")\n", status2);
             }
             //APDU 3: execSELECT-FID-GRUNDDATEN
-            byte[] data2 = HexFormat.ofDelimiter(",").parseHex("EF,01");
+           byte[] data2 = HexFormat.ofDelimiter(",").parseHex("EF,01");
             int status3 = channel.transmit(new CommandAPDU(0x00, 0xA4, 0x02, 0x04, data2, 0x100)).getSW();
             if(verbose){
                 System.out.printf("Selecting File GRUNDDATEN...\nStatus: %X (9000 means no further qualification -> \"everythig's fine\")\n", status3);
