@@ -11,7 +11,7 @@ import java.util.concurrent.ConcurrentHashMap;
 public class ReadEcardGeneric /*implements Runnable*/{
 
     public static DB_Patient readCard(int terminalNo, boolean verbose){
-        Date dob=new Date(); String name = "Testt Maxi";
+        Date dob=new Date(); String firstname_out = "Test"; String lastname_out = "Maxi";
 
         try {
             // connect to card and establish channel
@@ -79,7 +79,8 @@ public class ReadEcardGeneric /*implements Runnable*/{
             if (birthdate!=null && verbose){
                 System.out.println(birthdate);
             }
-            name = firstname + "\u0020" + surname;
+            firstname_out = firstname;
+            lastname_out = surname;
             SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
             dob = df.parse(birthdate);
 
@@ -88,7 +89,7 @@ public class ReadEcardGeneric /*implements Runnable*/{
         } catch (ParseException e) {
             System.out.println("Something went wrong during parsing the birthdate from card...please contact your system administrator!");
         }
-        return new DB_Patient(name, dob);
+        return new DB_Patient(firstname_out,lastname_out, dob);
     }
     private static String byteToHex(byte[] response){
         StringBuilder responseHex = new StringBuilder();

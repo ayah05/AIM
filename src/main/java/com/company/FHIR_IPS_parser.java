@@ -20,7 +20,7 @@ public class FHIR_IPS_parser {
         ctx = FhirContext.forR4();
     }
     public  DB_Patient readIPS(String pathName){ // "./src/main/IPS-example-Bundle-with-renal-disease-et-al.json"
-        String name = null; List<String> conditions = new ArrayList<>(), drugs = new ArrayList<>(); int age = -1; Date dob = null; double weight = Double.NaN;
+        String firstname = null; String lastname = null;  List<String> conditions = new ArrayList<>(), drugs = new ArrayList<>(); int age = -1; Date dob = null; double weight = Double.NaN;
         // boolean worked = false; // only for testing
         IParser parser = ctx.newJsonParser();
         File ips_file = new File(pathName);
@@ -30,7 +30,8 @@ public class FHIR_IPS_parser {
             System.out.println("\n\n\n");
             // demographic info
             Patient pat = BundleUtil.toListOfResourcesOfType(ctx,ips_bundle,Patient.class).get(0);
-            name = pat.getName().get(0).getGivenAsSingleString() +" " + pat.getName().get(0).getFamily();
+            firstname = pat.getName().get(0).getGivenAsSingleString();
+            lastname = pat.getName().get(0).getFamily();
             age = (int)((System.currentTimeMillis() - pat.getBirthDate().getTime()) / 3.154e+10); // subtracts the birthdate in ms from currentTime in ms, divides by the approx # of ms in a year and cuts decimal digits
             dob = pat.getBirthDate();
             // drugs
@@ -96,13 +97,13 @@ public class FHIR_IPS_parser {
             // adding age, over- and underweight as risk-factors
             if(age > 85) {conditions.add("R54") /*age related physical debility*/;}
             // cheating a little instead of adding a weight observation in martha's IPS
-            if(name.equals("Martha DeLarosa")){weight=63.4;}
+            if(firstname.equals("Martha")&& lastname.equals("DeLarosa")){weight=63.4;}
             if(!Double.isNaN(weight)) { if(weight<45){ conditions.add("R63.6") /*underweight*/ ;} if(weight>110){ conditions.add("E66.9");/*obesity, not specified*/}}
 
         } catch (IOException e) {
             e.printStackTrace();
         }
-         return new DB_Patient(name, conditions, drugs, dob, weight, age);
+         return new DB_Patient(firstname,lastname, conditions, drugs, dob, weight, age);
     }
 
 }
