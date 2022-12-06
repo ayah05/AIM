@@ -31,7 +31,8 @@ public class InterfaceController implements Initializable {
     // TODO: sein eigenes SQL-pw eingeben...
     //public SQLtoJava connection = new SQLtoJava("sql");
     //public SQLtoJava connection = new SQLtoJava("0");
-    public SQLtoJava connection = new SQLtoJava("medProjekt");
+    //public SQLtoJava connection = new SQLtoJava("medProjekt");
+    public SQLtoJava connection = new SQLtoJava();
 
     // TODO: choice boxen auf standradwert stellen
     // TODO: how did i destroy saving >.<
