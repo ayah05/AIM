@@ -4,11 +4,10 @@ import javax.smartcardio.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HexFormat;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class ReadEcardGeneric /*implements Runnable*/{
+public class ReadEcardGeneric /*implements Runnable -- not anymore*/{
 
     public static DB_Patient readCard(int terminalNo, boolean verbose){
         Date dob=new Date(); String firstname_out = "Test"; String lastname_out = "Maxi";
@@ -24,13 +23,13 @@ public class ReadEcardGeneric /*implements Runnable*/{
                 System.out.printf("Selecting Master File...\nStatus: %X (9000 means no further qualification -> \"everythig's fine\")\n", status1);
             }
             //APDU 2: execSELECT-AID-SV-PERSONENDATEN
-            byte[] data1 = HexFormat.ofDelimiter(",").parseHex("D0,40,00,00,17,01,01,01");
+            byte[] data1 = {(byte)0xD0,(byte)0x40,(byte)0x00,(byte)0x00,(byte)0x17,(byte)0x01,(byte)0x01,(byte)0x01};
             int status2 = channel.transmit(new CommandAPDU(0x00, 0xA4, 0x04, 0x00, data1, 0x100)).getSW();
             if(verbose){
                 System.out.printf("Selecting Application SV-PERSONENDATEN...\nStatus: %X (9000 means no further qualification -> \"everythig's fine\")\n", status2);
             }
             //APDU 3: execSELECT-FID-GRUNDDATEN
-           byte[] data2 = HexFormat.ofDelimiter(",").parseHex("EF,01");
+            byte[] data2 = {(byte)0xEF,(byte)0x01};
             int status3 = channel.transmit(new CommandAPDU(0x00, 0xA4, 0x02, 0x04, data2, 0x100)).getSW();
             if(verbose){
                 System.out.printf("Selecting File GRUNDDATEN...\nStatus: %X (9000 means no further qualification -> \"everythig's fine\")\n", status3);
@@ -89,7 +88,8 @@ public class ReadEcardGeneric /*implements Runnable*/{
         } catch (ParseException e) {
             System.out.println("Something went wrong during parsing the birthdate from card...please contact your system administrator!");
         }
-        return new DB_Patient(firstname_out,lastname_out, dob);
+        return new DB_Patient(firstname_out, lastname_out, dob);
+
     }
     private static String byteToHex(byte[] response){
         StringBuilder responseHex = new StringBuilder();
