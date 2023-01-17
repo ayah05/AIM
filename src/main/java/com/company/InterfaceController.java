@@ -29,10 +29,10 @@ import java.util.concurrent.ConcurrentHashMap;
 
 public class InterfaceController implements Initializable {
     // TODO: sein eigenes SQL-pw eingeben...
-    //public SQLtoJava connection = new SQLtoJava("sql");
+    public SQLtoJava connection = new SQLtoJava("sql");
     //public SQLtoJava connection = new SQLtoJava("0");
     //public SQLtoJava connection = new SQLtoJava("medProjekt");
-    public SQLtoJava connection = new SQLtoJava();
+    //public SQLtoJava connection = new SQLtoJava();
 
     // TODO: choice boxen auf standradwert stellen
     // TODO: how did i destroy saving >.<
@@ -42,8 +42,10 @@ public class InterfaceController implements Initializable {
     // TODO: update patient in DB
     // TODO: mayyybe geb-datum
     // TODO: mehr infos im UI
-    // TODO: namen in vor- und nachname
+    // TODO: geburtsdatum maximal heute
+    // TODO: schriftgröße in stage1?
     // TODO: ordnung in der Liste (alphabet)
+    // TODO: interface2 check: soll auch die aktuellen medikamente mitvergleichen
 
     @FXML
     private Button B_Anamnese,saveButton,importJason;
@@ -175,7 +177,7 @@ public class InterfaceController implements Initializable {
 
         ECardBox.getItems().addAll(ReadEcardGeneric.getAllTerminalsWithCardPresent());
         ECardBox.setOnAction(this::readDataFromEcard);
-        ECardBox.setValue("Kartenlesegerät wählen");
+        ECardBox.setValue("Choose card reader");
 
         //////////////////////
         //Pation load Section

@@ -310,7 +310,7 @@ public class SQLtoJava {
             drugs.append(drug).append(",");
         }
         if(drugs.length()<0);
-        drugs.setLength(drugs.length()-1);
+        drugs.setLength(drugs.length()-1); // TODO what is happening here? this makes saving fail...
 
         String age = "";
         if(patient.getAge()>=0){

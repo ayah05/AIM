@@ -4,11 +4,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="673.0" prefWidth="866.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.company.InterfaceController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="673.0" prefWidth="866.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.company.InterfaceController">
    <children>
       <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="29.0" prefWidth="866.0" VBox.vgrow="ALWAYS">
          <children>
-            <Button fx:id="B_Anamnese" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="31.0" prefWidth="382.0" text="Anamnese" HBox.hgrow="ALWAYS">
+            <Button fx:id="B_Anamnese" alignment="CENTER" maxWidth="1.7976931348623157E308" mnemonicParsing="false" prefHeight="31.0" prefWidth="382.0" text="Anamnesis" HBox.hgrow="ALWAYS">
                <font>
                   <Font size="15.0" />
                </font></Button>
@@ -119,7 +119,7 @@
                                     <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="151.0" prefWidth="433.0" VBox.vgrow="ALWAYS">
                                        <children>
                                           <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="58.0" HBox.hgrow="ALWAYS" />
-                                          <TextField fx:id="t_PMedication" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="173.0" promptText="Tipp in a medikation" HBox.hgrow="ALWAYS" />
+                                          <TextField fx:id="t_PMedication" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="173.0" promptText="Type in a medikation" HBox.hgrow="ALWAYS" />
                                           <ChoiceBox fx:id="ChoiceB_PatientMedication" prefHeight="26.0" prefWidth="140.0" HBox.hgrow="ALWAYS" />
                                           <HBox maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="27.0" prefWidth="57.0" HBox.hgrow="ALWAYS" />
                                        </children>
@@ -149,7 +149,7 @@
          <children>
             <ButtonBar maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
               <buttons>
-                  <Button fx:id="importJason" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#fileJson" prefHeight="26.0" prefWidth="869.0" text="Json import" />
+                  <Button fx:id="importJason" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#fileJson" prefHeight="26.0" prefWidth="869.0" text="Import IPS" />
                   <ChoiceBox fx:id="ECardBox" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="26.0" prefWidth="150.0" />
                   <Button fx:id="B_Ecard" minWidth="68.0" mnemonicParsing="false" onAction="#scanForTerminalsWithCard" prefHeight="26.0" text="scan E-Card" />
                 <Button fx:id="saveButton" mnemonicParsing="false" onAction="#savePatient" prefHeight="26.0" prefWidth="200.0" text="Save Patient" />
