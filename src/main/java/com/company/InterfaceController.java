@@ -1,6 +1,7 @@
 package com.company;
 
 import javafx.application.Platform;
+import javafx.beans.binding.Bindings;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -13,6 +14,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -299,26 +301,39 @@ public class InterfaceController implements Initializable {
         }
 
 
-        @FXML
-        private  void drugChecker(ActionEvent event){//Here the check button click is received and the query interaction is carried out
+    @FXML
+    private  void drugChecker(ActionEvent event){
+        //Here the check button click is received and the query interaction is carried out
         List<String> drugCodes = new ArrayList<>();
         Set<Map.Entry<String,String>> drMedListSet = connection.listAllDrugs(false).entrySet();
         System.out.println(DoctorMedicationListView.getItems());
         for(String drugName : DoctorMedicationListView.getItems()) {
             if (connection.listAllDrugs(false).containsValue(drugName)){
-            for(Map.Entry<String,String> entry: drMedListSet){
-                if (Objects.equals(entry.getValue(),drugName) && !drugCodes.contains(entry.getKey())) {
-                    drugCodes.add(entry.getKey());
-                }
-            }}
+                for(Map.Entry<String,String> entry: drMedListSet){
+                    if (Objects.equals(entry.getValue(),drugName) && !drugCodes.contains(entry.getKey())) {
+                        drugCodes.add(entry.getKey());
+                    }}
+            }
+            System.out.println(drugCodes);
+            Patient.addDrugs(drugCodes);
+            //System.out.println(Patient);
+            List<String> hints = connection.getInteractionsForPatient(Patient);
+
+            checkerListView.setCellFactory(lv -> {
+                ListCell<String> cell = new ListCell<>();
+                Text text = new Text();
+                text.wrappingWidthProperty().bind(checkerListView.widthProperty());
+                cell.graphicProperty().bind(Bindings.when(cell.emptyProperty()).then((Node) null).otherwise(text));
+                text.textProperty().bind(cell.itemProperty());
+                return cell ;
+            });
+
+            checkerListView.getItems().setAll(hints);
         }
-        System.out.println(drugCodes);
-        Patient.addDrugs(drugCodes);
-        //System.out.println(Patient);
-        List<String> hints = connection.getInteractionsForPatient(Patient);
-        //new ConcurrentHashMap<>(){{put("O01","Ein Aderlass wird empfohlen");put("O02","Empfählen Sie den Patienten eine Granderwasser Aufbereitunganlage");}} ;
-        checkerListView.getItems().setAll(hints);
+
+
     }
+
 
 
     public void savePatient(ActionEvent actionEvent) {
