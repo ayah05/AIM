@@ -194,9 +194,15 @@ public class InterfaceController implements Initializable {
         ChoiceB_PationLoad.setOnAction(this::setLoadPation);
         ChoiceB_PationLoad.setValue("load patient");
         // interface stage 2
+      /*  ChoiceB_PationLoad2.getItems().addAll(patientListMap.values());
+        ChoiceB_PationLoad2.setOnAction(this::setLoadPation2);
+        ChoiceB_PationLoad2.setValue("load patient");*/
+        ChoiceB_PationLoad2.setId("choice-box");
         ChoiceB_PationLoad2.getItems().addAll(patientListMap.values());
         ChoiceB_PationLoad2.setOnAction(this::setLoadPation2);
         ChoiceB_PationLoad2.setValue("load patient");
+        ChoiceB_PationLoad2.getStylesheets().add("stylesheet.css");
+
 
         //////////////////
         //Medication Doctor
@@ -214,6 +220,7 @@ public class InterfaceController implements Initializable {
         //////////////////
         ChoiceB_PatientMedication.getItems().addAll(connection.listAllDrugs(false).values());
         ChoiceB_PatientMedication.setValue("Choose medication:");
+
 
         // currentPatientMedication.addAll(connection.queryDrugNameFromDrugCode(testP.getDrugs()));
         patMedListView.getItems().addAll(currentPatientMedication);
@@ -261,6 +268,7 @@ public class InterfaceController implements Initializable {
             }
             //System.out.println(chosenPatient);
         }
+        ChoiceB_PationLoad2.getStylesheets().add("stylesheet.css");
     }
 
     //was a try to create a seacht funktion for the DoctorMedication Textfield
@@ -354,6 +362,7 @@ public class InterfaceController implements Initializable {
         ChoiceB_PationLoad.getItems().clear();
         ChoiceB_PationLoad2.getItems().addAll(patientListMap.values());
         ChoiceB_PationLoad2.setValue("Load patient");
+        ChoiceB_PationLoad2.getStylesheets().add("stylesheet.css");
     }
 
 

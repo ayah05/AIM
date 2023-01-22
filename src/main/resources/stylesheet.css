@@ -1,0 +1,4 @@
+.choice-box .list-view {
+    -fx-orientation: vertical;
+    -fx-scale-y: -1;
+}
